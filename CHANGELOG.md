@@ -2,7 +2,7 @@
 
 ## 2.2.0 (upcoming)
 
-* Pending changelog
+* Bugfix #148 and #248
 
 ## 2.1.0 (May 19, 2017)
 
