@@ -6,8 +6,7 @@ import { StHeaderModel, StHeaderUserMenuModel, StSubMenuModel } from './st-heade
 @Component({
    selector: 'st-header',
    templateUrl: './st-header.component.html',
-   styleUrls: ['./st-header.component.scss'],
-   changeDetection: ChangeDetectionStrategy.OnPush
+   styleUrls: ['./st-header.component.scss']
 })
 export class StHeaderComponent implements OnInit {
 
