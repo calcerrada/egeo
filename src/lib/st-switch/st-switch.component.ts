@@ -10,7 +10,7 @@ import {
    ControlValueAccessor,
    NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import { CheckRequired, Required } from '../decorators/require-decorators';
+import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-label-status.enum';
 
 @Component({
@@ -23,9 +23,9 @@ import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-labe
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-@CheckRequired()
+@StEgeo()
 export class StSwitchComponent implements ControlValueAccessor {
-   @Input() @Required() qaTag: string;
+   @Input() @StRequired() qaTag: string;
    @Input() label: string;
    @Input() labelPosition: 'top' | 'right' | 'left' = 'top';
    @Input() contextualHelp: string;
@@ -38,7 +38,7 @@ export class StSwitchComponent implements ControlValueAccessor {
    constructor(private _cd: ChangeDetectorRef) {
    }
 
-   @Input() @Required()
+   @Input() @StRequired()
    get stModel(): boolean {
       return this._stModel;
    }

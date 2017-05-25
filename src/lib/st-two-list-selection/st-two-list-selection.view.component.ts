@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import * as _ from 'lodash';
 
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
-import { CheckRequired, Required } from '../decorators/require-decorators';
+import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExtraLabelAction } from './st-two-list-selection.model';
 
 @Component({
@@ -11,11 +11,11 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
    styleUrls: ['./st-two-list-selection.view.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-@CheckRequired()
+@StEgeo()
 export class StTwoListSelectionViewComponent {
 
-   @Input() @Required() qaTag: string;
-   @Input() @Required() selectedElements: StTwoListSelectionElement[];
+   @Input() @StRequired() qaTag: string;
+   @Input() @StRequired() selectedElements: StTwoListSelectionElement[];
    @Input() allElements: StTwoListSelectionElement[];
    @Input() config: StTwoListSelectionConfig;
    @Input() editable: boolean = false;

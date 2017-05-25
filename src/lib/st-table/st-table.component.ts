@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { CheckRequired, Required } from '../decorators/require-decorators';
+import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableHeader } from './shared/table-header.interface';
 
-@CheckRequired()
+@StEgeo()
 @Component({
    selector: 'st-table',
    templateUrl: './st-table.component.html',
@@ -13,8 +13,8 @@ import { StTableHeader } from './shared/table-header.interface';
 })
 
 export class StTableComponent {
-   @Input() @Required() fields: StTableHeader[];
-   @Input() @Required() qaTag: string;
+   @Input() @StRequired() fields: StTableHeader[];
+   @Input() @StRequired() qaTag: string;
    @Input() header: boolean = true;
    @Input() sortable: boolean = true;
    @Input() currentOrder: Order;

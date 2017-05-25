@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { StDropDownMenuItem } from '../../st-dropdown-menu/st-dropdown-menu.interface';
-import { CheckRequired, Required } from '../../decorators/require-decorators';
+import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StTwoListSelectionElement, StTwoListSelectExtraLabelAction } from '../st-two-list-selection.model';
 
 @Component({
@@ -12,11 +12,11 @@ import { StTwoListSelectionElement, StTwoListSelectExtraLabelAction } from '../s
 })
 export class ListSelectionComponent {
 
-   @Input() @Required() list: StTwoListSelectionElement[];
+   @Input() @StRequired() list: StTwoListSelectionElement[];
    @Input() editable: boolean = false;
-   @Input() @Required() title: string;
-   @Input() @Required() searchPlaceholder: string;
-   @Input() @Required() qaTag: string;
+   @Input() @StRequired() title: string;
+   @Input() @StRequired() searchPlaceholder: string;
+   @Input() @StRequired() qaTag: string;
    @Input() important: boolean = false;
    @Input() hasSearch: boolean = true;
    @Input() orderOptions: StDropDownMenuItem[] = [];

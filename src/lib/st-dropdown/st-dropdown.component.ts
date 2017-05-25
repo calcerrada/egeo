@@ -54,6 +54,10 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
    }
 
    ngAfterViewInit(): void {
+      this.updateWidth();
+   }
+
+   updateWidth(): void {
       setTimeout(() => {
          this.widthMenu = this.buttonElement.nativeElement.offsetWidth + 'px';
          this.cd.markForCheck();
@@ -73,6 +77,7 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
       if (values.items) {
          this.checkFirstSelected();
          this.findSelected();
+         this.updateWidth();
       }
    }
 
@@ -109,7 +114,6 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
       let size: ClientRect = (this.buttonElement.nativeElement as HTMLButtonElement).getBoundingClientRect();
       let element: HTMLElement = this.menuElement.nativeElement;
       element.style.position = 'fixed';
-      element.style.width = `${size.width}px`;
       element.style.left = `${size.left}px`;
       element.style.top = `${size.top}px`;
    }
@@ -117,8 +121,19 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
    private findSelected(): void {
       if (this.isStDropdownItem(this.items)) {
          let item = this.items.find((object) => object.selected === true);
+
          if (item) {
             this.button = item.label;
+            this.cd.markForCheck();
+         }
+      } else if (this.items && this.items.length > 0) {
+
+         let items = this.items.map((i: StDropDownMenuGroup) => {
+            return i.items.find((object) => object.selected === true);
+         }).filter((object) => object !== undefined);
+
+         if (items.length > 0) {
+            this.button = items[0].label;
             this.cd.markForCheck();
          }
       }
@@ -141,8 +156,27 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
 
          if (item) {
             let element = this.items.find((i) => i === item);
-            element.selected = true;
+
+            if (element)
+               element.selected = true;
          }
+      } else if (this.items && this.items.length > 0) {
+
+         this.items.map((i: StDropDownMenuGroup) => {
+            let itemSelected = i.items.find((object) => object.selected === true);
+
+            if (itemSelected) {
+               itemSelected.selected = false;
+            }
+
+            if (item) {
+               let element = i.items.find((i) => i === item);
+
+               if (element)
+                  element.selected = true;
+            }
+
+         })
       }
 
    }
@@ -153,6 +187,12 @@ export class StDropdownComponent extends EventWindowManager implements AfterView
          if (this.isStDropdownItem(this.items)) {
             this.updateSelected();
             this.items[0].selected = true;
+         } else if (this.items && this.items.length > 0) {
+
+            this.updateSelected();
+            this.items.map((i: StDropDownMenuGroup) => {
+               i.items[0].selected = true;
+            });
          }
       }
    }

@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { StFormLabelStatus } from './st-form-label-status.enum';
-import { Required, CheckRequired } from '../../../decorators/require-decorators';
+import { StEgeo, StRequired } from '../../../decorators/require-decorators';
 
 @Component({
    selector: 'st-form-label',
@@ -14,10 +14,10 @@ import { Required, CheckRequired } from '../../../decorators/require-decorators'
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-@CheckRequired()
+@StEgeo()
 export class StFormLabelComponent {
    @Input() label: string = '';
-   @Input() @Required() qaTag: string;
+   @Input() @StRequired() qaTag: string;
    @Input() contextualHelp: string;
    @Input() status: StFormLabelStatus;
    @Input() name: string;

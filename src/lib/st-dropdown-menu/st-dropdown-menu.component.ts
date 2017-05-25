@@ -25,6 +25,16 @@ export class StDropdownMenuComponent implements OnInit {
          throw new Error('Attribute items is required');
       }
 
+      this.checkGroup();
+   }
+
+   ngOnChanges(values: any): void {
+      if (values.items) {
+         this.checkGroup();
+      }
+   }
+
+   checkGroup(): void {
       if (this.isDropDownGroup(this.items)) {
          this.itemsGroup = this.items;
       }

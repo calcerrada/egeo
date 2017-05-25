@@ -13,10 +13,10 @@ import {
 } from '@angular/core';
 import * as _ from 'lodash';
 
-import { CheckRequired, Required } from '../decorators/require-decorators';
+import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { StModalButton, StModalConfig, StModalMainTextSize, StModalResponse, StModalType, StModalWidth } from './st-modal.interface';
 
-@CheckRequired()
+@StEgeo()
 @Component({
    selector: 'st-modal',
    templateUrl: './st-modal.component.html',
@@ -24,7 +24,7 @@ import { StModalButton, StModalConfig, StModalMainTextSize, StModalResponse, StM
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StModal implements OnDestroy, OnInit {
-   @Input() @Required() modalConfig: StModalConfig;
+   @Input() @StRequired() modalConfig: StModalConfig;
 
    @Output() close: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
    @Output() click: EventEmitter<StModalResponse> = new EventEmitter<StModalResponse>();

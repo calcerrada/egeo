@@ -1,24 +1,11 @@
 <div class="sth-dropdown-container" [style.width]="width + 'px'">
-   <button tabindex="0"
-      [style.width]="width + 'px'"
-      [attr.aria-expanded]="isActive"
-      [attr.id]="qaTag + 'button'"
-      aria-haspopup="true"
-      class="button sth-dropdown-button"
-      [ngClass]="themeClass"
-      #buttonId
-      (click)="onClickEvent($event)"
-      [disabled]="disabled">
+   <button tabindex="0" [style.width]="width + 'px'" [attr.aria-expanded]="isActive" [attr.id]="qaTag + 'button'" aria-haspopup="true"
+      class="button sth-dropdown-button" [ngClass]="themeClass" #buttonId (click)="onClickEvent($event)" [disabled]="disabled">
          <span>{{button}}</span>
          <i class="icon-arrow4_down"></i>
    </button>
    <div class="sth-dropdown-menu menu" [ngClass]="themeClass" [style.minWidth]='widthMenu' #menuId>
-      <st-dropdown-menu
-         [items]="items"
-         [attr.id]="qaTag + 'menu'"
-         (change)="changeOption($event)"
-         [ngClass]="themeClass"
-         [active]="isActive">
+      <st-dropdown-menu [items]="items" [attr.id]="qaTag + 'menu'" (change)="changeOption($event)" [ngClass]="themeClass" [active]="isActive">
       </st-dropdown-menu>
    </div>
 </div>

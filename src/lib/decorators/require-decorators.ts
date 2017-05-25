@@ -15,7 +15,7 @@ export interface EgeoMetadata {
 }
 
 // tslint:disable:only-arrow-functions
-export function Required(condition?: string): any {
+export function StRequired(condition?: string): any {
    return function (target: any, name: string): any {
       const meta: any = Reflect.getOwnMetadata(EGEO_METADATA, target.constructor) || {};
       meta[name] = meta.hasOwnProperty(name) && meta[name] || { type: METADATA_TYPE.PROPERTY };
@@ -28,21 +28,7 @@ export function Required(condition?: string): any {
    };
 }
 
-// tslint:disable:only-arrow-functions
-export function EgRequired(condition?: string): any {
-   return function (target: any, name: string): any {
-      const meta: any = Reflect.getOwnMetadata(EGEO_METADATA, target.constructor) || {};
-      meta[name] = meta.hasOwnProperty(name) && meta[name] || { type: METADATA_TYPE.PROPERTY };
-      meta[name].required = true;
-      if (condition !== undefined) {
-         meta[name].requireCondition = condition;
-      }
-
-      Reflect.defineMetadata(EGEO_METADATA, meta, target.constructor);
-   };
-}
-
-export function EgDeprecated(initialValue?: any): any {
+export function StDeprecated(initialValue?: any): any {
    return function (target: any, name: string): any {
       const meta: any = Reflect.getOwnMetadata(EGEO_METADATA, target.constructor) || {};
       meta[name] = meta.hasOwnProperty(name) && meta[name] || { type: METADATA_TYPE.PROPERTY };
@@ -55,7 +41,7 @@ export function EgDeprecated(initialValue?: any): any {
    };
 }
 
-export function Egeo(params?: ''): any {
+export function StEgeo(params?: ''): any {
    return function (target: any): any {
       let _onInit = target.prototype.ngOnInit;
       if (_onInit !== undefined) {
@@ -67,22 +53,6 @@ export function Egeo(params?: ''): any {
       } else {
          target.prototype.ngOnInit = function (): void {
             checkDeprecated(target, this);
-            checkRequired(target, this);
-         };
-      }
-   };
-}
-
-export function CheckRequired(params?: ''): any {
-   return function (target: any): any {
-      let _onInit = target.prototype.ngOnInit;
-      if (_onInit !== undefined) {
-         target.prototype.ngOnInit = function (...args: any[]): void {
-            checkRequired(target, this);
-            _onInit.apply(this, args);
-         };
-      } else {
-         target.prototype.ngOnInit = function (): void {
             checkRequired(target, this);
          };
       }

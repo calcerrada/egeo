@@ -12,7 +12,7 @@ import {
 import * as _ from 'lodash';
 
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
-import { CheckRequired, Required } from '../decorators/require-decorators';
+import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { StTwoListSelection } from './st-two-list-selection';
 import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExtraLabelAction } from './st-two-list-selection.model';
 
@@ -49,11 +49,11 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
    `,
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-@CheckRequired()
+@StEgeo()
 export class StTwoListSelectionComponent extends StTwoListSelection implements OnInit, OnChanges {
 
-   @Input() @Required('editable') allElements: StTwoListSelectionElement[];
-   @Input() @Required() selectedElements: StTwoListSelectionElement[];
+   @Input() @StRequired('editable') allElements: StTwoListSelectionElement[];
+   @Input() @StRequired() selectedElements: StTwoListSelectionElement[];
    @Output() selectedElementsChange: EventEmitter<StTwoListSelectionElement[]> = new EventEmitter<StTwoListSelectionElement[]>();
 
    @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
@@ -63,7 +63,7 @@ export class StTwoListSelectionComponent extends StTwoListSelection implements O
 
    @Input() config: StTwoListSelectionConfig;
    @Input() editable: boolean = false;
-   @Input() @Required() qaTag: string;
+   @Input() @StRequired() qaTag: string;
    @Input() sortBy: 'id' | 'name' = 'id';
    @Input() mode: 'compact' | 'normal' = 'normal';
 

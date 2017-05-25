@@ -2,7 +2,7 @@
 export { EgeoModule } from './egeo.module';
 
 /**************************** UTILS AND OTHERS *****************************************/
-export { CheckRequired, EgDeprecated, Egeo, EgRequired, Required } from './decorators/require-decorators';
+export { StEgeo, StRequired, StDeprecated} from './decorators/require-decorators';
 export { TranslateableElement, EgeoResolverKeys, TranslateServiceType } from './utils/egeo-resolver/egeo-resolve-model';
 export { EgeoResolveService } from './utils/egeo-resolver/egeo-resolve.service';
 export { EgeoUtils } from './utils/egeo-utils';

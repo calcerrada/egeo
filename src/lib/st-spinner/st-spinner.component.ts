@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CheckRequired, Required } from '../decorators/require-decorators';
+import { StEgeo, StRequired } from '../decorators/require-decorators';
 
 @Component({
   selector: 'st-spinner',
@@ -7,7 +7,7 @@ import { CheckRequired, Required } from '../decorators/require-decorators';
   styleUrls: ['./st-spinner.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-@CheckRequired()
+@StEgeo()
 export class StSpinnerComponent {
-  @Input() @Required() imageUrl: string;
+  @Input() @StRequired() imageUrl: string;
 }
