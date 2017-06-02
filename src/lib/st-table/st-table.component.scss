@@ -8,9 +8,11 @@
 }
 
 .sth-table__header-item {
-   cursor: pointer;
    padding: 0 20px;
    text-transform: capitalize;
+}
+.sortable {
+   cursor: pointer;
 }
 
 .sth-table__header-text {
@@ -20,7 +22,8 @@
    align-items: center;
    margin-bottom: 6px;
    justify-content: flex-start;
-   cursor: pointer;
+
+   cursor: inherit;
 }
 
 .sth-table__order-arrow {

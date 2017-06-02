@@ -7,6 +7,7 @@
 * Refactor decorators now all start by St
 * Improvement in st-switch template
 * Add st-pop component
+* Allow Able or disable for columns singly 
 
 ## 2.1.1 (May 29, 2017)
 
