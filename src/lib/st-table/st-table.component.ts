@@ -31,8 +31,6 @@ export class StTableComponent {
             this.currentOrder = new Order(field.id, ORDER_TYPE.ASC);
          }
          this.changeOrder.emit(this.currentOrder);
-         console.log(this.currentOrder);
-
       }
 
    }
