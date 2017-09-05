@@ -14,12 +14,11 @@ In this repository, you'll find UI components, services and utilities but this i
 * [egeo-web](https://github.com/Stratio/egeo-web): The official website of Egeo where documentation will be available soon.
 * [egeo-ui-base](https://github.com/Stratio/egeo-ui-base): A Sass library that helps us to build our styles, including a rewritten Sass version of [flexboxgrid](http://flexboxgrid.com/).
 * [egeo-theme](https://github.com/Stratio/egeo-theme): The egeo components are thematizable. This is the official theme used in the Stratio's applications.
-* [egeo-starter](https://github.com/Stratio/egeo-starter): A Boilerplate project prepared for work with Egeo 1.x, Angular 2.x, TypeScript, Webpack, Karma, Jasmine and Sass.
+* [egeo-starter](https://github.com/Stratio/egeo-starter): A Boilerplate project prepared for work with Egeo 2.x, Angular 4.x, TypeScript, Webpack, Karma, Jasmine and Sass.
 
 ## Table of contents
 
 * [About this repo](#about-this-repo)
-* [File Structure](#file-structure)
 * [Getting Started](#getting-started)
    * [Dependencies](#dependencies)
    * [Installing](#installing)
@@ -34,46 +33,7 @@ In this repository, you'll find UI components, services and utilities but this i
 
 This repo includes the components, services, and utilities built in Angular. The library is compiled with AoT for distribution and each component is provided as a module that can be imported separately in your project.
 
-We are also using [HMR](https://github.com/AngularClass/angular2-hmr) and [DLL](https://robertknight.github.io/posts/webpack-dll-plugins/) to dramatically speed your builds.
-
 * Documentation website (soon)
-
-## File Structure
-
-```
-egeo/
- ├──config/                        * our configuration
- |   ├──empty.js                   * special file needed for webpack
- |   ├──helpers.js                 * utilities file for webpack
- |   ├──karma.conf.js              * karma config for our unit tests
- |   ├──resource-override.js       * special file needed for webpack
- │   ├──spec-bundle.js             * index generator of spec files for testing
- │   ├──webpack.components.js      * Webpack configuration
- |   └──webpack.test.js            * specifical configuration for execute karma
- │
- ├──src/                           * our source files
- |   ├──decorators/                * decorators for components
- |   ├──pipes/                     * filters for components
- |   ├──utils/                     * utilities
- │   ├──st-*/                      * folder of each component
- |   ├──egeo.module.ts             * library main module
- |   ├──index.ts                   * this file indicates what will be exported
- |   └──modules.ts                 * declares the list of modules will be added to the main module
- │
- ├──.htmlhintrc                    * our htmlhint linting configuration
- ├──.sass-lint.yml                 * our sass linting configuration
- ├──tslint.json                    * typescript lint config
- ├──jenkinsfile                    * configuration of our jenkins process
- ├──gulpfile.js                    * gulp tasks definition needed to generate de distribution
- ├──karma.conf.js                  * index file for the karma configuration
- ├──pom.xml                        * configuration to work with our CI system
- ├──tsconfig.lib.json              * settings of typescript to build the library using webpack
- ├──tsconfig.gulp.json             * settings of typescript to build the library using gulp
- ├──tsconfig.json                  * default settings of typescript
- ├──package.json                   * what npm uses to manage it's dependencies
- └──yarn.lock                      * need in order to get consistent installs across machines using yarn
-
-```
 
 ## Getting Started
 
@@ -84,16 +44,12 @@ What you need to run this app:
 * Ensure you're running the latest versions Node `v6.x.x` and NPM `4.x.x`+
 
 What your app will need to work with Egeo:
-* angular/common ~ 2.4.6",
-* angular/core ~ 2.4.6",
-* angular/forms ~ 2.4.6",
-* angular/http ~ 2.4.6",
-* angular/platform-browser-dynamic ~ 2.4.6",
-* angular/Router ~ 3.4.6
-* Lodash 4.17.4
-* Reflect Metadata ~ 0.1.9
-* Typescript 2.0.x
-* Angular2 Virtual Scroll ~ 0.1.3
+* angular/common ~4.2.0",
+* angular/core ~4.2.0",
+* angular/forms ~4.2.0",
+* angular/http ~4.2.0",
+* angular/platform-browser-dynamic ~4.2.0",
+* angular/Router ~3.4.6
 
 ### Installing
 
@@ -154,7 +110,7 @@ npm run test
 It is possible to run an individual test to avoid run the whole suite.
 
 ```
-npm run test --component=st-two-list
+npm run test -- -- st-two-list
 ```
 
 ### How to Build
