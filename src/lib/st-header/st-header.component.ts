@@ -8,98 +8,113 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Event, Router } from '@angular/router';
+import {
+   ChangeDetectionStrategy,
+   ChangeDetectorRef,
+   Component,
+   ElementRef,
+   EventEmitter,
+   Input,
+   OnInit,
+   Output,
+   ViewChild,
+   HostListener,
+   AfterViewInit
+} from '@angular/core';
+import { Router } from '@angular/router';
 
-import { StHeaderModel, StHeaderUserMenuModel, StSubMenuModel } from './st-header.model';
+import { StHeaderMenuOption, StHeaderSubMenuOption } from './st-header.model';
+import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
+import { StWindowRefService } from '../utils/window-service';
 
+
+/**
+ * @description {Component} [Header]
+ *
+ * The header component is a main component of an application.
+ * This component must be on top and scroll with page, when scroll is in a calculated position,
+ * the header shrinks and fix to top.
+ *
+ * @model
+ *
+ *   [Header menu options] {./st-header.model.ts#StHeaderMenuOption}
+ *   [Submenu options] {./st-header.model.ts#StHeaderSubMenuOption}
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ * <st-header [menu]="headerMenuSchema" id="header">
+ *     <div class="sth-header-logo">
+ *        <!-- Logo as svg, image, etc. -->
+ *     </div>
+ *     <div class="sth-header-user-menu">
+ *        <!-- Right header menu, with user menu, notifications, etc -->
+ *     </div>
+ *
+ *  </st-header>
+ * ```
+ */
 @Component({
    selector: 'st-header',
    templateUrl: './st-header.component.html',
-   styleUrls: ['./st-header.component.scss']
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StHeaderComponent implements OnInit {
+export class StHeaderComponent implements AfterViewInit {
 
-   @Input() appName: string | undefined;
-   @Input() companyName: string = 'Stratio';
+   /** @Input {StHeaderMenuOption[]} [menu] Array with menu option to show */
+   @Input() menu: StHeaderMenuOption[] = [];
+   /** @Output {string} [selectMenu] Notify any menu option selection */
+   @Output() selectMenu: EventEmitter<string> = new EventEmitter<string>();
 
-   // TODO: In the future this header can use image or text for now, only use text
-   appLogoPath: string | undefined;
+   @ViewChild('headerDivElement') headerDivElement: ElementRef;
+   @ViewChild('headerFixPart') headerFixPart: ElementRef;
+   @ViewChild('userMenuContainerElement') userMenuContainer: ElementRef;
 
-   @Input() maxWidth: number;
+   public showMenuNames: boolean = true;
 
-   @Input() menu: StHeaderModel[] = [];
-
-   @Input() userMenu: StHeaderUserMenuModel;
-   @Input() qaTag: string;
-
-   @Output() contentChangeOffset: EventEmitter<number> = new EventEmitter<number>();
-
-   selectedSubmenu: StSubMenuModel[] = [];
-   navigationOffset: number = 0;
-
-   private headerOffset: number = 0;
-   private showSubmenu: boolean = false;
+   private _headerSize: number = 0;
+   private _window: Window;
 
    constructor(
-      private _router: Router,
       private _cd: ChangeDetectorRef,
-      private el: ElementRef
-   ) { }
+      private _router: Router,
+      private _windowServiceRef: StWindowRefService,
+      private _el: ElementRef) {
+      this._window = _windowServiceRef.nativeWindow;
+   }
 
-   public hasSubmenu(): boolean {
-      let menu: StHeaderModel | undefined = this.menu.find((menuOption) => this._router.url.includes(menuOption.link));
-      if (menu !== undefined && menu.subMenus !== undefined && menu.subMenus.length > 0) {
-         this.selectedSubmenu = menu.subMenus;
-         this.checkIfNotify(true);
-         return true;
-      } else {
-         this.selectedSubmenu = [];
-         this.checkIfNotify(false);
-         return false;
+   public ngAfterViewInit(): void {
+      this._headerSize = this.headerFixPart.nativeElement.scrollWidth + this.userMenuContainer.nativeElement.scrollWidth + 20;
+      this.checkMenuLabelVisibility();
+   }
+
+   @HostListener('window:resize', [])
+   onResize(): void {
+      this.checkMenuLabelVisibility();
+   }
+
+   public get id(): string {
+      return this._el.nativeElement.id || 'st-header';
+   }
+
+   public onSelectMenu(link: string): void {
+      this._router.navigate([link]);
+      this.selectMenu.emit(link);
+   }
+
+   public get menuContainerId(): string {
+      return `${this.id}-menu`;
+   }
+
+   private checkMenuLabelVisibility(): void {
+      let windowSize: number = this._window.innerWidth;
+      let canShowMenuNames = this._headerSize <= windowSize;
+
+      if (this.showMenuNames !== canShowMenuNames) {
+         this.showMenuNames = canShowMenuNames;
+         this._cd.markForCheck();
       }
-   }
-
-   public ngOnInit(): void {
-      if (!this.qaTag) {
-         throw new Error('qaTag is a necesary field');
-      }
-      this.headerOffset = this.el.nativeElement.getBoundingClientRect().left;
-      this.showSubmenu = this.hasSubmenu();
-      this.notifyOffset();
-   }
-
-   public onPositionChange(newPosition: number): void {
-      this.navigationOffset = newPosition - this.headerOffset;
-      this._cd.markForCheck();
-   }
-
-   public hasUserMenu(): boolean {
-      return this.userMenu !== undefined;
-   }
-
-   public getHeaderStyle(): Object {
-      if (this.maxWidth !== undefined && typeof this.maxWidth === 'number' && this.maxWidth > 0) {
-         return {
-            'max-width': `${this.maxWidth}px`
-         };
-      } else {
-         return {};
-      }
-   }
-
-   private checkIfNotify(hasSubMenu: boolean): void {
-      if (this.showSubmenu !== hasSubMenu) {
-         this.showSubmenu = hasSubMenu;
-         this.notifyOffset();
-      }
-   }
-
-   private notifyOffset(): void {
-      if (this.showSubmenu) {
-            this.contentChangeOffset.emit(140);
-         } else {
-            this.contentChangeOffset.emit(95);
-         }
    }
 }

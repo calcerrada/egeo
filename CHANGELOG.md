@@ -15,6 +15,18 @@
 **New features:**
 
 * st-label: New component based on label native tag
+* st-header: Menu notifies navigation
+
+**Breaking changes:**
+
+* st-header: Remove stHeaderBehavior directive because now it's unnecesary
+* st-header: Change contentChangeOffset parameter by changeHeight
+* st-header: Removed app name, now use a ng-content to define
+* st-header: Removed user menu, now use a ng-content to define
+* st-header: Removed company name input
+* st-header: Remove disable parameter of menu and submenu model
+* st-header: Models change of name
+* st-header: Change general behaivor and design
 
 **Fixed bugs:**
 
@@ -39,8 +51,8 @@
 
 * st-two-list-selection: Fix when list is empty, height not showing correctly
 * st-item-list: Add item list to egeo module
-* st-dropdown: Fix inputs immutable 
-* st-switch: Change input id to <name>-input 
+* st-dropdown: Fix inputs immutable
+* st-switch: Change input id to <name>-input
 
 **Breaking changes:**
 
@@ -155,7 +167,7 @@
 * Refactor decorators now all start by St
 * Improvement in st-switch template
 * Add st-pop component
-* Allow Able or disable for columns singly 
+* Allow Able or disable for columns singly
 
 ## 2.1.1 (May 29, 2017)
 
@@ -194,7 +206,7 @@
 * Extract theme of vertical-tabs
 * Extract theme of search
 * Reduce bundle size
-* Add Breadcrumbs component 
+* Add Breadcrumbs component
 * Create table component
 
 ## 1.4.1 (April 17, 2017)

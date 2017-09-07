@@ -8,47 +8,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { TranslateableElement } from '../utils/egeo-resolver/egeo-resolve-model';
-
-export interface StHeaderModel {
-   icon?: string;
-   label: string;
-   link: string;
-   isActive: boolean;
-   subMenus: StSubMenuModel[];
-   notifications?: number;
+export class StHeaderMenuOption {
+   icon: string; // Icon to show on left of menu label
+   label: string; // Menu label to show
+   link: string; // Link to navigate when click
+   subMenus: StHeaderSubMenuOption[]; // List of submenu options
 }
 
-export interface StSubMenuModel {
-   label: string;
-   link: string;
-   isActive: boolean;
-}
-
-/** For translate service */
-export interface StHeaderModelSchema {
-   icon?: string;
-   label: TranslateableElement;
-   link: string;
-   isActive: boolean;
-   subMenus: StSubMenuModelSchema[];
-   notifications?: number;
-}
-
-export interface StSubMenuModelSchema {
-   label: TranslateableElement;
-   link: string;
-   isActive: boolean;
-}
-
-export interface StHeaderUserMenuModel {
-   logoutLabel: string;
-   userName: string;
-   logoutPath: string;
-}
-
-export interface StHeaderUserMenuModelSchema {
-   logoutLabel: TranslateableElement;
-   userName: string;
-   logoutPath: string;
+export class StHeaderSubMenuOption {
+   label: string; // Label to show
+   link: string; // Link to navigate when click
 }

@@ -10,8 +10,6 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<li class="st-breadcrumbs__item sth-breadcrumbs__item" [ngClass]="{'last': active}" [attr.id]="qaTag">
-    <span class="st-breadcrumbs__item--text sth-breadcrumbs__item--text">
-      <ng-content></ng-content>
-   </span>
-</li>
+<nav class="sth-header-menu" [attr.id]="qaId">
+   <st-header-menu-option *ngFor="let option of menu" class="sth-header-menu-item" [option]="option" [attr.id]="itemId" [showMenuName]="showMenuNames" (selectMenu)="selectMenu.emit($event)"></st-header-menu-option>
+</nav>

@@ -73,14 +73,7 @@ export { StFooterModule } from './st-footer/st-footer.module';
 export { StFooterLink } from './st-footer/st-footer.model';
 
 // Header
-export {
-   StHeaderModel,
-   StSubMenuModel,
-   StHeaderUserMenuModel,
-   StHeaderModelSchema,
-   StHeaderUserMenuModelSchema,
-   StSubMenuModelSchema
-} from './st-header/st-header.model';
+export { StHeaderMenuOption, StHeaderSubMenuOption } from './st-header/st-header.model';
 export { StHeaderModule } from './st-header/st-header.module';
 
 // Help
