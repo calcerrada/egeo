@@ -27,11 +27,14 @@
 * st-header: Models change of name
 * st-header: Change general behaviour and design
 * st-input-adjustable: Rename directive 'StInputAdjustable' to st-input-adjustable
+* st-switch: Remove labelPosition input, label always are dispayed at the left.
+
 
 **Refactor**
 
 * st-radio: Apply new style according to UX specifications
 * st-table: Apply new style according to UX specifications
+* st-switch: Apply new style.
 
 **Documentation:**
 
@@ -43,6 +46,7 @@
 **Others**
 
 * Theme is now part of this repository. egeo-theme is deprecated.
+
 
 ## 3.0.1 (September 01, 2017)
 

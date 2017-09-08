@@ -46,7 +46,6 @@ describe('StFormComponent', () => {
             }
          }
       });
-
       it('tooltips are generated using their descriptions', () => {
          for (let propertyId in JSON_SCHEMA.properties) {
             if (JSON_SCHEMA.properties.hasOwnProperty(propertyId)) {

@@ -8,25 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-$st-switch__toggle-width: 35px;
 
 .st-switch {
-   position: relative;
-   box-sizing: border-box;
-   font-size: 1rem;
-   display: inline-block;
-   max-width: 100%;
-   padding-top: 20px;
-   padding-bottom: 7px;
-
-   &__label {
-      display: inline-block;
-
-      &--top {
-         width: 100%;
-         margin-top: 10px;
-      }
-   }
 
    &__input {
       visibility: hidden;
@@ -35,9 +18,11 @@ $st-switch__toggle-width: 35px;
 
    //toggle
    &__toggle {
+      margin-left: 15px;
+      vertical-align: middle;
       position: relative;
-      height: 22px;
-      width: $st-switch__toggle-width;
+      height: 25px;
+      width: 45px;
       display: inline-block;
       cursor: pointer;
    }
@@ -51,9 +36,9 @@ $st-switch__toggle-width: 35px;
    }
 
    &__circle {
-      width: 18px;
-      height: 18px;
-      top: 2px;
+      width: 19px;
+      height: 19px;
+      top: 3px;
       left: 3px;
       border-radius: 100%;
       position: absolute;
@@ -70,7 +55,7 @@ $st-switch__toggle-width: 35px;
 
    &--on {
       .st-switch__circle {
-         margin-left: 13px;
+         margin-left: 21px;
       }
    }
 }

@@ -10,23 +10,13 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<st-form-label class="st-switch__label sth-switch__label" labelPosition="{{labelPosition}}" [label]="label"
-               [qaTag]="labelQaTag"
-               [contextualHelp]="contextualHelp"
-               [status]="getLabelStatus()">
-   <div class="st-switch__toggle sth-switch__toggle" [attr.id]="qaTag"
-        [ngClass]="{ 'st-switch--disabled': disabled, 'st-switch--on': stModel, 'st-switch--off': !stModel, 'st-switch__label--top': labelPosition === 'top'}">
-      <div class="st-switch__box sth-switch__box">
-         <span class="st-switch__circle sth-switch__circle"></span>
-      </div>
-      <input class="st-switch__input"
-             [name]="name"
-             [attr.type]="'checkbox'"
-             [checked]="stModel"
-             (change)="onChange($event)"
-             [attr.id]="name + '-input'"
-             [disabled]="disabled"
-      />
+<label st-label [attr.for]="relatedInput" [tooltip]="contextualHelp" [attr.id]="name">
+   {{label}}
+</label>
+<div class="st-switch__toggle sth-switch__toggle" (click)="writeValue(!stModel)" [attr.id]="labelQaTag" [ngClass]="{ 'st-switch--disabled': disabled, 'st-switch--on': stModel, 'st-switch--off': !stModel}">
+   <div class="st-switch__box sth-switch__box">
+      <span class="st-switch__circle sth-switch__circle"></span>
    </div>
-   <ng-content></ng-content>
-</st-form-label>
+   <input class="st-switch__input" [name]="name" [attr.type]="'checkbox'" [checked]="stModel" (change)="onChange($event)" [attr.id]="relatedInput"
+   [disabled]="disabled" />
+</div>

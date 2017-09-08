@@ -12,25 +12,20 @@
 -->
 <section class="container-liquid">
     <form [formGroup]="form" novalidate autocomplete="off">
-      <h1>Switch with label at top</h1>
-      <st-switch label="Enabled switch" labelPosition="top" contextualHelp="This is an example of tooltip" [stModel]="model" formControlName="switch" qaTag="enabled-switch-1"></st-switch>
-      <br>
       <h1>Switch with label at left</h1>
-      <st-switch label="Enabled switch" labelPosition="left" contextualHelp="This is an example of tooltip" [stModel]="model" formControlName="switch" qaTag="enabled-switch-2"></st-switch>
-      <br>
-      <h1>Switch with label at right</h1>
-      <st-switch label="Enabled switch" labelPosition="right" contextualHelp="This is an example of tooltip" [stModel]="model" formControlName="switch" qaTag="enabled-switch-3"></st-switch>
-      <br>
+      <st-switch class="swicth-demo" contextualHelp="this is a contextual help" name="switch-1" label="Enabled switch" [stModel]="model" formControlName="switch" qaTag="enabled-switch-1" ></st-switch>
    </form>
 
-   <button class="button button-sq1" (click)="form.controls['switch'].enable()">
+   <button class="button button-primary" (click)="form.controls['switch'].enable()">
       <span>ENABLE SWITCH</span>
    </button>
-   <button class="button button-sq2" (click)="form.controls['switch'].disable()">
+   <button class="button button-secondary-gray" (click)="form.controls['switch'].disable()">
       <span>DISABLE SWITCH</span>
    </button>
-
+   <br>
+   <br>
+   <br>
    <h1>Disabled switch without a form control</h1>
-   <st-switch [disabled]="true" label="Disabled switch" labelPosition="right" contextualHelp="This is an example of tooltip" [stModel]="model" qaTag="enabled-switch-3"></st-switch>
+   <st-switch class="swicth-demo" name="switch-2" [disabled]="true" label="Disabled switch" [stModel]="model" qaTag="enabled-switch-2"></st-switch>
    <br>
 </section>

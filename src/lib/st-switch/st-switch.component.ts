@@ -37,9 +37,8 @@ import { StFormLabelStatus } from '../utils/egeo-form/st-form-label/st-form-labe
 export class StSwitchComponent implements ControlValueAccessor {
    @Input() qaTag: string;
    @Input() label: string;
-   @Input() labelPosition: 'top' | 'right' | 'left' = 'top';
-   @Input() contextualHelp: string;
    @Input() name: string;
+   @Input() contextualHelp: string;
    @Output() change: EventEmitter<boolean> = new EventEmitter<boolean>();
 
    private _stModel: boolean;
@@ -76,13 +75,24 @@ export class StSwitchComponent implements ControlValueAccessor {
    }
 
    get labelQaTag(): string {
-     return (this.qaTag || '') + '-label';
+      return (this.qaTag || '') + '-label';
+   }
+
+   get relatedInput(): string {
+      return `${this.name}-input`;
    }
 
    // load external change
    writeValue(value: boolean): void {
-      this._stModel = value;
+      if (!this._disabled) {
+         this._stModel = value;
+         this.change.emit(this._stModel);
+         if (this.registeredOnChange) {
+            this.registeredOnChange(value);
+         }
+      }
    }
+
 
    // internal change callback
    registerOnChange(fn: (_: any) => void): void {
@@ -97,14 +107,9 @@ export class StSwitchComponent implements ControlValueAccessor {
    }
 
    onChange(event: MouseEvent): void {
-      if (!this.disabled) {
-         event.stopPropagation();
-         let value: boolean = (<HTMLInputElement> event.target).checked;
-         this._stModel = value;
-         this.change.emit(this._stModel);
-         if (this.registeredOnChange) {
-            this.registeredOnChange(value);
-         }
-      }
+      event.stopPropagation();
+      let value: boolean = (<HTMLInputElement>event.target).checked;
+      this._stModel = value;
+      this.writeValue(value);
    }
 }
