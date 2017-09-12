@@ -51,7 +51,7 @@ describe('StSwitchComponent', () => {
       }
    });
 
-   it('qa tag is added as id to the clickable element', () => {
+   it('if has qa tag, is added as id to the clickable element', () => {
       let qaTag = 'fakeQATag';
       component.qaTag = qaTag;
       fixture.detectChanges();
@@ -63,6 +63,21 @@ describe('StSwitchComponent', () => {
       expect(clickableElement).toBeDefined();
       expect(clickableElement.click).toBeDefined();
    });
+
+   it('if has not qa tag, name is added as id to the clickable element', () => {
+      let nameImput = 'demo';
+      component.qaTag = undefined;
+      component.name = nameImput;
+      fixture.detectChanges();
+      fixture.changeDetectorRef.markForCheck();
+
+      let clickableElement: HTMLElement = fixture.nativeElement.querySelector('#' + nameImput + '-label');
+
+      expect(fixture.nativeElement.querySelector('#' + nameImput + '-label')).not.toBeNull();
+      expect(clickableElement).toBeDefined();
+      expect(clickableElement.click).toBeDefined();
+   });
+
 
    describe('Should update its class when disabled attribute changes', () => {
       beforeEach(() => {

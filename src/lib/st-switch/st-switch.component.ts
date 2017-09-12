@@ -68,14 +68,8 @@ export class StSwitchComponent implements ControlValueAccessor {
       this._cd.markForCheck();
    }
 
-   getLabelStatus(): StFormLabelStatus {
-      if (this.disabled) {
-         return StFormLabelStatus.DISABLED;
-      }
-   }
-
    get labelQaTag(): string {
-      return (this.qaTag || '') + '-label';
+      return (this.qaTag || this.name) + '-label';
    }
 
    get relatedInput(): string {
