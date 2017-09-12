@@ -369,11 +369,11 @@ describe('StFormFieldComponent', () => {
       });
 
       it('label is displayed', () => {
-         expect(fixture.nativeElement.querySelector('.st-form-label__label span').innerHTML).toBe(booleanProperty.title);
+         expect(fixture.nativeElement.querySelector('#boolean-text').textContent).toContain(booleanProperty.title);
       });
 
       it('tooltip is displayed if description exits', () => {
-         let tooltip: HTMLElement = fixture.nativeElement.querySelector('#boolean-label-contextual-help');
+         let tooltip: HTMLElement = fixture.nativeElement.querySelector('#boolean-tooltip');
          let tooltipText: Element = (<Element> tooltip.parentNode).querySelector('.sth-tooltip-content-text');
 
          expect(tooltipText.innerHTML).toBe(booleanProperty.description);
