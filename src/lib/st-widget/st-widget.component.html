@@ -1,0 +1,29 @@
+<!--
+
+    © 2017 Stratio Big Data Inc., Sucursal en España.
+
+    This software is licensed under the Apache License, Version 2.0.
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the terms of the License for more details.
+
+    SPDX-License-Identifier: Apache-2.0.
+
+-->
+
+<div class="st-widget" [attr.id]="widgetId">
+   <div class="st-widget__header" >
+      <span class="drag-drop-action">
+         <i class="icon-actions"></i>
+         <i class="icon-actions"></i>
+      </span>
+      <span class="st-widget__title">{{title}}</span>
+      <span class="setting-action">
+         <i class="icon-settings2"></i>
+      </span>
+   </div>
+   <div class="st-widget__body">
+      <ng-content></ng-content>
+      <div class="resize-action"></div>
+   </div>
+</div>

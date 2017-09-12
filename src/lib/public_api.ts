@@ -213,9 +213,11 @@ export {
 } from './st-two-list-selection/st-two-list-selection';
 
 // Vertical tabs
-export {
-   StVerticalTabsModule
-} from './st-vertical-tabs/st-vertical-tabs.module';
+export { StVerticalTabsModule } from './st-vertical-tabs/st-vertical-tabs.module';
+
+// Widget
+export { StWidgetModule } from './st-widget/st-widget.module';
+
 
 export { StPopModule } from './st-pop/st-pop.module';
 

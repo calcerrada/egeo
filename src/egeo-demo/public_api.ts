@@ -39,3 +39,4 @@ export { StTipDemoModule } from './st-tip-demo/st-tip-demo.module';
 export { StTooltipDemoModule } from './st-tooltip-demo/st-tooltip-demo.module';
 export { StTreeDemoModule } from './st-tree-demo/st-tree-demo.module';
 export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
+export { StWidgetDemoModule } from './st-widget-demo/st-widget-demo.module';

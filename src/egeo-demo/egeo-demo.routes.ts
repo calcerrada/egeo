@@ -48,7 +48,8 @@ export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
    { id: 'st-tip', name: 'Tip', path: 'tip-demo', moduleLazyLoad: 'StTipDemoModule' },
    { id: 'st-tooltip', name: 'Tooltip', path: 'tooltip-demo', moduleLazyLoad: 'StTooltipDemoModule' },
    { id: 'st-tree', name: 'Tree', path: 'tree-demo', moduleLazyLoad: 'StTreeDemoModule' },
-   { id: 'st-two-list-selection', name: 'Two List Selection', path: 'two-list-selection-demo', moduleLazyLoad: 'StTwoListSelectionDemoModule' }
+   { id: 'st-two-list-selection', name: 'Two List Selection', path: 'two-list-selection-demo', moduleLazyLoad: 'StTwoListSelectionDemoModule' },
+   { id: 'st-widget', name: 'Widget', path: 'widget-demo', moduleLazyLoad: 'StWidgetDemoModule' }
 ];
 
 // tslint:disable:max-line-length
@@ -80,7 +81,8 @@ const routes: Routes = [
    { path: 'tip-demo', loadChildren: './st-tip-demo/st-tip-demo.module#StTipDemoModule' },
    { path: 'tooltip-demo', loadChildren: './st-tooltip-demo/st-tooltip-demo.module#StTooltipDemoModule' },
    { path: 'tree-demo', loadChildren: './st-tree-demo/st-tree-demo.module#StTreeDemoModule' },
-   { path: 'two-list-selection-demo', loadChildren: './st-two-list-selection-demo/st-two-list-selection-demo.module#StTwoListSelectionDemoModule' }
+   { path: 'two-list-selection-demo', loadChildren: './st-two-list-selection-demo/st-two-list-selection-demo.module#StTwoListSelectionDemoModule' },
+   { path: 'widget-demo', loadChildren: './st-widget-demo/st-widget-demo.module#StWidgetDemoModule' }
 ];
 // tslint:enable
 

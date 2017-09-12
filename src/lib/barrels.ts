@@ -46,6 +46,7 @@ import { StTooltipModule } from './st-tooltip/st-tooltip.module';
 import { StTreeModule } from './st-tree/st-tree.module';
 import { StTwoListSelectionModule } from './st-two-list-selection/st-two-list-selection.module';
 import { StVerticalTabsModule } from './st-vertical-tabs/st-vertical-tabs.module';
+import { StWidgetModule } from './st-widget/st-widget.module';
 
 export const DECLARATIONS: any[] = [
    PipesModule,
@@ -85,5 +86,6 @@ export const DECLARATIONS: any[] = [
    StTooltipModule,
    StTreeModule,
    StTwoListSelectionModule,
-   StVerticalTabsModule
+   StVerticalTabsModule,
+   StWidgetModule
 ];
