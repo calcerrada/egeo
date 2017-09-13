@@ -6,13 +6,12 @@
 
 | Property | Type   | Req   | Description                                  | Default |
 | -------- | ------ | ----- | -------------------------------------------- | ------- |
-| title    | String | False | title will de displayed in the widget header |         |
+| title    | String | False | title will be displayed in the widget header |         |
 
 ## Example
 
 
 ```html
-<st-widget title="widget demo"
-      class="widget-demo"></st-widget>
+<st-widget title="widget demo"></st-widget>
 ```
 
