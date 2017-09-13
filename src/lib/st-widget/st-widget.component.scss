@@ -12,7 +12,6 @@
 @import './../../theme/constants/colors';
 @import './../../theme/constants/fonts';
 
-$boder : 1px solid  $neutral-03;
 $height-header: 50px;
 
 :host {
@@ -25,18 +24,10 @@ $height-header: 50px;
       height: 100%;
       width: 100%;
       border-radius: 4px;
-      box-shadow: 0 1px 2px 0 rgba(170, 183, 196, 0.17);
-
-      //theme
-      background-color: $neutral-00;
-      border: $boder;
 
       &__header{
          height: $height-header;
          padding: 15px 19.5px;
-
-         // theme
-         border-bottom: $boder;
 
          .drag-drop-action {
 
@@ -53,18 +44,12 @@ $height-header: 50px;
          }
          .setting-action {
             cursor: pointer;
-            font-size: $egeo-font-size-large;
-            color: $action-secondary-04;
             float: right;
          }
       }
 
       &__title{
          text-transform: capitalize;
-         //theme
-         color: $neutral-12;
-         font-family: $egeo-nunito-sans;
-         font-size: $egeo-font-size-small;
       }
 
       &__body{
@@ -85,13 +70,11 @@ $height-header: 50px;
          }
 
          .resize-action::after {
-            border: 1px solid $action-secondary-03;
             content: '';
             display: block;
             height: 100%;
             transform: rotate(45deg) translate(13px, -4px);
             width: 6px;
-
 
          }
       }
