@@ -35,7 +35,7 @@ import { StEgeo, StRequired } from './../decorators/require-decorators';
 })
 
 export class StWidgetComponent {
-   /** @Input {string} [title] title will de displayed in the widget header */
+   /** @Input {string} [title] title will be displayed in the widget header */
    @Input() title: string;
 
    public widgetId: string;
