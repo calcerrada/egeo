@@ -129,6 +129,7 @@
 
    .container-fluid,
    .container {
+      display: flex;
       margin-right: auto;
       margin-left: auto;
    }
@@ -138,14 +139,16 @@
       max-width: $egeo-grid---max;
       padding-right: $egeo-grid---outer-margin;
       padding-left: $egeo-grid---outer-margin;
+      width: 100%,
    }
 
    .row {
-      box-sizing: border-box;
       display: flex;
       flex: 0 1 auto;
       flex-direction: row;
       flex-wrap: wrap;
+      margin: 0 -#{$egeo-grid---half-gutter-width};
+      width: calc(100% + #{$egeo-grid---gutter-width});
    }
 
    .row.reverse {

@@ -4,6 +4,7 @@
 
 **Fixed bugs:**
 
+* grid: fix container and row flexbox behaviors
 * st-breadcrumbs: Fix qaTags
 * st-dropdown: Fix qaTags
 * st-page-title: Fix bug when page is refreshed, the editable page title is displayed wrong
