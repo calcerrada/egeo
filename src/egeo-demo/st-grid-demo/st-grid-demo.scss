@@ -10,6 +10,10 @@
  */
 @import '../../theme/constants/index';
 
+section{
+   margin-bottom: 30px;
+}
+
 .grid-example {
    font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-small;
@@ -19,7 +23,6 @@
 .example {
    .row {
       background-color: rgba(188, 231, 246, 0.5);
-      ;
    }
    .box {
       margin: 10px 0;
