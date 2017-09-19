@@ -8,13 +8,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+ .row{
+    margin-bottom: 30px;
+ }
 .widget-demo{
-   width: 389px;
    height: 443px;
 
    &__content{
       height: 100%;
-      widows: 100%;
+      width: 100%;
       background-color: #FCDFDF
    }
 }
