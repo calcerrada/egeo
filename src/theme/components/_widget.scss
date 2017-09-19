@@ -12,16 +12,16 @@
  @import './../../theme/constants/colors';
  @import './../../theme/constants/fonts';
 
- $boder : 1px solid  $neutral-03;
+ $border : 1px solid  $neutral-03;
 
 .st-widget{
    box-shadow: 0 1px 2px 0 rgba($neutral-04, 0.17);
    background-color: $neutral-00;
-   border: $boder;
+   border: $border;
 
    &__header{
 
-      border-bottom: $boder;
+      border-bottom: $border;
       .drag-drop-action{
          color: $action-secondary-04;
       }
