@@ -22,7 +22,9 @@
    &__header{
 
       border-bottom: $boder;
-
+      .drag-drop-action{
+         color: $action-secondary-04;
+      }
       .setting-action{
          font-size: $egeo-font-size-large;
          color: $action-secondary-04;
