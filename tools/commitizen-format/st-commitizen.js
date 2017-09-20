@@ -23,7 +23,7 @@ module.exports = (function() {
          cz.prompt([{
                type: 'input',
                name: 'issue',
-               message: 'Jira issue number only (164):\n'
+               message: 'Jira issue (example: CCT-164) In case of not have related issue use "NA":\n'
             },
             {
                type: 'list',
@@ -61,7 +61,7 @@ module.exports = (function() {
             const scope = answers.scope.trim() ? `(${answers.scope.trim()})` : '';
 
             // Hard limit this line
-            const head = `[CCT-${answers.issue}]${answers.type}${scope}: ${answers.subject.trim().slice(0, maxLineWidth)}`;
+            const head = `[${answers.issue}]${answers.type}${scope}: ${answers.subject.trim().slice(0, maxLineWidth)}`;
 
             // Wrap these lines at 120 characters
             let body = wrap(answers.body, wrapOptions);
