@@ -90,6 +90,15 @@ $height-header: 50px;
          }
 
       }
+
+      &:hover{
+
+         .resize-action,
+         .setting-action{
+            visibility: visible;
+         }
+
+      }
    }
 
 }
