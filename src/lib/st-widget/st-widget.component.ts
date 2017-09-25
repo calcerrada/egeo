@@ -60,6 +60,7 @@ export class StWidgetComponent {
    }
 
    public set draggable(value: boolean) {
+      this.dragging = value;
       this._draggable = value;
    }
 }

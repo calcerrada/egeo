@@ -11,7 +11,7 @@
 
 -->
 
-<div class="st-widget" [attr.id]="widgetId" [ngClass]="{'dragging': dragging}" [draggable]="draggable" (dragend)="dragging = false" (dragstart)="dragging = true">
+<div class="st-widget" [attr.id]="widgetId" [ngClass]="{'dragging': dragging}" [draggable]="draggable" (dragend)="dragging = false" >
    <div class="st-widget__header" >
       <span class="drag-drop-action" (mousedown)="draggable = true" (mouseup)="draggable = false">
          <i class="icon-actions"></i>
