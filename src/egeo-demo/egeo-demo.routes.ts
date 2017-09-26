@@ -22,6 +22,9 @@ export class EgeoDemoMenu {
 
 export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
    { id: 'st-main', name: 'Main', path: 'main-demo', moduleLazyLoad: '' },
+   // Theme
+   { id: 'st-icons', name: 'Icons', path: 'icons-demo', moduleLazyLoad: 'StIconsDemoModule' },
+   // Egeo
    { id: 'st-alerts', name: 'Alerts', path: 'alerts-demo', moduleLazyLoad: 'StAlertsDemoModule' },
    { id: 'st-breadcrumbs', name: 'Breadcrumbs', path: 'breadcrumbs', moduleLazyLoad: 'StBreadcrumbsDemoModule' },
    { id: 'st-button', name: 'Button', path: 'button-demo', moduleLazyLoad: 'StButtonDemoModule' },
@@ -62,6 +65,9 @@ export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
 // tslint:disable:max-line-length
 const routes: Routes = [
    { path: 'main-demo', component: StMainDemoComponent },
+   // Theme
+   { path: 'icons-demo', loadChildren: './theme/st-icons-demo/st-icons-demo.module#StIconsDemoModule' },
+   // Egeo
    { path: 'alerts-demo', loadChildren: './st-alert-demo/st-alerts-demo.module#StAlertsDemoModule' },
    { path: 'breadcrumbs', loadChildren: './st-breadcrumbs-demo/st-breadcrumbs-demo.module#StBreadcrumbsDemoModule' },
    { path: 'button-demo', loadChildren: './st-button-demo/st-button-demo.module#StButtonDemoModule' },

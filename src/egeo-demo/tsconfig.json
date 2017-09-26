@@ -16,6 +16,9 @@
          ]
       }
    },
+   "files": [
+      "./typings.d.ts"
+   ],
    "include": [
       "./**/*.ts"
    ]

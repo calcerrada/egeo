@@ -8,19 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-/* SystemJS module definition */
-declare var module: NodeModule;
-interface NodeModule {
-  id: string;
-}
-
-interface Window { egeo_demo: CONFIG; }
-
-interface CONFIG {
-   CREATION_DATE: Date;
-}
-
-declare module "*.txt" {
-   const value: any;
-   export default value;
+export interface StIconDemoModel {
+   name: string;
+   key: string;
 }

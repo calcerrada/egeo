@@ -44,7 +44,11 @@ import { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-tw
 import { StVerticalTabsDemoModule } from './st-vertical-tabs-demo/st-vertical-tabs-demo.module';
 import { StWidgetDemoModule } from './st-widget-demo/st-widget-demo.module';
 
+// Theme
+import { StIconsDemoModule } from './theme/st-icons-demo/st-icons-demo.module';
+
 export const EGEO_DEMO_MODULES: any[] = [
+   // Demos
    StAlertsDemoModule,
    StBreadcrumbsDemoModule,
    StButtonDemoModule,
@@ -78,5 +82,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StTreeDemoModule,
    StTwoListSelectionDemoModule,
    StVerticalTabsDemoModule,
-   StWidgetDemoModule
+   StWidgetDemoModule,
+   // Theme
+   StIconsDemoModule
 ];

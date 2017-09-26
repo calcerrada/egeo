@@ -47,3 +47,7 @@ export { StTreeDemoModule } from './st-tree-demo/st-tree-demo.module';
 export { StTwoListSelectionDemoModule } from './st-two-list-selection-demo/st-two-list-selection-demo.module';
 export { StVerticalTabsDemoModule } from './st-vertical-tabs-demo/st-vertical-tabs-demo.module';
 export { StWidgetDemoModule } from './st-widget-demo/st-widget-demo.module';
+
+
+// Theme
+export { StIconsDemoModule } from './theme/st-icons-demo/st-icons-demo.module';
