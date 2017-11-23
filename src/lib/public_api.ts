@@ -150,6 +150,10 @@ export { StPaginationModule } from './st-pagination/st-pagination.module';
 // Pop Over
 export { StPopOverModule } from './st-pop-over/st-pop-over.module';
 
+// Progress bar
+
+export { StProgressBarModule } from './st-progress-bar/st-progress-bar.module';
+
 // Radio
 export { StRadioModule } from './st-radio/st-radio.module';
 export { RadioChange } from './st-radio/st-radio.change';

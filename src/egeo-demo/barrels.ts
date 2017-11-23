@@ -29,6 +29,7 @@ import { StModalDemoModule } from './st-modal-demo/st-modal-demo.module';
 import { StPageTitleDemoModule } from './st-page-title-demo/st-page-title-demo.module';
 import { StPaginationDemoModule } from './st-pagination-demo/st-pagination-demo.module';
 import { StPopOverDemoModule } from './st-pop-over-demo/st-pop-over-demo.module';
+import { StProgressBarDemoModule } from './st-progress-bar-demo/st-progress-bar-demo.module';
 import { StRadioDemoModule } from './st-radio-demo/st-radio-demo.module';
 import { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.module';
 import { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
@@ -72,6 +73,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StPageTitleDemoModule,
    StPaginationDemoModule,
    StPopOverDemoModule,
+   StProgressBarDemoModule,
    StRadioDemoModule,
    StRadioMenuDemoModule,
    StSearchDemoModule,
