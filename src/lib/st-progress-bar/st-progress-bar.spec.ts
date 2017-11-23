@@ -36,7 +36,7 @@ describe('ProgressBar', () => {
          fixture.detectChanges();
       });
 
-      it('should be add two elements with progress-bar class name', () => {
+      it('should add two elements with progress-bar class name', () => {
          const progressElement = nativeElement.querySelectorAll('.progress-bar');
          expect(progressElement.length).toBe(2);
       });
