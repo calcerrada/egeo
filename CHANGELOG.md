@@ -7,7 +7,7 @@
 * st-header: New input "navigateByDefault" for prevent navigation when click 
 * st-header: Add new parameter "external" to model to define external links
 * st-header: Add new parameter "openInNewPage" to model to define if open new tab when navigate to link 
-* st-progress-bar: craete component
+* st-progress-bar: create component
 
 ## 5.0.0 (November 15, 2017)
 
