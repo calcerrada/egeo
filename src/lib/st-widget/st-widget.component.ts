@@ -23,7 +23,7 @@ import { StEgeo, StRequired } from './../decorators/require-decorators';
  * {html}
  *
  * ```
- * <st-widget title="widget demo"></st-widget>
+ * <st-widget title="widget demo" [loading]="isLoading" overwriteLoadingData="Loading..."></st-widget>
  * ```
  *
  */
@@ -37,6 +37,10 @@ import { StEgeo, StRequired } from './../decorators/require-decorators';
 export class StWidgetComponent {
    /** @Input {string} [title] title will be displayed in the widget header */
    @Input() title: string;
+   /** @Input {bolean} [loading] when true, loading stauts is displayed    */
+   @Input() loading: boolean = false;
+   /** @Input {string} [title] text "loading data" will be overwritten with this parameter */
+   @Input() overwriteLoadingData: string = 'Loading data';
 
    public widgetId: string;
 
@@ -45,6 +49,7 @@ export class StWidgetComponent {
 
    constructor(private el: ElementRef) {
       this.widgetId = this.el.nativeElement.id ? this.el.nativeElement.id + '-widget' : undefined;
+
    }
 
    public get dragging(): boolean {

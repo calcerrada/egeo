@@ -23,7 +23,11 @@
       </span>
    </div>
    <div class="st-widget__body">
-      <div class="st-widget__content">
+      <div class="loading-status" *ngIf="loading">
+         <st-progress-bar class="progress-bar"></st-progress-bar>
+         <span class="loading-status-text">{{overwriteLoadingData}}</span>
+      </div>
+      <div class="st-widget__content" *ngIf="!loading">
          <ng-content ></ng-content>
       </div>
       <div class="resize-action"></div>

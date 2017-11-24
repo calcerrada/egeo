@@ -8,6 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+ @import '../../theme/constants/index';
+
 $height-header: 50px;
 
 :host {
@@ -49,13 +51,34 @@ $height-header: 50px;
          text-transform: capitalize;
       }
 
+
+
       &__body{
          position: relative;
          width: 100%;
          height: calc(100% - #{$height-header});
          padding: 30px;
 
-         > .resize-action{
+         .loading-status{
+            align-items: center;
+            background-color: $action-secondary-01;
+            color:  $neutral-08;
+            display: flex;
+            font-family: $egeo-nunito-sans;
+            height: 100%;
+            justify-content: center;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+
+            .progress-bar{
+               position: absolute;
+               top: 0;
+               left: 0;
+            }
+         }
+         .resize-action{
             cursor: se-resize;
             bottom: 6px;
             height: 20px;

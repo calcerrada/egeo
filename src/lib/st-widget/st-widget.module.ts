@@ -12,10 +12,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { StProgressBarModule } from '../st-progress-bar/st-progress-bar.module';
 import { StWidgetComponent } from './st-widget.component';
 
 @NgModule({
-   imports: [CommonModule],
+   imports: [CommonModule, StProgressBarModule],
    exports: [StWidgetComponent],
    declarations: [StWidgetComponent]
 })

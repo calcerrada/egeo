@@ -8,6 +8,7 @@
 * st-header: Add new parameter "external" to model to define external links
 * st-header: Add new parameter "openInNewPage" to model to define if open new tab when navigate to link 
 * st-progress-bar: create component
+* st-widget: Implement loading state 
 
 ## 5.0.0 (November 15, 2017)
 
