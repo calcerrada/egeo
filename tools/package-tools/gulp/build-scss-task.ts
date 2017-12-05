@@ -21,8 +21,8 @@ const gulpPostCss = require('gulp-postcss');
 const gulpSassBundle = require('scss-bundle');
 
 const postCssPlugins = [
-   autoprefixer({browsers: ['IE 11']}),
-   cssnano()
+   autoprefixer({ browsers: ['IE 11'] }),
+   cssnano({ reduceIdents: false })
 ];
 
 /** Create a gulp task that builds SCSS files. */
