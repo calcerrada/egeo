@@ -11,9 +11,12 @@
  @import '../../theme/constants/index';
 
 :host {
-   animation-fill-mode: both;
    display: flex;
    flex-direction: column;
+   opacity: 0;
+   pointer-events: none;
+   transition-duration: 1s;
+   transition-property: opacity;
 
    .foreground-notification {
       box-shadow: 0 1px 4px 1px rgba(124, 124, 124, 0.15);
@@ -22,14 +25,12 @@
       padding: 11px;
       position: relative;
 
-
-
       .close{
+         cursor: pointer;
          font-size: 18px;
          position: absolute;
          top: 11px;
          right: 11px;
-         cursor: pointer;
       }
 
       &.default {
@@ -65,6 +66,7 @@
          background-color: $status-warning-light;
          color: $status-warning-hover;
       }
+
       &__text {
          margin: 0px 60px;
       }
@@ -72,29 +74,12 @@
    }
 
    &.visible {
-      animation-duration: 1s;
-      animation-name: fadeIn;
-   }
-
-   &.fadeout {
-      animation-name: fadeOut;
-      animation-duration: 1s;
-
-   }
-   &.hidden{
-      display: none;
+      pointer-events: all;
+      opacity: 1;
+      transition-duration: 1s;
+      transition-property: opacity;
    }
 
 }
 
-
-@keyframes fadeIn {
-   0% {opacity: 0;}
-   100% {opacity: 1;}
-}
-
-@keyframes fadeOut {
-   0% {opacity: 1;}
-   100% {opacity: 0;}
-}
 

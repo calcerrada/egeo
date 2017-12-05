@@ -133,12 +133,9 @@ describe('StForegroundNotificationsComponent', () => {
          closeButton.click();
          fixture.detectChanges();
 
-         expect(nativeElement.querySelector('st-foreground-notifications').classList).toContain('fadeout');
+         expect(nativeElement.querySelector('st-foreground-notifications').classList).not.toContain('visible');
 
-         tick(1000);
-         fixture.detectChanges();
 
-         expect(nativeElement.querySelector('st-foreground-notifications').classList).toContain('hidden');
 
       }));
 

@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-foreground-notifications-demo.component.scss']
 })
 export class StForegroundNotificationsDemoComponent {
-   isVisible: boolean = true;
+   isVisible: boolean = false;
    items: any[]= [
       {
          text : 'This is a neutral informational notification',

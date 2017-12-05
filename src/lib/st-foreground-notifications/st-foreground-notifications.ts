@@ -15,9 +15,7 @@ import { Component, Input, ChangeDetectorRef, EventEmitter, Output, ElementRef }
    templateUrl: 'st-foreground-notifications.html',
    styleUrls: ['st-foreground-notifications.scss'],
    host: {
-      '[class.visible]': 'visible',
-      '[class.fadeout]': 'fadeOut',
-      '[class.hidden]': 'hide'
+      '[class.visible]': 'visible'
    }
 })
 /**
@@ -39,37 +37,18 @@ export class StForegroundNotificationsComponent {
 
 
    /** @Input {bollean} [visible=flase] When true the notification is shown */
-   @Input()
-   public get visible(): boolean {
-      return this._visible;
-   }
-
-   public set visible(value: boolean) {
-      this._visible = value;
-      this.fadeOut = !value;
-      setTimeout(() => {
-         this.hide = !this._visible;
-         this.cd.markForCheck();
-      }, 1000);
-   }
-
+   @Input() visible: boolean = false;
    /** @Input {string} [text=''] Displayed text */
    @Input() text: string;
    /** @Input {NotificationStatus} [status='NotificationStatus.default'] Defines the criticality level of the notification */
    @Input() status: string = 'default';
 
 
-   public hide: boolean;
-   public fadeOut: boolean;
-   private _visible: boolean;
-   private _blocked: boolean;
-
-   constructor(private cd: ChangeDetectorRef) { }
+   constructor() { }
 
 
    onClose(): void {
       this.visible = false;
-
    }
 
    getStatus(): string {
