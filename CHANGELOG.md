@@ -6,7 +6,6 @@
 
 * st-modal: Removed space when modal does not have buttons
 * st-modal: Reorder buttons in delete confirmation modal
-* st-widget: Hide unused buttons
 
 **New features:**
 
@@ -16,6 +15,7 @@
 * st-header: Add new parameter "openInNewPage" to model to define if open new tab when navigate to link 
 * st-progress-bar: create component
 * st-widget: Implement loading state
+* st-foreground-notifications: create component
 
  **Breaking changes:**
 

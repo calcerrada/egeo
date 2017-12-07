@@ -69,6 +69,10 @@ export { StFileButtonModule } from './st-file-button/st-file-button.module';
 export { StFooterModule } from './st-footer/st-footer.module';
 export { StFooterLink } from './st-footer/st-footer.model';
 
+// Foreground notifications
+
+export { StForegroundNotificationsModule } from './st-foreground-notifications/st-foreground-notifications.module';
+
 // Header
 export {
    StHeaderMenuOption,

@@ -1,0 +1,100 @@
+/**
+ * © 2017 Stratio Big Data Inc., Sucursal en España.
+ *
+ * This software is licensed under the Apache License, Version 2.0.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the terms of the License for more details.
+ *
+ * SPDX-License-Identifier: Apache-2.0.
+ */
+ @import '../../theme/constants/index';
+
+:host {
+   animation-fill-mode: both;
+   display: flex;
+   flex-direction: column;
+
+   .foreground-notification {
+      box-shadow: 0 1px 4px 1px rgba(124, 124, 124, 0.15);
+      font-size: 14px;
+      text-align: center;
+      padding: 11px;
+      position: relative;
+
+
+
+      .close{
+         font-size: 18px;
+         position: absolute;
+         top: 11px;
+         right: 11px;
+         cursor: pointer;
+      }
+
+      &.default {
+         background-color: $neutral-00;
+         color: $action-primary-default;
+
+         .close {
+            color: $neutral-06
+         }
+      }
+
+      &.critical,
+      &.success,
+      &.warning {
+         border: solid 1px;
+         border-radius: 4px;
+      }
+
+      &.critical {
+         border-color: $status-critical-hover;
+         background-color: $status-critical-light;
+         color: $status-critical-hover;
+      }
+
+      &.success {
+         border-color: $status-success-hover;
+         background-color: $status-success-light;
+         color: $status-success-hover;
+      }
+
+      &.warning {
+         border-color: $status-warning-hover;
+         background-color: $status-warning-light;
+         color: $status-warning-hover;
+      }
+      &__text {
+         margin: 0px 60px;
+      }
+
+   }
+
+   &.visible {
+      animation-duration: 1s;
+      animation-name: fadeIn;
+   }
+
+   &.fadeout {
+      animation-name: fadeOut;
+      animation-duration: 1s;
+
+   }
+   &.hidden{
+      display: none;
+   }
+
+}
+
+
+@keyframes fadeIn {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
+}
+
+@keyframes fadeOut {
+   0% {opacity: 1;}
+   100% {opacity: 0;}
+}
+
