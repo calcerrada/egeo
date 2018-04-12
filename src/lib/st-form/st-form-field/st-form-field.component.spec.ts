@@ -303,7 +303,7 @@ describe('StFormFieldComponent', () => {
             fixture.detectChanges();
 
             let cssInput: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;
-            expect(cssInput.getAttribute('placeholder')).toContain('e.g. ' + fakePlaceholder);
+            expect(cssInput.getAttribute('placeholder')).toContain(fakePlaceholder);
 
             component.schema = { key: 'log_level', value: { type: 'number', examples: [] } };
             fixture.detectChanges();
@@ -794,7 +794,7 @@ describe('StFormFieldComponent', () => {
          fixture.detectChanges();
 
          const input: HTMLElement = fixture.debugElement.query(By.css('input')).nativeElement;
-         expect(input.getAttribute('placeholder')).toContain('e.g. ' + fakePlaceholder);
+         expect(input.getAttribute('placeholder')).toContain(fakePlaceholder);
       });
 
       it('if select has a default value and user interacts with it, he will be able to reset to the default value', (done) => {

@@ -10,6 +10,10 @@
 
 * st-select: Allow to propagate itemsBeforeScroll from select to dopdown
 
+**Others**
+
+* st-form: Remove e.g. from placeholders
+
 
 ## 8.9.0 (April 06, 2018)
 
