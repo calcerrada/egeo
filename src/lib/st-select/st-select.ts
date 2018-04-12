@@ -49,6 +49,7 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    @Input() errorMessage: string | undefined = undefined;
    @Input() selected: StDropDownMenuItem = undefined;
    @Input() default: any;
+   @Input() itemsBeforeScroll: number = 8;
 
    @Output() expand: EventEmitter<boolean> = new EventEmitter<boolean>();
    @Output() select: EventEmitter<any> = new EventEmitter<any>();

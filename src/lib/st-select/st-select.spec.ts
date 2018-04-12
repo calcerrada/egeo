@@ -513,12 +513,14 @@ describe('StSelectComponent', () => {
             [options]="options"
             [errorMessage]="errorMessage"
             [selected]="selected"
+            [itemsBeforeScroll]="itemsBeforeScroll"
             class="st-form-field">
          </st-select>
       </form>
       `
 })
 class StSelectTestReactiveComponent {
+   itemsBeforeScroll: number = null;
    errorMessage: string | undefined = null;
    selected: StDropDownMenuItem = null;
    options: StDropDownMenuItem[];
@@ -615,6 +617,12 @@ describe('StSelectComponent', () => {
          fixture.detectChanges();
          const select: HTMLElement = fixture.debugElement.query(By.css('st-select')).nativeElement;
          expect(select.classList).toContain('ng-invalid');
+      });
+      it('Propagate itemsBeforeScroll variable to dropdownmenu', () => {
+         comp.itemsBeforeScroll = 4;
+         fixture.detectChanges();
+         const dropdownElement = fixture.nativeElement.querySelector('.st-select-menu');
+         expect(dropdownElement.getAttribute('ng-reflect-items-before-scroll')).toEqual('4');
       });
    });
 });
