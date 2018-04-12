@@ -233,7 +233,7 @@ export { StTooltipModule } from './st-tooltip/st-tooltip.module';
 
 // Tree
 export { StTreeModule } from './st-tree/st-tree.module';
-export { StNodeTree, StNodeTreeChange } from './st-tree/st-tree.model';
+export { StTreeNode, StTreeEvent } from './st-tree/st-tree.model';
 
 // Two list selection
 export {

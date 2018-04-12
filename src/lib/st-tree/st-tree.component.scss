@@ -8,6 +8,23 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-.tree-partial {
-   margin-left: 19px;
+:host {
+   .node {
+      position: relative;
+   }
+
+   .button {
+      position: absolute;
+   }
+
+   .name {
+      cursor: pointer;
+   }
+
+   .text {
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+   }
 }

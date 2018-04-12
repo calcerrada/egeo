@@ -16,33 +16,14 @@
          <h2>Root Tree</h2>
          <div class="tree-container">
             <st-tree
+               id="tree"
                [tree]="treeA"
-               [maxLevel]="treeModel.max"
-               [isRoot]="true"
-               (toogleNode)="onToogleNode($event, treeA)"
-               (selectNode)="onSelectNode($event, treeA)"
-               (navigatePrevious)="onNavigatePrevious($event)"
-               [changeStreamNotification]="notificationChangeStream">
-            </st-tree>
-         </div>
-      </div>
-
-      <div class="col-md-12 tree-background-B">
-         <h2>Partial Tree</h2>
-         <div class="tree-container">
-            <st-tree
-               [tree]="treeB"
-               [maxLevel]="treeModel.max"
-               [isRoot]="false"
-               (toogleNode)="onToogleNode($event, treeB)"
-               (selectNode)="onSelectNode($event, treeB)"
-               (navigatePrevious)="onNavigatePrevious($event)"
-               [changeStreamNotification]="notificationChangeStream">
+               (toggleNode)="onToggleNode($event)"
+               (selectNode)="onSelectNode($event)">
             </st-tree>
          </div>
       </div>
    </div>
-
    <div class="row">
       <div class="col-md-12 tree-background-B">
             <form [formGroup]="treeForm" novalidate autocomplete="off" (ngSubmit)="onGenerateTrees()">
@@ -78,19 +59,6 @@
                <div class="row">
                   <div class="col-md-12" style="margin-bottom: 10px;">
                      <st-input
-                        label="Max Level"
-                        placeholder="Maximum tree level"
-                        [forceValidations]="forceTreeValidations"
-                        [errors]="errors"
-                        fieldType="number"
-                        name="max"
-                        qaTag="max-input"
-                        contextualHelp="Maximum of tree levels to display"
-                        formControlName="max">
-                     </st-input>
-                  </div>
-                  <div class="col-md-12" style="margin-bottom: 10px;">
-                     <st-input
                         label="Node name"
                         placeholder="Name of nodes"
                         [forceValidations]="forceTreeValidations"
@@ -105,43 +73,6 @@
                </div>
                <button class="button button-primary">
                   <span>Generate</span>
-               </button>
-         </form>
-      </div>
-
-      <div class="col-md-12 tree-background-A">
-            <form [formGroup]="nodeForm" novalidate autocomplete="off" (ngSubmit)="onUpdateNodes()">
-               <h2>Update Nodes</h2>
-               <div class="row">
-                  <div class="col-md-12" style="margin-bottom: 10px;">
-                     <st-input
-                        label="New name"
-                        placeholder="Node name"
-                        [forceValidations]="forceNodeValidations"
-                        [errors]="errors"
-                        fieldType="string"
-                        name="name"
-                        qaTag="node-name-input"
-                        contextualHelp="Name to update in the node tree"
-                        formControlName="name">
-                     </st-input>
-                  </div>
-                  <div class="col-md-12" style="margin-bottom: 10px;">
-                     <st-input
-                        label="Node path"
-                        placeholder="Path of node"
-                        [forceValidations]="forceNodeValidations"
-                        [errors]="errors"
-                        fieldType="string"
-                        name="path"
-                        qaTag="path-input"
-                        contextualHelp="Path of node to update in the trees"
-                        formControlName="path">
-                     </st-input>
-                  </div>
-               </div>
-               <button class="button button-primary">
-                  <span>Update</span>
                </button>
          </form>
       </div>

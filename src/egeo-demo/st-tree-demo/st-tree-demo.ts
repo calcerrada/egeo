@@ -15,7 +15,7 @@ import {
    get as _get,
    set as _set
 } from 'lodash';
-import { StNodeTree, StNodeTreeChange, StInputError } from '@stratio/egeo';
+import { StTreeNode, StTreeEvent, StInputError } from '@stratio/egeo';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
@@ -28,13 +28,11 @@ import { Observable } from 'rxjs/Observable';
 export class StTreeDemoComponent implements OnInit {
    public treeForm: FormGroup;
    public nodeForm: FormGroup;
-   public treeModel: TreeModel = { levels: 10, nodes: 50, max: undefined, name: 'Node' };
-   public nodeModel: NodeModel = { name: 'New name', path: 'children[0]' };
-   public forceTreeValidations: boolean = false;
-   public forceNodeValidations: boolean = false;
+   public treeModel: TreeModel = { levels: 10, nodes: 50, name: 'Node' };
+   public nodeModel: NodeModel = { name: 'New name', path: [0] };
    public errors: StInputError = { generic: 'Error' };
 
-   public treeA: StNodeTree = {
+   public treeA: StTreeNode = {
       name: 'hdfs',
       icon: 'icon-folder',
       expanded: false,
@@ -71,10 +69,10 @@ export class StTreeDemoComponent implements OnInit {
          { name: 'folder D', icon: 'icon-folder' }
       ]
    };
-   public treeB: StNodeTree;
+   public treeB: StTreeNode;
 
-   public notificationChangeStream: Observable<StNodeTreeChange>;
-   private subject: Subject<StNodeTreeChange> = new Subject<StNodeTreeChange>();
+   public notificationChangeStream: Observable<StTreeEvent>;
+   private subject: Subject<StTreeEvent> = new Subject<StTreeEvent>();
    private selectedPath: string;
 
    constructor(private _fb: FormBuilder) {
@@ -86,7 +84,6 @@ export class StTreeDemoComponent implements OnInit {
       this.treeForm = this._fb.group({
          'levels': [this.treeModel.levels, [Validators.required]],
          'nodes': [this.treeModel.nodes, [Validators.required]],
-         'max': [this.treeModel.max],
          'name': [this.treeModel.name, [Validators.required]]
       });
       this.nodeForm = this._fb.group({
@@ -95,63 +92,33 @@ export class StTreeDemoComponent implements OnInit {
       });
    }
 
-   onToogleNode(nodeChange: StNodeTreeChange, tree: StNodeTree): void {
-      console.log('toogle node', nodeChange);
-      let node: StNodeTree = <StNodeTree>_get(tree, nodeChange.path, tree);
-      node.expanded = nodeChange.node.expanded;
-      tree = _cloneDeep(tree);
+   onToggleNode(event: StTreeEvent): void {
+      console.log('toogle node', event);
+      this.treeA = _cloneDeep(event.node);
    }
 
-   onSelectNode(nodeChange: StNodeTreeChange, tree: StNodeTree): void {
-      console.log('select node', nodeChange);
-      let node: StNodeTree;
-      if (this.selectedPath) {
-         node = <StNodeTree>_get(tree, this.selectedPath, tree);
-         node.selected = false;
-      }
-      this.selectedPath = nodeChange.path;
-      node = <StNodeTree>_get(tree, nodeChange.path, tree);
-      node.selected = true;
-      tree = _cloneDeep(tree);
-   }
-
-   onNavigatePrevious(nodeChange: StNodeTreeChange): void {
-      console.log('navigate previous', nodeChange);
-   }
-
-   onUpdateNodes(): void {
-      this.forceNodeValidations = true;
-      if (this.nodeForm.valid) {
-         let nodeA: StNodeTree = _cloneDeep(this.treeA.children[0]);
-         let nodeB: StNodeTree = _cloneDeep(this.treeB.children[0]);
-         nodeA.name = nodeB.name = this.nodeModel.name = this.nodeForm.value.name;
-         this.nodeModel.path = this.nodeForm.value.path;
-         _set(this.treeA, this.nodeModel.path, nodeA);
-         _set(this.treeB, this.nodeModel.path, nodeB);
-         this.subject.next({ node: nodeA, path: this.nodeModel.path });
-         this.subject.next({ node: nodeB, path: this.nodeModel.path });
-      }
+   onSelectNode(event: StTreeEvent): void {
+      console.log('select node', event);
+      this.treeA = _cloneDeep(event.node);
    }
 
    onGenerateTrees(): void {
-      this.forceTreeValidations = true;
       if (this.treeForm.valid) {
          this.treeModel.levels = this.treeForm.value.levels;
          this.treeModel.nodes = this.treeForm.value.nodes;
-         this.treeModel.max = this.treeForm.value.max || undefined;
          this.treeModel.name = this.treeForm.value.name;
          this.treeA = this.generateTree(this.treeModel.levels, this.treeModel.nodes, this.treeModel.name, 0);
          this.treeB = _cloneDeep(this.treeA);
       }
    }
 
-   private generateNode(name: string, children?: StNodeTree[]): StNodeTree {
+   private generateNode(name: string, children?: StTreeNode[]): StTreeNode {
       return children ? { name: name, icon: 'icon-folder', expanded: true, children: children } : { name: name, icon: 'icon-file' };
    }
 
-   private generateTree(levels: number, levelNodes: number, nodeName: string, startNode: number): StNodeTree {
-      let node: StNodeTree;
-      let childNodes: StNodeTree[];
+   private generateTree(levels: number, levelNodes: number, nodeName: string, startNode: number): StTreeNode {
+      let node: StTreeNode;
+      let childNodes: StTreeNode[];
       if (levels > 0) {
          childNodes = [];
          for (let i: number = 0; i < levelNodes; i++) {
@@ -166,11 +133,10 @@ export class StTreeDemoComponent implements OnInit {
 export interface TreeModel {
    levels: number;
    nodes: number;
-   max: number;
    name: string;
 }
 
 export interface NodeModel {
    name: string;
-   path: string;
+   path: number[];
 }

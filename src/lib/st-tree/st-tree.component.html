@@ -10,11 +10,31 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div>
-   <st-tree-node-expand *ngIf="!isRoot" [type]="'root'" (click)="navigatePrevious.emit($event)"></st-tree-node-expand>
-   <div [ngClass]="{'tree-partial': !isRoot}">
-      <st-node-tree [father]="fatherNode" [node]="tree" [pos]="0" [maxLevel]="maxLevel" [selectedPath]="selectedPath" [changeStreamNotification]="changeStreamNotification"
-         (internalNodeUpdate)="onInternalNodeUpdate($event)" (toogleNode)="onToogleNode($event)" (selectNode)="onSelectNode($event)">
-      </st-node-tree>
-   </div>
+<div class="node sth-tree-node">
+   <i
+         *ngIf="hasChildren()"
+         class="button sth-tree-node-button"
+         [ngClass]="node && node.expanded ? 'icon-arrow2_down' : 'icon-arrow2_right'"
+         [attr.id]="idSuffix('-toggle')"
+         (click)="onClick($event, 'toggle')">
+   </i>
+   <span
+         class="name sth-tree-node-name"
+         [attr.id]="idSuffix('-node')"
+         [ngClass]="{'active': node.selected}"
+         (click)="onClick($event, 'select')"
+         (dblclick)="onDoubleClick($event)">
+      <i class="sth-tree-node-icon" [ngClass]="node.icon"></i>
+      <span class="text sth-tree-node-text">{{node.name}}</span>
+   </span>
+</div>
+<div *ngIf="hasChildren() && node.expanded" class="sth-tree-children">
+   <st-tree
+         *ngFor="let child of node.children; index as i"
+         [attr.id]="idSuffix('-' + i)"
+         [node]="child"
+         [path]="buildPath(i)"
+         (selectNode)="onSelectNode($event)"
+         (toggleNode)="onToggleNode($event)">
+   </st-tree>
 </div>

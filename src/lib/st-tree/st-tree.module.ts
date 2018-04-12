@@ -12,15 +12,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { StTreeComponent } from './st-tree.component';
-import { StNodeTreeComponent } from './st-node-tree/st-node-tree.component';
-import { StTreeNodeExpandComponent } from './st-tree-node-expand/st-tree-node-expand.component';
-
-import { EgeoResolveService } from '../utils/egeo-resolver/egeo-resolve.service';
 
 @NgModule({
-   imports: [CommonModule],
-   declarations: [StTreeComponent, StNodeTreeComponent, StTreeNodeExpandComponent],
+   declarations: [StTreeComponent],
    exports: [StTreeComponent],
-   providers: [EgeoResolveService]
+   imports: [CommonModule]
 })
 export class StTreeModule { }

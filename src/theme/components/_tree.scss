@@ -8,33 +8,42 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-
 @import '../constants/fonts';
 @import '../constants/colors';
 
-.sth-tree-node {
-   &-filetype {
-      padding-top: 2px;
-      color: $neutral-09;
+.sth-tree {
+   font-family: $egeo-nunito-sans;
+
+   .sth-tree-node,
+   .sth-tree-children {
+      margin-left: 20px;
+   }
+
+   .sth-tree-node-button {
+      color: $neutral-13;
       font-size: $egeo-font-size-xxxsmall;
-      line-height: $egeo-line-height-xxxsmall;
-      text-align: right;
-      &:hover {
-         color: $brand;
-      }
+      left: -20px;
+      line-height: $egeo-line-height-small;
    }
-   &-name {
-      font-family: $egeo-nunito-sans;
-      font-size: $egeo-font-size-xxsmall;
-      line-height: $egeo-line-height-xxsmall;
-      text-align: left;
+
+   .sth-tree-node-icon {
+      color: $action-secondary-04;
+      font-size: $egeo-font-size-xxxsmall;
+      line-height: $egeo-line-height-small;
+   }
+
+   .sth-tree-node-text {
       color: $neutral-09;
+      font-size: $egeo-font-size-xsmall;
+      line-height: $egeo-line-height-small;
+      margin-left: 3px;
    }
-   &-container {
-      &__active {
-         background-color: $neutral-04;
-         padding-left: 2px;
-         padding-right: 2px;
+
+   .sth-tree-node-name.active,
+   .sth-tree-node-name:hover {
+      .sth-tree-node-icon,
+      .sth-tree-node-text {
+         color: $neutral-11;
       }
    }
 }

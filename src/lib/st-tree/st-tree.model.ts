@@ -8,15 +8,16 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-export class StNodeTree {
-   name: string;
+export class StTreeNode {
    icon: string;
-   children?: StNodeTree[];
+   name: string;
+   children?: StTreeNode[];
    expanded?: boolean;
    selected?: boolean;
+   [key: string]: any;
 }
 
-export class StNodeTreeChange {
-   node: StNodeTree;
-   path: string;
+export class StTreeEvent {
+   node: StTreeNode;
+   target: number[];
 }
