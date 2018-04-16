@@ -5,6 +5,7 @@
 **New features:**
 
 * st-form: Allow to display sections descriptions
+* st-foregroundNotification: two way binding fro visible input
 
 **Fixed bugs:**
 

@@ -8,14 +8,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, Input, ChangeDetectorRef, EventEmitter, Output, ElementRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ElementRef } from '@angular/core';
 
 @Component({
    selector: 'st-foreground-notifications',
    templateUrl: 'st-foreground-notifications.html',
    styleUrls: ['st-foreground-notifications.scss'],
    host: {
-      '[class.visible]': 'visible'
+      '[class.visible]': '_visible'
    }
 })
 /**
@@ -37,12 +37,25 @@ export class StForegroundNotificationsComponent {
 
 
    /** @Input {bollean} [visible=flase] When true the notification is shown */
-   @Input() visible: boolean = false;
+   @Input()
+   set visible(value: boolean) {
+      if (value !== undefined) {
+         this._visible = value;
+         this.visibleChange.emit(this._visible);
+      }
+   }
+   get visible(): boolean {
+      return this._visible;
+   }
+
    /** @Input {string} [text=''] Displayed text */
    @Input() text: string;
    /** @Input {NotificationStatus} [status='NotificationStatus.default'] Defines the criticality level of the notification */
    @Input() status: string = 'default';
 
+   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter();
+
+   private _visible: boolean = false;
 
    constructor() { }
 

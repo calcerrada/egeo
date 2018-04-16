@@ -13,10 +13,13 @@
 <section class="container-liquid">
    <h1>FOREGROUND NOTIFICATIONS</h1>
    <div class="st-fn-demo-container">
-      <div class="button button-primary" (click)="toggleNotifications()" >
-         <span>Toggle notifications</span>
+      <div  *ngFor="let item of items, let i = index">
+
+         <div class="button button-primary" (click)="toggleNotifications(i)" >
+            <span>Toggle notification</span>
+         </div>
+         <st-foreground-notifications [status]="item.status" [text]="item.text" [(visible)]="item.visible"></st-foreground-notifications>
       </div>
-      <st-foreground-notifications *ngFor="let item of items "[status]="item.status" [text]="item.text" [visible]="isVisible"></st-foreground-notifications>
    </div>
 
 </section>

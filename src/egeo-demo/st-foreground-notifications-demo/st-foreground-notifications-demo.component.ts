@@ -16,24 +16,27 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-foreground-notifications-demo.component.scss']
 })
 export class StForegroundNotificationsDemoComponent {
-   isVisible: boolean = false;
    items: any[]= [
       {
          text : 'This is a neutral informational notification',
-         status: ''
+         status: '',
+         visible: true
       },
       {
          text : 'This is a successful feedback notification',
-         status: 'success'
+         status: 'success',
+         visible: true
       }, {
          text : 'This is a warning feedback notification',
-         status: 'warning'
+         status: 'warning',
+         visible: true
       }, {
          text : 'This is a critical error feedback notification',
-         status: 'critical'
+         status: 'critical',
+         visible: true
       }
     ];
-  public toggleNotifications(): void {
-    this.isVisible = !this.isVisible;
+  public toggleNotifications(index: number): void {
+    this.items[index].visible = !this.items[index].visible;
   }
 }
