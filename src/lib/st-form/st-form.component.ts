@@ -258,10 +258,6 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
       }
    }
 
-   setPristine(): void {
-
-   }
-
    private getParentField(propertyName: string): string {
       let parentField: string = undefined;
       if (this.schema.dependencies) {
