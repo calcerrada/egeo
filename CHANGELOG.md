@@ -3,6 +3,7 @@
 ## 9.2.0 (upcoming)
 
 * Pending changelog
+* st-form: Fields should not be displayed with error at the beginning
 
 ## 9.1.0 (April 19, 2018)
 

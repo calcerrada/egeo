@@ -18,7 +18,8 @@ import {
    ChangeDetectionStrategy,
    AfterViewChecked,
    OnInit,
-   OnDestroy
+   OnDestroy,
+   AfterViewInit
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgForm, NG_VALIDATORS, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -52,7 +53,7 @@ import { FORM_UI_COMPONENT } from './shared/ui-component.interface';
    ]
 })
 
-export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewChecked, OnDestroy {
+export class StFormComponent implements AfterViewInit, AfterViewChecked, ControlValueAccessor, OnInit, OnDestroy {
    /** @Input {any} [schema=] JSON schema needed to generate the form */
    @Input() schema: any;
    /** @Input {string} [parentName=] Name of the parent section. By default, it is undefined */
@@ -85,6 +86,12 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       if (this.schema.dependencies) {
          this._parentFields = Object.keys(this.schema.dependencies);
       }
+   }
+   ngAfterViewInit(): void {
+      setTimeout(() => {
+         this.form.form.markAsPristine();
+      }, 0);
+
    }
 
    ngAfterViewChecked(): void {
@@ -167,14 +174,15 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
    getFieldClasses(propertyName: string): any {
       return {
          'hidden': this.isCollapsedSection() && !this.showCollapsedSectionFields,
-         'parent-field': this.isAParentField(propertyName) || (this.isASwitchSection() && this.isTheFirstField(propertyName))};
+         'parent-field': this.isAParentField(propertyName) || (this.isASwitchSection() && this.isTheFirstField(propertyName))
+      };
    }
 
    fieldHasToBeCreated(propertyName: string): boolean {
       let createField: boolean = true;
       let parentField: string = this.getParentField(propertyName);
       let isVisible: boolean = this.fulfillDependencyVisibility(propertyName);
-      if (!isVisible || (((parentField && !this._value[parentField]) || ( this.isInADisabledSection() && !this.isTheFirstField(propertyName))))) {
+      if (!isVisible || (((parentField && !this._value[parentField]) || (this.isInADisabledSection() && !this.isTheFirstField(propertyName))))) {
          createField = false;
          this.onChangeProperty(undefined, propertyName);
       }
@@ -250,6 +258,10 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       }
    }
 
+   setPristine(): void {
+
+   }
+
    private getParentField(propertyName: string): string {
       let parentField: string = undefined;
       if (this.schema.dependencies) {
@@ -271,11 +283,11 @@ export class StFormComponent implements ControlValueAccessor, OnInit, AfterViewC
       let fulfill: boolean = true;
       let propertySchema: any = this.schema.properties[propertyName];
       if (propertySchema.ui && propertySchema.ui.visible) {
-            Object.keys(propertySchema.ui.visible).forEach((property) => {
-               if (this._value[property] !== propertySchema.ui.visible[property]) {
-                  fulfill = false;
-               }
-            });
+         Object.keys(propertySchema.ui.visible).forEach((property) => {
+            if (this._value[property] !== propertySchema.ui.visible[property]) {
+               fulfill = false;
+            }
+         });
       }
       return fulfill;
    }
