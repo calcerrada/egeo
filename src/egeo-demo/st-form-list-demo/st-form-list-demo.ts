@@ -14,7 +14,7 @@ import { FormArray, NgForm, FormGroup, FormControl } from '@angular/forms';
 @Component({
    selector: 'st-form-list-demo',
    templateUrl: 'st-form-list-demo.html',
-   styleUrls: ['./st-form-list-demo.scss'],
+   styleUrls: ['./st-form-list-demo.scss']
 })
 
 export class StFormListDemoComponent {
@@ -57,12 +57,12 @@ export class StFormListDemoComponent {
    ];
 
    public model2: Array<any> = [
-      { genericNumberInput: 3, genericTextInput: 'item 1 of model 2' },
+      { genericNumberInput: 3, genericTextInput: 'item 1 of model 2' }
    ];
    public model3: Array<any> = [
       { genericNumberInput: 4, genericTextInput: 'item 1 of model 3' },
       { genericNumberInput: 5, genericTextInput: 'item 2 of model 3' },
-      { genericNumberInput: 6, genericTextInput: 'item 3 of model 3' },
+      { genericNumberInput: 6, genericTextInput: 'item 3 of model 3' }
    ];
 
    constructor() {

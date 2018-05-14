@@ -10,6 +10,10 @@
 
 * st-horizontal-tabs: Changed activeOption from string with the text for an option with the interface StHorizontalTab
 
+**Fixed bugs:**
+
+* st-form-list: Fix  Select dropdown is not displayed
+
 **Others:**
 
 * Update stratio parent artifact to 0.10.0
