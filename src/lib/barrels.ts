@@ -10,6 +10,7 @@
  */
 import { PipesModule } from './pipes/pipes.module';
 import { StAlertsModule } from './st-alerts/st-alerts.module';
+import { StBubbleModule } from './st-bubble/st-bubble.module';
 import { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 import { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 import { StDraggableCardModule } from './st-draggable-card/st-draggable-card.module';
@@ -60,6 +61,7 @@ export const DECLARATIONS: any[] = [
    PipesModule,
    StAlertsModule,
    StBreadcrumbsModule,
+   StBubbleModule,
    StCheckboxModule,
    StDraggableCardModule,
    StDropdownMenuModule,

@@ -24,11 +24,16 @@ import {
 } from '@angular/core';
 
 import { StPopPlacement, StPopOffset } from '../st-pop/st-pop.model';
-import { StDropDownMenuGroup, StDropDownMenuItem } from './st-dropdown-menu.interface';
+import { StDropDownMenuGroup, StDropDownMenuItem, StDropDownVisualMode } from './st-dropdown-menu.interface';
 
 /**
  * @description {Component} [Dropdown Menu]
  * This directive show a dropdown menu list in element that you attach
+ *
+ *
+ * @model
+ *
+ *   [Menu items] {./st-dropdown-menu.interface.ts#StDropDownMenuItem}
  *
  * @example
  *
@@ -60,13 +65,16 @@ export class StDropdownMenuComponent implements AfterViewInit, OnChanges {
    @Input() selectedItem: StDropDownMenuItem = undefined;
    /** @Input {StDropDownMenuItem | undefined} [selectedItem=undefined] Define selected item without passing as property */
    @Input() itemsBeforeScroll: number = 8;
-   /** @Input {boolean} [moveSelected=true] If true, apply class selected to selected item */
-   @Input() moveSelected: boolean = true;
    /** @Input {boolean} [styleSelected=true] If true, move selected item to top in menu when open */
+   @Input() moveSelected: boolean = true;
+   /** @Input {boolean} [moveSelected=true] If true, apply class selected to selected item */
    @Input() styleSelected: boolean = true;
    /** @Input {StPopOffset} [offset={x: 0 , y: 0}] For position with offset in x o y axis */
    @Input() offset: StPopOffset = { x: 0, y: 0 };
-
+   /** @Input {StDropdownVisualMode} [visualMode=StDropDownVisualMode.OPTION_LIST] It is needed to specify the styles applied to the list.
+    *  By default is displayed as a normal option list
+    */
+   @Input() visualMode: StDropDownVisualMode = StDropDownVisualMode.OPTION_LIST;
    /** @output {StDropDownMenuItem} [change] Event emitted when user select an item */
    @Output() change: EventEmitter<StDropDownMenuItem> = new EventEmitter<StDropDownMenuItem>();
 
@@ -94,6 +102,10 @@ export class StDropdownMenuComponent implements AfterViewInit, OnChanges {
 
    get menuMaxHeight(): string {
       return this.itemsBeforeScroll ? `${this._itemHeight * this.itemsBeforeScroll}px` : null;
+   }
+
+   get listClasses(): any {
+      return {'st-dropdown-menu': true, 'active': this.active, 'menu-list': this.displayAsMenuList()};
    }
 
    getItemId(value: any | undefined): string | null {
@@ -138,6 +150,10 @@ export class StDropdownMenuComponent implements AfterViewInit, OnChanges {
          this.widthMenu = button.getBoundingClientRect().width + 'px';
       }
       this.cd.markForCheck();
+   }
+
+   private displayAsMenuList(): boolean {
+      return this.visualMode === StDropDownVisualMode.MENU_LIST;
    }
 
    private getItemValueMerged(value: any): string {

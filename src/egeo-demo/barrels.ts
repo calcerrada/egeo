@@ -10,6 +10,7 @@
  */
 import { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
 import { StBreadcrumbsDemoModule } from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+import { StBubbleDemoModule } from './st-bubble-demo/st-bubble-demo.module';
 import { StButtonDemoModule } from './st-button-demo/st-button-demo.module';
 import { StCheckboxDemoModule } from './st-checkbox-demo/st-checkbox-demo.module';
 import { StDropdownMenuDemoModule } from './st-dropdown-menu-demo/st-dropdown-menu-demo.module';
@@ -40,6 +41,7 @@ import { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.m
 import { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
 import { StSelectDemoModule } from './st-select-demo/select-demo.module';
 import { StSidebarDemoModule } from './st-sidebar-demo/st-sidebar-demo.module';
+import { StSpinnerDemoModule } from './st-spinner-demo/st-spinner-demo.module';
 import { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
 import { StTabBoxDemoModule } from './st-tab-box-demo/st-tab-box-demo.module';
 import { StTableDemoModule } from './st-table-demo/st-table-demo.module';
@@ -59,6 +61,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    // Demos
    StAlertsDemoModule,
    StBreadcrumbsDemoModule,
+   StBubbleDemoModule,
    StButtonDemoModule,
    StCheckboxDemoModule,
    StDraggableCardDemoModule,
@@ -88,6 +91,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StSearchDemoModule,
    StSelectDemoModule,
    StSidebarDemoModule,
+   StSpinnerDemoModule,
    StSwitchDemoModule,
    StTabBoxDemoModule,
    StTableDemoModule,

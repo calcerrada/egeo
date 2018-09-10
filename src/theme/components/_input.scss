@@ -24,10 +24,6 @@
    color: $neutral-07;
 }
 
-.st-input:focus::placeholder {
-   color: transparent;
-}
-
 .st-input-error-message {
    font-size: 13px;
    color: $status-critical-default;

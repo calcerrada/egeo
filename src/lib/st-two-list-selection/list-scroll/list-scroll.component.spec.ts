@@ -69,6 +69,7 @@ describe('StTwoListSelectionComponent', () => {
       it('Should init correctly', () => {
          fixture.detectChanges();
          expect(comp.listQaTag).toEqual(qaTag + '-scroll-list');
+         expect(comp.listCheckAllQaTag).toEqual(qaTag + '-check-all-scroll-list');
       });
    });
 });

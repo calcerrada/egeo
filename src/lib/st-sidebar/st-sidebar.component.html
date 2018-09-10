@@ -10,10 +10,11 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-
+<ng-content select=[sidebar-header]></ng-content>
 <h1 class="title" *ngIf="title"> {{title}}</h1>
 <st-search class="search" *ngIf="searchMode" (search)="onSearch($event)"></st-search>
 <ul class="item-list">
    <st-sidebar-item-list [active]="active" [items]="items" [visualMode]="visualMode" (change)="onChange($event)">
    </st-sidebar-item-list>
 </ul>
+<ng-content select=[sidebar-footer]></ng-content>

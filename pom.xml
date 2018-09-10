@@ -11,7 +11,7 @@
 
    <groupId>com.stratio.egeo</groupId>
    <artifactId>egeo</artifactId>
-   <version>11.2.0-SNAPSHOT</version>
+   <version>14.0.0-SNAPSHOT</version>
    <name>Egeo</name>
    <inceptionYear>2016</inceptionYear>
 

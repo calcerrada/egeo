@@ -8,10 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { NO_ERRORS_SCHEMA, DebugElement, ElementRef } from '@angular/core';
+import { NO_ERRORS_SCHEMA, ElementRef } from '@angular/core';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
 import { RouterStub } from '../tests/router-stub';
@@ -24,7 +22,6 @@ import { StHeaderMenuOption, StHeaderSelection } from './st-header.model';
 
 let comp: StHeaderComponent;
 let fixture: ComponentFixture<StHeaderComponent>;
-let de: DebugElement;
 
 let menu: StHeaderMenuOption[] = [
    {
@@ -48,7 +45,6 @@ let menu: StHeaderMenuOption[] = [
    }
 ];
 
-let appName: string = 'Test App';
 
 class WindowMock {
    innerWidth: number = 0;

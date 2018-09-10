@@ -8,8 +8,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { StWindowRefService } from '../utils/window-service';
 
 
 /**
@@ -40,7 +41,16 @@ import { Router } from '@angular/router';
    styleUrls: ['./st-fullscreen-layout.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StFullscreenLayoutComponent {
+export class StFullscreenLayoutComponent implements OnDestroy {
    /** @Input {string} [title=""] Title of fullscreen layout */
    @Input() title: string = '';
+
+   constructor( private windowRef: StWindowRefService) {
+      this.windowRef.nativeWindow.document.body.style.overflow = 'hidden';
+   }
+
+   ngOnDestroy(): void {
+      this.windowRef.nativeWindow.document.body.style.overflow = '';
+}
+
 }

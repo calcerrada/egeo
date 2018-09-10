@@ -130,6 +130,14 @@ describe('[StTwoListSelection]', () => {
       });
 
       it('Should move to selected', () => {
+
+         let elemAll: StTwoListSelectionElement = {
+            id: 0,
+            name: 'All',
+            itemAll: true
+         };
+
+         twoListSelection.init(allElements, selectedElements, changeEmitter, 'id', true, true, elemAll);
          twoListSelection.onSelectAllElement(twoListSelection.copyAllElement[2]);
 
          twoListSelection.onMoveToSelected(new Event(''));
@@ -146,8 +154,14 @@ describe('[StTwoListSelection]', () => {
       });
 
       it('Should move to all', () => {
+         let elemAll: StTwoListSelectionElement = {
+            id: 0,
+            name: 'All',
+            itemAll: true
+         };
+
          selectedElements = _cloneDeep(allElements.slice(0, 2));
-         twoListSelection.init(allElements, selectedElements, changeEmitter, 'id');
+         twoListSelection.init(allElements, selectedElements, changeEmitter, 'id', true, true, elemAll);
          twoListSelection.onSelectSelectedElement(twoListSelection.copySelectedElements[0]);
          expect(twoListSelection.copySelectedElements[0].selected).toBe(true);
 
@@ -162,8 +176,8 @@ describe('[StTwoListSelection]', () => {
             id: 2,
             name: 'test2'
          };
-         twoListSelection.init(allElements, [el2], changeEmitter, 'id');
 
+         twoListSelection.init(allElements, [el2], changeEmitter, 'id');
          twoListSelection.onMoveAllToAll(new Event(''));
          expect(changeEmitter.emit).toHaveBeenCalled();
          expect(changeEmitter.emit).toHaveBeenCalledTimes(1);
@@ -206,6 +220,52 @@ describe('[StTwoListSelection]', () => {
          expect(twoListSelection.copySelectedElements[0].selected).toBe(true);
       });
    });
+
+   it('Should mark/unmark all elements if click check all button', () => {
+      let el1: StTwoListSelectionElement = {
+         id: 1,
+         name: 'test1'
+      };
+      let el2: StTwoListSelectionElement = {
+         id: 2,
+         name: 'test2'
+      };
+      let elemAll: StTwoListSelectionElement = {
+         id: 0,
+         name: 'All',
+         itemAll: true
+      };
+
+      twoListSelection.init([el1], [el2], changeEmitter, 'id', true, true, elemAll);
+
+      // All list
+      elemAll.selected = false;
+      twoListSelection.onSelectAllElement(elemAll);
+      twoListSelection.copyAllElement.forEach((elem) => {
+         expect(elem.selected).toBe(true);
+      });
+
+      elemAll.selected = true;
+      twoListSelection.onSelectAllElement(elemAll);
+      twoListSelection.copyAllElement.forEach((elem) => {
+         expect(elem.selected).toBe(false);
+      });
+
+      // Selected list
+      elemAll.selected = false;
+      twoListSelection.onSelectSelectedElement(elemAll);
+      twoListSelection.copySelectedElements.forEach((elem) => {
+         expect(elem.selected).toBe(true);
+      });
+
+      elemAll.selected = true;
+      twoListSelection.onSelectSelectedElement(elemAll);
+      twoListSelection.copySelectedElements.forEach((elem) => {
+         expect(elem.selected).toBe(false);
+      });
+
+   });
+
 });
 
 

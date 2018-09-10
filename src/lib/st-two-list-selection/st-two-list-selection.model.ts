@@ -15,6 +15,7 @@ export interface StTwoListSelectionElement {
    name: string;
    selected?: boolean;
    extraLabel?: string;
+   itemAll?: boolean;
 }
 
 export interface StTwoListSelectExtraLabelAction {
@@ -29,14 +30,20 @@ export interface StTwoListSelectionAction {
 
 export interface StTwoListSelectionConfig {
    allElementsListTitle: string;
+   allElementsListSubtitle?: string;
    allElementsSearchPlaceholder: string;
    selectedElementsListTitle: string;
+   selectedElementsListSubtitle?: string;
    selectedElementsSearchPlaceholder: string;
+   orderPlaceholder?: string;
 }
 
 export interface StTwoListSelectionConfigSchema {
    allElementsListTitle: TranslateableElement;
+   allElementsListSubtitle?: TranslateableElement;
    allElementsSearchPlaceholder: TranslateableElement;
    selectedElementsListTitle: TranslateableElement;
+   selectedElementsListSubtitle?: TranslateableElement;
    selectedElementsSearchPlaceholder: TranslateableElement;
+   orderPlaceholder?: TranslateableElement;
 }

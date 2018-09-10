@@ -9,7 +9,6 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-
 .sidebar {
    width: 283px;
 }
@@ -17,4 +16,10 @@
 .sidebar-container {
    float: left;
    padding: 20px;
+}
+
+.header, .footer {
+   margin-top: -10px;
+   display: block;
+   margin-bottom: 10px;
 }

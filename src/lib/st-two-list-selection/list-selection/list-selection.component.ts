@@ -25,12 +25,17 @@ export class ListSelectionComponent {
    @Input() @StRequired() list: StTwoListSelectionElement[];
    @Input() editable: boolean = false;
    @Input() @StRequired() title: string;
+   @Input() subtitle?: string;
    @Input() @StRequired() searchPlaceholder: string;
    @Input() @StRequired() qaTag: string;
    @Input() important: boolean = false;
+   @Input() hasAllList?: boolean = false;
    @Input() hasSearch: boolean = true;
+   @Input() itemAll?: StTwoListSelectionElement;
    @Input() orderOptions: StDropDownMenuItem[] = [];
+   @Input() orderPlaceholder?: string;
    @Input() mode: 'compact' | 'normal' = 'normal';
+   @Input() showSearchNumber?: number;
 
    @Output() selectItem: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectExtraLabel: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();

@@ -8,6 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+ @import '../../theme/constants/index';
+
 :host {
    display: flex;
    flex: 1;
@@ -24,9 +26,7 @@
 }
 
 .list {
-   padding: 33px 20px 20px 20px;
    flex-grow: 1;
-   overflow: auto;
 }
 
 .not-editable {
@@ -38,10 +38,31 @@
    flex-direction: column;
    align-items: center;
    width: 73px;
-   min-width: 73px;
-   max-width: 73px;
+   min-width: 135px;
+   max-width: 135px;
    margin: auto;
    button {
       margin-bottom: 10px;
    }
+}
+
+.sth-two-list{
+   &__all-list, &__selected-list{
+      border-radius: 4px;
+      border: solid 1px $neutral-05;
+   }
+}
+
+button.button-toolbar{
+   width: 40px;
+   height: 40px;
+   border-radius: 4px;
+   background-color: $neutral-00;
+   border: solid 1px $neutral-03;
+   color: $neutral-10;
+}
+
+button.button-toolbar.empty{
+   background-color: $neutral-03;
+   color: $neutral-06;
 }

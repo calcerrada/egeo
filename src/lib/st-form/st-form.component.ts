@@ -72,6 +72,9 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
     */
    @Input() sectionDescriptionLevel: number = -1;
 
+   /** @Input {number} [textFieldMaxWidth=] Maximum width of a field needed to paint a input or textarea */
+   @Input() textFieldMaxWidth: number;
+
    /** @Input {boolean} [showTooltips=-1] Enable or disable displaying of tooltips
     * By default, tooltips are displayed
     */
@@ -94,10 +97,9 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    }
 
    ngAfterViewInit(): void {
-      setTimeout(() => {
-         this.form.form.markAsPristine();
-      }, 0);
-
+      if (!this.forceValidations) {
+            this.form.form.markAsPristine();
+      }
    }
 
    ngAfterViewChecked(): void {

@@ -16,7 +16,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StFilterList implements PipeTransform {
    transform(list: any[], field: string, search: string): any[] {
       this.checkParams(field);
-      if (list && list.length > 0) {
+      if (!search) {
+         return list;
+      }
+      if (list && list.length > 0 && field) {
          return list.filter((element) => this.contains(element, field, search));
       } else {
          return [];

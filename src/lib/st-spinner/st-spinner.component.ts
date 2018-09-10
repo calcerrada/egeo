@@ -9,15 +9,38 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { StEgeo, StRequired } from '../decorators/require-decorators';
 
+/**
+ * @description {Component} Spinner
+ *
+ * This component shows a spinner when something is being loaded
+ *
+ * @example
+ *
+ * {html}
+ *
+ * ```
+ *    <st-spinner theme="secondary">
+ *    </st-spinner>
+ * ```
+ */
 @Component({
-  selector: 'st-spinner',
-  templateUrl: './st-spinner.component.html',
-  styleUrls: ['./st-spinner.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+   selector: 'st-spinner',
+   templateUrl: './st-spinner.component.html',
+   styleUrls: ['./st-spinner.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
-@StEgeo()
+
 export class StSpinnerComponent {
-  @Input() @StRequired() imageUrl: string;
+   /** @input {string} [theme='primary'] Name of the spinner theme. By default it is 'primary' */
+   @Input() theme: string = 'primary';
+
+   getClasses(): any {
+      const result: any = {path: true};
+      if (this.theme) {
+         const themeClass = 'path--' + this.theme;
+         result[themeClass] = true;
+      }
+      return result;
+   }
 }

@@ -28,12 +28,23 @@ export class StTwoListSelectionDemoComponent {
 
    completeUserList: Array<StTwoListSelectionElement> = [];
    selectedUserList: Array<StTwoListSelectionElement> = [];
+   itemAll: StTwoListSelectionElement;
 
    config: StTwoListSelectionConfig = {
       allElementsListTitle: 'All element',
-      allElementsSearchPlaceholder: 'Search in all',
+      allElementsSearchPlaceholder: 'Search...',
       selectedElementsListTitle: 'Selected elements',
-      selectedElementsSearchPlaceholder: 'Search in selected'
+      selectedElementsSearchPlaceholder: 'Search...'
+   };
+
+   configWithCheckAll: StTwoListSelectionConfig = {
+      allElementsListTitle: 'All element',
+      allElementsListSubtitle: '0 users',
+      allElementsSearchPlaceholder: 'Search...',
+      selectedElementsListTitle: 'Selected elements',
+      selectedElementsListSubtitle: '0 users',
+      selectedElementsSearchPlaceholder: 'Search...',
+      orderPlaceholder: 'Order by alphabet'
    };
 
    public orderOptions: Array<StDropDownMenuItem> = [
@@ -51,6 +62,28 @@ export class StTwoListSelectionDemoComponent {
       this.fillLists();
    }
 
+   onChange(event: Event): void {
+      if (this.completeUserList.length === 0) {
+         this.configWithCheckAll.allElementsListSubtitle = `0 users`;
+      } else {
+         this.configWithCheckAll.allElementsListSubtitle = `0/${this.completeUserList.length} users selected`;
+      }
+
+      if (this.selectedUserList.length === 0) {
+         this.configWithCheckAll.selectedElementsListSubtitle = `0 users`;
+      } else {
+         this.configWithCheckAll.selectedElementsListSubtitle = `0/${this.selectedUserList.length} users selected`;
+      }
+   }
+
+   onNumItemsAll(event: Event): void {
+      this.configWithCheckAll.allElementsListSubtitle = `${event}/${this.completeUserList.length} users selected`;
+   }
+
+   onNumItemsSelected(event: Event): void {
+      this.configWithCheckAll.selectedElementsListSubtitle = `${event}/${this.selectedUserList.length} users selected`;
+   }
+
    showSelectedElements(): void {
       console.log(JSON.stringify(this.selectedUserList.map(item => item.name)));
    }
@@ -66,14 +99,14 @@ export class StTwoListSelectionDemoComponent {
 
    private fillLists(): void {
       for (let i = 0; i < 300; i++) {
-         if (i === 2) {
-            this.completeUserList.push({id: i, name: null });
-         } else {
+
             this.completeUserList.push({ id: i, name: `User-${i}` });
             if (i % 4 === 0) {
                this.selectedUserList.push(_.clone(this.completeUserList[i]));
             }
-         }
+
       }
+
+      this.itemAll = {id: this.completeUserList.length, name : 'All', itemAll: true};
    }
 }

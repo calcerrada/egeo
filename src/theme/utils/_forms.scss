@@ -33,9 +33,6 @@
 
    &:focus {
       border-color: $action-primary-default;
-      &::placeholder {
-         color: transparent;
-      }
    }
 
    &:disabled {

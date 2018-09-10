@@ -60,7 +60,8 @@ export class StModalService {
       message: string,
       okButton: string,
       cancelButton: string = '',
-      maxWidth: number = 600
+      maxWidth: number = 600,
+      minWidth: number = 400
    ): Observable<StModalResponse> {
 
       const buttons: StModalButton[] = [{
@@ -84,7 +85,8 @@ export class StModalService {
          messageTitle,
          modalTitle,
          buttons,
-         maxWidth
+         maxWidth,
+         minWidth
       });
    }
 
@@ -152,6 +154,7 @@ export class StModalService {
          message: undefined,
          html: undefined,
          maxWidth: undefined,
+         minWidth: undefined,
          empty: false
       };
       const checkedConfig: StModalConfig = Object.assign({}, defaultConfig, config);

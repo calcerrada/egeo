@@ -27,6 +27,11 @@ export class StTwoListSelection {
    public copySelectedElements: List = [];
 
    public allSearch: string = '';
+   public hasCheckboxAllList?: boolean = false;
+   public hasCheckboxSelectedList?: boolean = false;
+   public itemAll?: StTwoListSelectionElement;
+   public numItemsSelectedAll: EventEmitter<number> = new EventEmitter<number>();
+   public numItemsSelectedSelected: EventEmitter<number> = new EventEmitter<number>();
    public selectedSearch: string = '';
 
    public searchBy: string = 'name';
@@ -38,25 +43,41 @@ export class StTwoListSelection {
 
    // Check selected element
    onSelectAllElement(selection: StTwoListSelectionElement): void {
-      if (this.canSelect(selection, this.copyAllElement)) {
+      if (this.hasCheckboxAllList && selection.itemAll) {
+         this.copyAllElement = _.cloneDeep(this.changeSelectedItemList(this.copyAllElement, !selection.selected));
          selection.selected = !selection.selected;
+      } else {
+         if (this.canSelect(selection, this.copyAllElement)) {
+            selection.selected = !selection.selected;
+         }
+      }
+      if (this.copyAllElement) {
+         this.numItemsSelectedAll.emit(this.getNumItemsSelected(this.copyAllElement));
       }
    }
 
    // Check selected element
    onSelectSelectedElement(selection: StTwoListSelectionElement): void {
-      if (this.canSelect(selection, this.copySelectedElements)) {
+      if (this.hasCheckboxSelectedList && selection.itemAll) {
+         this.copySelectedElements = _.cloneDeep(this.changeSelectedItemList(this.copySelectedElements, !selection.selected));
          selection.selected = !selection.selected;
+      } else {
+         if (this.canSelect(selection, this.copySelectedElements)) {
+            selection.selected = !selection.selected;
+         }
+      }
+      if (this.copySelectedElements) {
+         this.numItemsSelectedSelected.emit(this.getNumItemsSelected(this.copySelectedElements));
       }
    }
 
    // Update search filter
-   onSearchOverAll(search: {text: string}): void {
+   onSearchOverAll(search: { text: string }): void {
       this.allSearch = search.text;
    }
 
    // Update search filter
-   onSearchOverSelected(search: {text: string}): void {
+   onSearchOverSelected(search: { text: string }): void {
       this.selectedSearch = search.text;
    }
 
@@ -65,6 +86,7 @@ export class StTwoListSelection {
       let ids: IdList = this.getIdsToMove(this.copyAllElement);
       let result: List = this.moveIdsFromAllToSelected(this.originalAll, this.originalSelected, ids);
       this.emitter.emit(result);
+      if (this.itemAll) this.itemAll.selected = false;
    }
 
    // Remove from selected
@@ -72,6 +94,7 @@ export class StTwoListSelection {
       let ids: IdList = this.getIdsToMove(this.copySelectedElements);
       let result: List = this.removeIdsFromSelected(this.originalSelected, ids);
       this.emitter.emit(result);
+      if (this.itemAll) this.itemAll.selected = false;
    }
 
    // Move all to selected
@@ -84,13 +107,16 @@ export class StTwoListSelection {
       this.emitter.emit([]);
    }
 
-
-   init(all: List, selected: List, changeEmitter: EventEmitter<List>, sorted: 'id' | 'name'): void {
+   init(all: List, selected: List, changeEmitter: EventEmitter<List>, sorted: 'id' | 'name',
+      hasCheckboxAllList: boolean = false, hasCheckboxSelectedList: boolean = false, itemAll: StTwoListSelectionElement= <any> null): void {
       this.emitter = changeEmitter;
       this.sortLists = sorted;
       this.originalAll = all;
       this.originalSelected = selected;
       this.generateWorkLists();
+      this.hasCheckboxAllList = hasCheckboxAllList;
+      this.hasCheckboxSelectedList = hasCheckboxSelectedList;
+      this.itemAll = itemAll;
    }
 
    checkChanges(changes: SimpleChanges, allList: string, selectedList: string): void {
@@ -103,6 +129,20 @@ export class StTwoListSelection {
       if (changes[allList] !== undefined || changes[selectedList] !== undefined) {
          this.generateWorkLists();
       }
+   }
+
+   private changeSelectedItemList(list: StTwoListSelectionElement[], selected: boolean): StTwoListSelectionElement[] {
+      return _.cloneDeep(list).map((elem) => {
+         elem.selected = selected;
+         return elem;
+      });
+   }
+
+   private getNumItemsSelected(list: List): number {
+      const reducer = (accumulator: number, currentValue: StTwoListSelectionElement) => {
+         return (currentValue.selected) ? accumulator + 1 : accumulator + 0;
+      };
+      return list.reduce(reducer, 0);
    }
 
    private generateWorkLists(): void {

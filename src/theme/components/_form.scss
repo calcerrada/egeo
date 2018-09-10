@@ -26,8 +26,8 @@
    .title {
       width: 100%;
       color: $neutral-13;
-      padding-top: 20px;
-      padding-bottom: 30px;
+      padding-top: 10px;
+      padding-bottom: 20px;
       font-family: $egeo-nunito-sans-bold;
    }
 
@@ -137,7 +137,7 @@
       }
 
       &.read-only {
-         input {
+         input, textarea {
             background-color: transparent;
             border: none;
             color: $action-secondary-07;
@@ -187,4 +187,8 @@
       margin-left: 15px;
       padding-left: 28px;
    }
+}
+
+.st-form > form:not(.accordion) {
+   padding-bottom: 10px;
 }

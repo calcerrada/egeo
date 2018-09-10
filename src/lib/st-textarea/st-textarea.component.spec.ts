@@ -77,6 +77,89 @@ describe('StTextareaComponent', () => {
          expect(component.focus).toBe(true);
       });
    }));
+
+   it('When user leaves textarea, it emits an event', () => {
+      spyOn(component.blur, 'emit');
+
+      textarea.dispatchEvent(new Event('focus'));
+      fixture.detectChanges();
+      textarea.dispatchEvent(new Event('blur'));
+      fixture.detectChanges();
+
+      expect(component.blur.emit).toHaveBeenCalledTimes(1);
+   });
+
+
+   describe('When a default value is introduced, user will be able to reset the textarea', () => {
+      let fakeDefault: string = 'default value';
+
+      beforeEach(() => {
+         component.default = fakeDefault;
+      });
+
+      it('reset icon is only created if default input is introduced and current input value is different to it', () => {
+         let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('textarea')).nativeElement;
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
+
+         htmlInput.value = 'test';
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
+      });
+
+      it('reset icon is only displayed when input is focused and user has typed something and it is different to default', () => {
+         let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('textarea')).nativeElement;
+
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
+
+         htmlInput.value = 'test';
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('1');
+
+         htmlInput.dispatchEvent(new Event('blur'));
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('0');
+
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         expect(fixture.debugElement.query(By.css('.st-form-control-reset-button')).styles.opacity).toEqual('1');
+
+         htmlInput.value = fakeDefault;
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).toBeNull();
+      });
+
+
+      it('when user clicks on the reset button, value of input will turn to the default value', () => {
+         let htmlInput: HTMLInputElement = fixture.debugElement.query(By.css('textarea')).nativeElement;
+         htmlInput.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+
+         htmlInput.value = 'a';
+         htmlInput.dispatchEvent(new Event('input'));
+         fixture.detectChanges();
+
+         fixture.nativeElement.querySelector('.st-form-control-reset-button').click();
+         fixture.detectChanges();
+
+         expect(htmlInput.value).toBe(fakeDefault);
+      });
+
+   });
+
 });
 
 @Component({
@@ -185,7 +268,6 @@ describe('StTextareaComponent in reactive form', () => {
       reactiveComp.forceValidations = false;
       reactiveComp.errors = { generic: genericError };
       reactiveFixture.detectChanges();
-      let htmlInput: HTMLInputElement = reactiveFixture.debugElement.query(By.css('textarea')).nativeElement;
 
       reactiveComp.forceValidations = true;
       reactiveFixture.detectChanges();
@@ -199,9 +281,8 @@ describe('StTextareaComponent in reactive form', () => {
 
    it('should notify empty error', () => {
       reactiveComp.forceValidations = false;
-      reactiveComp.errors = { };
+      reactiveComp.errors = {};
       reactiveFixture.detectChanges();
-      let htmlInput: HTMLInputElement = reactiveFixture.debugElement.query(By.css('textarea')).nativeElement;
 
       reactiveComp.forceValidations = true;
       reactiveFixture.detectChanges();
@@ -261,8 +342,7 @@ describe('StTextareaComponent in reactive form', () => {
       expect(errorMessage).toBeNull();
    });
 
-
-   it('should notify no notify error with focus', () => {
+   it('should only notify error with focus', () => {
       reactiveComp.forceValidations = false;
       reactiveComp.errors = { generic: 'error' };
       reactiveFixture.detectChanges();

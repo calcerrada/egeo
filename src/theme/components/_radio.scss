@@ -19,7 +19,8 @@
 }
 
 .st-radio.disabled {
-   color: $neutral-08;
+   color: $neutral-06;
+   cursor: default !important;
 }
 
 .radio-flex > * {
@@ -55,8 +56,8 @@
 
    &.disabled {
       border-color: $neutral-06;
-      color: $neutral-05;
-      background-color: $neutral-01;
+      color: $neutral-06;
+      background-color: $neutral-14;
       &.checked {
          background-color: $neutral-06;
       }

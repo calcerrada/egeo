@@ -1,6 +1,100 @@
 # Changelog
 
-## 11.2.0 (upcoming)
+## 14.0.0 (upcoming)
+
+* Pending changelog
+
+## 13.0.0 (September 06, 2018)
+
+**New features:**
+
+* st-two-list: Added click listener only to checkbox and 'check all' button is only displayed when it has elements. Apply new style and behaviour according to UX specifications
+
+**Breaking changes:**
+
+* st-spinner: Apply new style and behaviour according to UX specifications
+
+**Fixed bugs:**
+
+* st-bubble: Fix visible style
+* st-dropdown-menu: Fix wrong visualization on small screens
+* st-input: Do not hide placeholder when user clicks on it
+
+**Others**
+
+* st-dropdown-menu: Put cursor pointer to items and improve design
+* st-input: Label is only generated if it is not empty
+* st-button: Minor style changes
+
+
+## 12.0.0 (August 17, 2018)
+
+**New features:**
+
+* st-bubble: Create component
+* st-button: Add small button style
+* st-input, st-textarea, st-select, st-radio-button, st-checkbox, st-tag-input: Change disabled style
+* st-modal: Set default max and min width
+* st-sidebar: Allow to add any content from outside to header and footer
+* st-dropdown-menu: Allow to add a visual mode in order to display it as option or menu list
+
+**Breaking changes:**
+
+* st-bread-crumb: Changed options from string to object with label and icon to allow icons
+* st-two-list: Includes checkbox all button in list-scroll component. Emits new event with number of elements selected.
+
+**Others**
+
+* Update version of the Stratio Icon Font
+
+
+## 11.5.1 (July 25, 2018)
+
+**Fixed bugs:**
+
+* Fix styles to Stratio Icon Font
+
+
+## 11.5.0 (July 25, 2018)
+
+**Others**
+
+* Update version of the Stratio Icon Font
+
+
+## 11.4.0 (July 23, 2018)
+
+**New features:**
+
+* st-form: Allow to render textareas when text fields are longer than the specified maximum width
+
+**Fixed bugs:**
+
+* st-form: Form is marked as pristine only if forceValidation input is false
+* st-tag-input: Put needed position relative in order to display autocompleted menu correctly
+* st-widget: Removed resize button
+
+**Others:**
+
+* egeo-theme: Improve margins between fields and sections in dynamic form
+
+
+## 11.3.0 (June 27, 2018)
+
+**New features:**
+
+* st-pop-over: Set as optional the arrow icon and header is only displayed if settings button is displayed or title is not empty
+
+**Fixed bugs:**
+
+* st-fullscreen-layout: Avoid to display scroll of the previous page when fullscreen is being displayed
+
+**Others:**
+
+* egeo-theme: Changes in labels and buttons styles
+
+
+## 11.2.0 (June 18, 2018)
 
 **New features:**
 

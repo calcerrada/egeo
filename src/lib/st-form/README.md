@@ -12,6 +12,7 @@
 | forceValidations        | Boolean | False | Boolean to force the field validations                                                                     |                                  |
 | disabledSectionMessage  | String  | False | Message displayed when a section is disabled. This is always displayed after the section name              | 'for this instance is disabled.' |
 | sectionDescriptionLevel | Number  | False | Level of the section to which description is displayed.By default, section descriptions are not displayed. | -1                               |
+| textFieldMaxWidth       | Number  | False | Maximum width of a field needed to paint a input or textarea                                               |                                  |
 | showTooltips            | Boolean | False | Enable or disable displaying of tooltipsBy default, tooltips are displayed                                 | -1                               |
 
 ## Outputs

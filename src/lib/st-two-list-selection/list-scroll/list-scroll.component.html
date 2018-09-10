@@ -11,6 +11,8 @@
 
 -->
 <virtual-scroll [items]="list" (update)="scrollItems = $event">
-   <list-item *ngFor="let item of scrollItems; let i = index" [item]="item" (selectItem)="selectItem.emit(item)" [qaTag]="listQaTag" [editable]="editable"
+
+   <list-item [disabled]="list.length === 0" class="virtual-scroll__list-item-all" *ngIf="hasAllList && scrollItems" [item]="itemAll" (selectItem)="selectItem.emit(itemAll);" [editable]="editable" [qaTag]="listCheckAllQaTag"></list-item>
+   <list-item  class="virtual-scroll__list-item" *ngFor="let item of scrollItems; let i = index" [item]="item" (selectItem)="selectItem.emit(item)" [qaTag]="listQaTag" [editable]="editable"
        (selectExtraLabel)="selectExtraLabel.emit($event)" [mode]="mode"></list-item>
 </virtual-scroll>

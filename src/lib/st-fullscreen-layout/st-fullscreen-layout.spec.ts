@@ -8,22 +8,33 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { DebugElement } from '@angular/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { StFullscreenLayoutComponent } from './st-fullscreen-layout';
+import { StWindowRefService } from '../utils/window-service';
 
 // Component
-import { StFullscreenLayoutComponent } from './st-fullscreen-layout';
 
 describe('StFullscreenLayoutComponent', () => {
 
    let comp: StFullscreenLayoutComponent;
    let fixture: ComponentFixture<StFullscreenLayoutComponent>;
-   let de: DebugElement;
+   let fakeWindowRefService: any;
+
+   class FakeWindowRefService {
+      get nativeWindow(): any {
+         return window;
+      }
+   }
 
    beforeEach(async(() => {
+      fakeWindowRefService = new FakeWindowRefService();
+
       TestBed.configureTestingModule({
+         providers: [
+            { provide: StWindowRefService, useValue: fakeWindowRefService }
+         ],
          declarations: [StFullscreenLayoutComponent],
          schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();  // compile template and css
@@ -41,5 +52,13 @@ describe('StFullscreenLayoutComponent', () => {
       const element: HTMLParagraphElement = fixture.debugElement.query(By.css('.title')).nativeElement;
 
       expect(element.innerText).toEqual('test');
+   });
+
+   it('it should disable scroll to body in order not to see the content of the previous page', () => {
+      expect(window.document.body.style.overflow).toEqual('hidden');
+
+      comp.ngOnDestroy();
+
+      expect(fakeWindowRefService.nativeWindow.document.body.overflow).toBeUndefined();
    });
 });

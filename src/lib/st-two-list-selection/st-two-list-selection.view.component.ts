@@ -29,36 +29,52 @@ export class StTwoListSelectionViewComponent {
    @Input() allElements: StTwoListSelectionElement[];
    @Input() config: StTwoListSelectionConfig;
    @Input() editable: boolean = false;
+   @Input() hasAllListAll?: boolean = false;
+   @Input() hasAllListSelected?: boolean = false;
+   @Input() hasSearch: boolean = true;
+   @Input() itemAll?: StTwoListSelectionElement;
+   @Input() mode: 'compact' | 'normal' = 'normal';
    @Input() moveAllToSelectedButton: boolean = false;
    @Input() moveAllToAllButton: boolean = false;
-   @Input() hasSearch: boolean = true;
    @Input() orderSelectedOptions: StDropDownMenuItem[] = [];
    @Input() orderAllOptions: StDropDownMenuItem[] = [];
-   @Input() mode: 'compact' | 'normal' = 'normal';
+   @Input() showSearchNumber?: number;
 
-   @Output() selectAllElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
-   @Output() selectSelectedElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
-   @Output() searchOverAll: EventEmitter<string> = new EventEmitter<string>();
-   @Output() searchOverSelected: EventEmitter<string> = new EventEmitter<string>();
-   @Output() moveAllToSelected: EventEmitter<Event> = new EventEmitter<Event>();
-   @Output() moveToSelected: EventEmitter<Event> = new EventEmitter<Event>();
-   @Output() moveAllToAll: EventEmitter<Event> = new EventEmitter<Event>();
-   @Output() moveToAll: EventEmitter<Event> = new EventEmitter<Event>();
-   @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
-   @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() changeOrderAll: EventEmitter<any> = new EventEmitter<any>();
    @Output() changeOrderSelected: EventEmitter<any> = new EventEmitter<any>();
+   @Output() moveAllToAll: EventEmitter<Event> = new EventEmitter<Event>();
+   @Output() moveAllToSelected: EventEmitter<Event> = new EventEmitter<Event>();
+   @Output() moveToAll: EventEmitter<Event> = new EventEmitter<Event>();
+   @Output() moveToSelected: EventEmitter<Event> = new EventEmitter<Event>();
+   @Output() searchOverAll: EventEmitter<string> = new EventEmitter<string>();
+   @Output() searchOverSelected: EventEmitter<string> = new EventEmitter<string>();
+   @Output() selectAllElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
+   @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
+   @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
+   @Output() selectSelectedElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
 
    get allTitle(): string {
       return this.config && this.config.allElementsListTitle || '';
+   }
+
+   get allSubtitle(): string {
+      return this.config && this.config.allElementsListSubtitle || '';
    }
 
    get allPlaceholder(): string {
       return this.config && this.config.allElementsSearchPlaceholder || '';
    }
 
+   get orderPlaceholder(): string {
+      return this.config && this.config.orderPlaceholder || '';
+   }
+
    get selectedTitle(): string {
       return this.config && this.config.selectedElementsListTitle || '';
+   }
+
+   get selectedSubtitle(): string {
+      return this.config && this.config.selectedElementsListSubtitle || '';
    }
 
    get allQaTag(): string {

@@ -13,7 +13,7 @@
 
 .st-label {
    display: inline-block;
-   font-family: $egeo-nunito-sans-bold;
+   font-family: $egeo-nunito-sans;
    font-size: $egeo-font-size-xxsmall;
    line-height: $egeo-line-height-xxsmall;
    margin-bottom: 5px;
@@ -21,7 +21,7 @@
 
 .st-form-field {
    .st-label {
-      color: $neutral-09;
+      color: $neutral-10;
       &.active {
          color: $action-primary-default;
       }
@@ -34,11 +34,14 @@
       }
       &:disabled {
          border-color: $neutral-06;
-         background-color: $neutral-01;
-         color: $neutral-08;
+         background-color: $neutral-14;
+         color: $neutral-07;
+         overflow: auto;
+         resize: none;
+         cursor: not-allowed;
       }
       &:disabled:placeholder {
-         color: $neutral-08;
+         color: $neutral-07;
       }
    }
 

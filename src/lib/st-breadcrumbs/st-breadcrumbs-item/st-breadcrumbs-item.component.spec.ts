@@ -32,9 +32,24 @@ describe('StBreadCrumbsItemComponent', () => {
       component = fixture.componentInstance;
    });
 
-   describe('if initialized', () => {
-      it('should create the component', () => {
+   describe('If initialized', () => {
+      it('Should create the component', () => {
          expect(component).toBeTruthy();
+      });
+
+      it(`Should be initialized the parameters`, () => {
+         component.active = false;
+         component.qaTag = '';
+         fixture.detectChanges();
+
+         expect(component.qaTag).toEqual('');
+         expect(component.active).toBeFalsy();
+
+         component.active = true;
+         fixture.detectChanges();
+         expect(component.active).toBeTruthy();
+
+
       });
    });
 });

@@ -128,6 +128,7 @@ describe('StModal', () => {
             html: '<h1>Title</h1>',
             fullscreen: true,
             maxWidth: 600,
+            minWidth: 400,
             empty: false
          };
 
@@ -147,6 +148,7 @@ describe('StModal', () => {
             message: undefined,
             html: undefined,
             maxWidth: undefined,
+            minWidth: undefined,
             empty: false
          };
 
@@ -182,15 +184,14 @@ describe('StModal', () => {
             message: deleteMessage,
             html: undefined,
             maxWidth: 600,
+            minWidth: 400,
             empty: false
          };
 
-         service.showBasicModal(StModalBasicType.DELETE, deleteModalTitle, deleteMessageTitle, deleteMessage, okButton, cancelButton);
-         expect(instanceObj.modalConfig).toEqual(deleteConfig);
-         service.close();
+         service.showBasicModal(StModalBasicType.DELETE, deleteModalTitle, deleteMessageTitle, deleteMessage, okButton, cancelButton, 600, 400);
+         expect(instanceObj.modalConfig).toEqual(Object.assign({}, deleteConfig, { maxWidth: 600 }));
+         expect(instanceObj.modalConfig).toEqual(Object.assign({}, deleteConfig, { minWidth: 400 }));
 
-         service.showBasicModal(StModalBasicType.DELETE, deleteModalTitle, deleteMessageTitle, deleteMessage, okButton, cancelButton, 500);
-         expect(instanceObj.modalConfig).toEqual(Object.assign({}, deleteConfig, { maxWidth: 500 }));
       });
 
       it('should test if resolve component factory return undefined', () => {

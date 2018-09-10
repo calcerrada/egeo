@@ -8,6 +8,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+
+ @import '../../../theme/constants/index';
+
 :host {
    display: flex;
    max-height: 100%;
@@ -17,4 +20,25 @@
 
 virtual-scroll {
    width: 100%;
+   &__list-item-all{
+      padding: 5px 22px 22px 22px;
+      margin-bottom: 5px;
+   }
+
+   &__list-item{
+      padding: 5px 22px 22px 22px;
+   }
+}
+
+.virtual-scroll{
+
+   &__list-item-all{
+      padding: 5px 22px 5px 22px;
+      border-bottom-width: 1px;
+      border-bottom-color: $neutral-05;
+   }
+
+   &__list-item{
+      padding: 5px 22px 0px 22px;
+   }
 }

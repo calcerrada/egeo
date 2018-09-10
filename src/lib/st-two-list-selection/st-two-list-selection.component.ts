@@ -24,7 +24,7 @@ import * as _ from 'lodash';
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { StTwoListSelection } from './st-two-list-selection';
-import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExtraLabelAction } from './st-two-list-selection.model';
+import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExtraLabelAction, StTwoListSelectionAction } from './st-two-list-selection.model';
 
 @Component({
    selector: 'st-two-list-selection',
@@ -34,14 +34,17 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
          [selectedElements]="selectedList | stFilterList:searchBy:selectedSearch"
          [config]="config"
          [editable]="editable"
+         [hasAllListAll]="hasAllListAll"
+         [hasAllListSelected]="hasAllListSelected"
+         [itemAll]="itemAll"
          [qaTag]="qaTag"
          [hasSearch]="hasSearch"
          [orderAllOptions]="orderAllOptions"
          [orderSelectedOptions]="orderSelectedOptions"
          [mode]="mode"
-
          [moveAllToSelectedButton]="moveAllToSelectedButton"
          [moveAllToAllButton]="moveAllToAllButton"
+         [showSearchNumber]="showSearchNumber"
 
          (selectAllElement)="onSelectAllElement($event)"
          (selectSelectedElement)="onSelectSelectedElement($event)"
@@ -51,6 +54,8 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
          (moveToAll)="onMoveToAll($event)"
          (moveAllToSelected)="onMoveAllToSelected($event)"
          (moveAllToAll)="onMoveAllToAll($event)"
+         (numItemsSelectedAll)="numItemsSelectedAll.emit($event)"
+         (numItemsSelectedSelected)="numItemsSelectedSelected.emit($event)"
          (selectExtraLabelAll)="selectExtraLabelAll.emit($event)"
          (selectExtraLabelSelected)="selectExtraLabelAll.emit($event)"
          (changeOrderAll)="changeOrderAll.emit($event)"
@@ -63,25 +68,30 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
 export class StTwoListSelectionComponent extends StTwoListSelection implements OnInit, OnChanges {
 
    @Input() @StRequired('editable') allElements: StTwoListSelectionElement[];
-   @Input() @StRequired() selectedElements: StTwoListSelectionElement[];
-   @Output() selectedElementsChange: EventEmitter<StTwoListSelectionElement[]> = new EventEmitter<StTwoListSelectionElement[]>();
-
-   @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
-   @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
-   @Output() changeOrderAll: EventEmitter<any> = new EventEmitter<any>();
-   @Output() changeOrderSelected: EventEmitter<any> = new EventEmitter<any>();
-
    @Input() config: StTwoListSelectionConfig;
    @Input() editable: boolean = false;
-   @Input() @StRequired() qaTag: string;
-   @Input() sortBy: 'id' | 'name' = 'id';
+   @Input() hasAllListAll?: boolean = false;
+   @Input() hasAllListSelected?: boolean = false;
+   @Input() hasSearch: boolean = true;
+   @Input() itemAll?: StTwoListSelectionElement;
    @Input() mode: 'compact' | 'normal' = 'normal';
-
    @Input() moveAllToSelectedButton: boolean = true;
    @Input() moveAllToAllButton: boolean = true;
-   @Input() hasSearch: boolean = true;
-   @Input() orderSelectedOptions: StDropDownMenuItem[] = [];
    @Input() orderAllOptions: StDropDownMenuItem[] = [];
+   @Input() orderSelectedOptions: StDropDownMenuItem[] = [];
+   @Input() @StRequired() qaTag: string;
+   @Input() @StRequired() selectedElements: StTwoListSelectionElement[];
+   @Input() showSearchNumber: number;
+   @Input() sortBy: 'id' | 'name' = 'id';
+
+   @Output() changeOrderAll: EventEmitter<any> = new EventEmitter<any>();
+   @Output() changeOrderSelected: EventEmitter<any> = new EventEmitter<any>();
+   @Output() numItemsSelectedAll: EventEmitter<any> = new EventEmitter<any>();
+   @Output() numItemsSelectedSelected: EventEmitter<any> = new EventEmitter<any>();
+   @Output() selectedElementsChange: EventEmitter<StTwoListSelectionElement[]> = new EventEmitter<StTwoListSelectionElement[]>();
+   @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
+   @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
+   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
    constructor(private cd: ChangeDetectorRef) {
       super(cd);
@@ -92,12 +102,16 @@ export class StTwoListSelectionComponent extends StTwoListSelection implements O
          this.allElements,
          this.selectedElements,
          this.selectedElementsChange,
-         this.sortBy
+         this.sortBy,
+         this.hasAllListAll,
+         this.hasAllListSelected,
+         this.itemAll
       );
    }
 
    ngOnChanges(changes: SimpleChanges): void {
       this.checkChanges(changes, 'allElements', 'selectedElements');
+      this.change.emit();
    }
 
    get allList(): StTwoListSelectionElement[] {

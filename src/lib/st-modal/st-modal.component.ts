@@ -38,6 +38,9 @@ export class StModalComponent implements OnDestroy, AfterViewInit {
    @ViewChild('stModalBody', { read: ViewContainerRef }) targetContent: ViewContainerRef;
    @ViewChild('stModalBodyEmpty', { read: ViewContainerRef }) targetEmpty: ViewContainerRef;
 
+   readonly defaultMaxWidth: number = 600;
+   readonly defaultMinWidth: number = 400;
+
    target: ViewContainerRef;
 
    private componentRef: ComponentRef<any>;
@@ -80,10 +83,10 @@ export class StModalComponent implements OnDestroy, AfterViewInit {
    }
 
    get modalStyles(): Object {
-      if (this.modalConfig && this.modalConfig.maxWidth > -1) {
-         return { 'max-width': `${this.modalConfig.maxWidth}px`, 'width': `${this.getModalActualWidth(this.modalConfig.maxWidth)}px` };
-      }
-      return {};
+      const maxWidth = this.modalConfig.maxWidth || this.defaultMaxWidth;
+      const minWidth = this.modalConfig.minWidth || this.defaultMinWidth;
+      const width = this.getModalActualWidth(maxWidth, minWidth);
+      return { 'max-width': `${maxWidth}px`, 'min-width': `${minWidth}px`, 'width': `${width}px` };
    }
 
    get emptyModal(): boolean {
@@ -106,9 +109,9 @@ export class StModalComponent implements OnDestroy, AfterViewInit {
       this.windowRef.nativeWindow.document.body.classList.remove('st-modal-overlay');
    }
 
-   private getModalActualWidth(width: number): number {
+   private getModalActualWidth(maxWidth: number, minWidth?: number): number {
       const screenWidth: number = this.windowRef.nativeWindow.screen.width;
-      return screenWidth > width ? width : screenWidth;
+      return screenWidth > maxWidth ? maxWidth : (screenWidth < minWidth ? minWidth : screenWidth);
    }
 
    private loadBody(): void {

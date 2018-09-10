@@ -18,6 +18,8 @@
 
       <st-sidebar class="sidebar" title="Mesos Manager" [items]="items" qaTag="sidebar-demo" [active]="activeItem"
                   [searchMode]="enableSearchMode" (change)="onChangeActive($event)">
+         <span class="header" sidebar-header> HEADER CONTENT</span>
+         <span class="footer" sidebar-footer> FOOTER CONTENT</span>
       </st-sidebar>
    </div>
 
@@ -25,6 +27,8 @@
       <h1>Complex visualization </h1>
       <st-sidebar class="sidebar" title="Mesos Manager" [visualMode]="complexMode" [items]="items" qaTag="sidebar-demo"
                   [active]="activeItem" [searchMode]="enableSearchMode" (change)="onChangeActive($event)">
+         <span sidebar-footer> FOOTER CONTENT</span>
+
       </st-sidebar>
    </div>
 

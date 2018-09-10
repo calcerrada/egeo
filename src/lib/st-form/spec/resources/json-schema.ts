@@ -23,6 +23,14 @@ export const JSON_SCHEMA: any = {
          'exclusiveMaximum': false,
          'examples': [5]
       },
+      'genericLongText': {
+         'title': 'Generic long text',
+         'description': 'Generic long text description',
+         'type': 'string',
+         'minLength': 2,
+         'maxLength': 200,
+         'examples': ['This is a long text and can be longer']
+      },
       'genericNumberInput': {
          'title': 'Generic number',
          'description': 'Generic input description',

@@ -11,9 +11,14 @@
 
 -->
 <div class="list-selection">
-   <p class="title sth-two-list__list-title" [ngClass]="{'sth-two-list__important-title': important}">{{title}}</p>
-   <st-search class="search" *ngIf="hasSearch" [placeholder]="searchPlaceholder" [qaTag]="searchQaTag" (search)="search.emit($event)"></st-search>
-   <list-scroll [list]="list" [mode]="mode" (selectItem)="selectItem.emit($event)" [qaTag]="listQaTag" [editable]="editable" [qaTag]="listQaTag" [editable]="editable"
+   <div class="list-selection__rectangle">
+      <p class="title sth-two-list__list-title" [ngClass]="{'sth-two-list__important-title': important}">{{title}}</p>
+      <p class="subtitle sth-two-list__list-subtitle">{{subtitle}}</p>
+      <st-search [disabled]="list.length === 0" class="search" *ngIf="hasSearch && ( list && list.length >= showSearchNumber) || (hasSearch && !showSearchNumber)" [placeholder]="searchPlaceholder" [qaTag]="searchQaTag" (search)="search.emit($event)"></st-search>
+   </div>
+   <list-scroll [list]="list" [itemAll]="itemAll" [mode]="mode" (selectItem)="selectItem.emit($event)" [hasAllList]="hasAllList" [qaTag]="listQaTag" [editable]="editable" [qaTag]="listQaTag" [editable]="editable"
              (selectExtraLabel)="selectExtraLabel.emit($event)"></list-scroll>
-   <st-select *ngIf="hasOrder" class="orderCombo" button="Order" [options]="orderOptions" (select)="changeOrder.emit($event)"></st-select>
+   <div class="list-selection__rectangle bottom" *ngIf="hasOrder" >
+         <st-select [disabled]="list.length === 0" class="order-select" button="Order" [options]="orderOptions" (select)="changeOrder.emit($event)" [placeholder]="orderPlaceholder"></st-select>
+   </div>
 </div>

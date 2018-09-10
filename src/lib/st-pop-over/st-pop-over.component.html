@@ -15,14 +15,13 @@
       <ng-content select=[pop-over-button]></ng-content>
    </div>
 
-   <div pop-content [style.z-index]="9" class="content st-pop-over__content">
-      <div class="st-pop-over__title">
-         <span>{{title}}</span>
+   <div pop-content [style.z-index]="9" class="content st-pop-over__content" [ngClass]="{'st-pop-over__content--with-arrow': showArrow}">
+      <div class="st-pop-over__header" [ngClass]="{'st-pop-over__header--underlined': title}"  *ngIf="title || showSettingBtn">
+         <span  *ngIf="title" class="title">{{title}}</span>
          <button class="button st-pop-over__setting-action" *ngIf="showSettingBtn" (click)="clickConfig.emit($event)">
             <i class="icon-settings2"></i>
          </button>
       </div>
-      <span class="arrow st-pop-over__arrow" [ngClass]="{'arrow-with-config': showSettingBtn}"></span>
       <ng-content select=[pop-over-content]></ng-content>
    </div>
 </st-pop>

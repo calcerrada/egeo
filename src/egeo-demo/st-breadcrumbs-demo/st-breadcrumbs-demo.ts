@@ -13,6 +13,7 @@ import { clone as _clone } from 'lodash';
 
 import { StDemoLoggerSeverity } from '../shared/st-demo-logger/st-demo-loger.model';
 import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.service';
+import { StBreadCrumbItem } from '@stratio/egeo';
 
 @Component({
    selector: 'st-breadcrumbs-demo',
@@ -20,13 +21,34 @@ import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.ser
 })
 export class StBreadcrumbsDemoComponent {
    public output: string;
-   public options: string[] = [];
+   public options: StBreadCrumbItem[] = [];
 
-   private originalOptions: string[] = ['Home'];
+   private originalOptions: StBreadCrumbItem[] = [{id: 'home', label: 'Home', icon: 'icon-home2' }];
+   private otherOptions: StBreadCrumbItem[] = [{ id: 'home', icon: 'icon-home2' },
+      { id: 'downLeft', icon: 'icon-corner-down-left' },
+      { id: 'downRight', icon: 'icon-corner-down-right' },
+      { id: 'leftDown', icon: 'icon-corner-left-down' },
+      { id: 'leftUp', icon: 'icon-corner-left-up' },
+      { id: 'rightDown', icon: 'icon-corner-right-down' },
+      { id: 'rightUp', icon: 'icon-corner-right-up' },
+      { id: 'upLeft', icon: 'icon-corner-up-left' },
+      { id: 'upRight', icon: 'icon-corner-up-right' }
+   ];
+
+   private otherOptions2: StBreadCrumbItem[] = [{ id: 'home', icon: 'icon-home2' },
+      { id: 'downLeft', label: 'icon-corner-down-left' },
+      { id: 'downRight', icon: 'icon-corner-down-right' },
+      { id: 'leftDown', label: 'icon-corner-left-down' },
+      { id: 'leftUp', icon: 'icon-corner-left-up' },
+      { id: 'rightDown', label: 'icon-corner-right-down' },
+      { id: 'rightUp', icon: 'icon-corner-right-up' },
+      { id: 'upLeft', label: 'icon-corner-up-left' },
+      { id: 'upRight', icon: 'icon-corner-up-right' }
+   ];
 
    constructor(private _logger: StDemoLoggerService) {
       for (let i = 1; i < 15; i++) {
-         this.originalOptions.push('level' + i);
+         this.originalOptions.push({id: 'level_' + i, label: 'level' + i, icon: 'icon-check'});
       }
       this.reset();
       this._logger.maxMessages = 15;

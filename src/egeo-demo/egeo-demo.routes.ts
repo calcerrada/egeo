@@ -21,6 +21,7 @@ export class EgeoDemoMenu {
 export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
    { id: 'st-alerts', name: 'Alerts', path: 'alerts-demo', moduleLazyLoad: 'StAlertsDemoModule' },
    { id: 'st-breadcrumbs', name: 'Breadcrumbs', path: 'breadcrumbs', moduleLazyLoad: 'StBreadcrumbsDemoModule' },
+   { id: 'st-bubble', name: 'Bubble', path: 'bubble-demo', moduleLazyLoad: 'StBubbleDemoModule' },
    { id: 'st-button', name: 'Button', path: 'button-demo', moduleLazyLoad: 'StButtonDemoModule' },
    { id: 'st-checkbox', name: 'Checkbox', path: 'checkbox-demo', moduleLazyLoad: 'StCheckboxDemoModule' },
    { id: 'st-draggable-card', name: 'Draggable card', path: 'draggable-card-demo', moduleLazyLoad: 'StDraggableCardDemoModule' },
@@ -51,6 +52,7 @@ export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
    { id: 'st-search', name: 'Search', path: 'search-demo', moduleLazyLoad: 'StSearchDemoModule' },
    { id: 'st-select', name: 'Select', path: 'select-demo', moduleLazyLoad: 'StSelectDemoModule' },
    { id: 'st-sidebar', name: 'Sidebar', path: 'sidebar-demo', moduleLazyLoad: 'SidebarDemoModule' },
+   { id: 'st-spinner', name: 'Spinner', path: 'spinner-demo', moduleLazyLoad: 'StSpinnerDemoModule' },
    { id: 'st-switch', name: 'Switch', path: 'switch-demo', moduleLazyLoad: 'StSwitchDemoModule' },
    { id: 'st-tab-box', name: 'Tab Box', path: 'tab-box-demo', moduleLazyLoad: 'StTabBoxDemoModule' },
    { id: 'st-table', name: 'Table', path: 'table-demo', moduleLazyLoad: 'StTableDemoModule' },
@@ -69,6 +71,7 @@ export const EGEO_DEMO_MENU: EgeoDemoMenu[] = [
 const routes: Routes = [
    { path: 'alerts-demo', loadChildren: './st-alert-demo/st-alerts-demo.module#StAlertsDemoModule' },
    { path: 'breadcrumbs', loadChildren: './st-breadcrumbs-demo/st-breadcrumbs-demo.module#StBreadcrumbsDemoModule' },
+   { path: 'bubble-demo', loadChildren: './st-bubble-demo/st-bubble-demo.module#StBubbleDemoModule' },
    { path: 'button-demo', loadChildren: './st-button-demo/st-button-demo.module#StButtonDemoModule' },
    { path: 'checkbox-demo', loadChildren: './st-checkbox-demo/st-checkbox-demo.module#StCheckboxDemoModule' },
    { path: 'draggable-card-demo', loadChildren: './st-draggable-card-demo/st-draggable-card-demo.module#StDraggableCardDemoModule' },
@@ -98,6 +101,7 @@ const routes: Routes = [
    { path: 'search-demo', loadChildren: './st-search-demo/st-search-demo.module#StSearchDemoModule' },
    { path: 'select-demo', loadChildren: './st-select-demo/select-demo.module#StSelectDemoModule' },
    { path: 'sidebar-demo', loadChildren: './st-sidebar-demo/st-sidebar-demo.module#StSidebarDemoModule' },
+   { path: 'spinner-demo', loadChildren: './st-spinner-demo/st-spinner-demo.module#StSpinnerDemoModule' },
    { path: 'switch-demo', loadChildren: './st-switch-demo/st-switch-demo.module#StSwitchDemoModule' },
    { path: 'tab-box-demo', loadChildren: './st-tab-box-demo/st-tab-box-demo.module#StTabBoxDemoModule' },
    { path: 'table-demo', loadChildren: './st-table-demo/st-table-demo.module#StTableDemoModule' },

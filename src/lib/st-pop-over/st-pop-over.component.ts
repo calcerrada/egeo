@@ -42,8 +42,10 @@ export class StPopOverComponent {
    @Input() hidden: boolean = false;
    /** @Input {StPopOffset} [offset={x: 0 , y: 17}] For position with offset in x o y axis */
    @Input() offset: StPopOffset = { x: 0, y: 17 };
-   /** @Input {boolean} [settings=false] when true, settings icon is displayed    */
+   /** @Input {boolean} [showSettingBtn=false] when true, settings icon is displayed    */
    @Input() showSettingBtn?: boolean = false;
+   /** @Input {boolean} [showArrow=true] when true, arrow icon is displayed    */
+   @Input() showArrow?: boolean = true;
 
    /** @Output {Event} [click] Notify event click */
    @Output() clickConfig: EventEmitter<Event> = new EventEmitter<Event>();

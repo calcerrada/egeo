@@ -14,6 +14,8 @@ export { EgeoDemoModule } from './egeo-demo.module';
 
 export { StAlertsDemoModule } from './st-alert-demo/st-alerts-demo.module';
 export { StBreadcrumbsDemoModule } from './st-breadcrumbs-demo/st-breadcrumbs-demo.module';
+export { StBubbleDemoModule } from './st-bubble-demo/st-bubble-demo.module';
+
 export { StButtonDemoModule } from './st-button-demo/st-button-demo.module';
 export { StCheckboxDemoModule } from './st-checkbox-demo/st-checkbox-demo.module';
 export { StDraggableCardDemoModule } from './st-draggable-card-demo/st-draggable-card-demo.module';
@@ -39,6 +41,7 @@ export { StRadioDemoModule } from './st-radio-demo/st-radio-demo.module';
 export { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
 export { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.module';
 export { StSelectDemoModule } from './st-select-demo/select-demo.module';
+export { StSpinnerDemoModule } from './st-spinner-demo/st-spinner-demo.module';
 export { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
 export { StTabBoxDemoModule } from './st-tab-box-demo/st-tab-box-demo.module';
 export { StTableDemoModule } from './st-table-demo/st-table-demo.module';

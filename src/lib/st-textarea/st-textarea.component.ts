@@ -8,8 +8,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input,
-   OnChanges, OnDestroy, OnInit, ViewChildren } from '@angular/core';
+import {
+   ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input,
+   OnChanges, OnDestroy, OnInit, ViewChildren, Output, EventEmitter
+} from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -31,7 +33,6 @@ import { StTextareaError } from './st-textarea.error.model';
  *    [forceValidations]="forceValidations"
  *    [errors]="errorsTextarea"
  *    name="components-template"
- *    fieldType="number"
  *    qaTag="components-textarea-template"
  *    required
  *    [(ngModel)]="model.components"
@@ -52,7 +53,7 @@ import { StTextareaError } from './st-textarea.error.model';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnInit, OnDestroy {
+export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnInit, OnDestroy  {
    /** @Input {string} [placeholder=''] The text that appears as placeholder of the textarea. It is empty by default */
    @Input() placeholder: string = '';
 
@@ -91,6 +92,12 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
    /** @Input {string} [wrap='soft'] Define type of wrap as html standard */
    @Input() wrap: string = 'soft';
 
+   /** @Input {string} [default=] Default value of textarea */
+   @Input() default: string;
+
+   /** @Output {} [blur] Notify when user leaves a field */
+   @Output() blur: EventEmitter<any> = new EventEmitter<any>();
+
    @ViewChildren('textarea') vc: any;
 
    public isDisabled: boolean = false; // To check disable
@@ -102,7 +109,8 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
    private valueChangeSub: Subscription;
    private internalTextareaModel: any = '';
 
-   constructor(private _cd: ChangeDetectorRef) { }
+   constructor(private _cd: ChangeDetectorRef) {
+   }
 
    onChange = (_: any) => { };
    onTouched = () => { };
@@ -177,8 +185,21 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
       this.focus = true;
    }
 
-   onFocusOut(event: Event): void {
+   onFocusOut(event: Event, emitEvent: boolean): void {
       this.focus = false;
+
+      if (emitEvent) {
+         this.blur.emit();
+      }
+   }
+
+   displayResetButton(): boolean {
+      return this.default !== undefined && this.internalControl.dirty && this.internalControl.value !== this.default;
+   }
+
+   resetToDefault(): void {
+      this.writeValue(this.default);
+      this._cd.markForCheck();
    }
 
    // When status change call this function to check if have errors
@@ -201,6 +222,16 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
       if (errors.hasOwnProperty('required')) {
          return this.errors.required || this.errors.generic || '';
       }
+      if (errors.hasOwnProperty('minlength')) {
+         return this.errors.minLength || this.errors.generic || '';
+      }
+      if (errors.hasOwnProperty('maxlength')) {
+         return this.errors.maxLength || this.errors.generic || '';
+      }
+      if (errors.hasOwnProperty('pattern')) {
+         return this.errors.pattern || this.errors.generic || '';
+      }
+
       return '';
    }
 

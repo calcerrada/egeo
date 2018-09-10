@@ -38,8 +38,8 @@ export class IconsDemoComponent {
       this.iconList = this._service.getIconList();
    }
 
-   onSearchResult(search: string): void {
-      this.searchValue = search;
+   onSearchResult(search: {text: string}): void {
+      this.searchValue = search.text;
    }
 
    onCopyIconName(name: string): void {

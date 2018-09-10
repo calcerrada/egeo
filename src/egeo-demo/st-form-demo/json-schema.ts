@@ -33,11 +33,27 @@ export const JSON_SCHEMA: any = {
                'ui': { 'relatedTo': 'serviceId' }
             },
             'serviceId': {
+               'title': 'Id',
+               'type': 'string',
+               'readOnly': false,
+               'maxLength': 200,
+               'default': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a imperdiet ipsum. Integer malesuada, mi semper maximus tempus, lacus lacus dapibus sem, ac accumsan ipsum mi quis eros. Duis tempus diam id nisi aliquam, at blandit mi blandit. Pellentesque hendrerit sem at pellentesque aliquam. '
+            },
+            'disabledServiceId': {
+               'title': 'Disabled Id',
+               'type': 'string',
+               'readOnly': true,
+               'maxLength': 200,
+               'pattern': 'Lorem',
+               'default': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+            },
+            'serviceName': {
                'title': 'Name',
                'type': 'string',
-               'default': ''
+               'readOnly': false,
+               'default': '/sparta/sparta-server/null',
+               'maxLength': 8
             },
-
             'a': {
                'title': 'a',
                'type': 'string',
@@ -260,7 +276,7 @@ export const JSON_SCHEMA: any = {
                }
             }
          },
-         'required': ['serviceId']
+         'required': ['serviceId', 'serviceName']
       }
    }
 };

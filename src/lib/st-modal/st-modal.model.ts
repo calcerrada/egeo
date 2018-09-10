@@ -35,6 +35,7 @@ export class StModalConfig {
    outputs?: Object;
    buttons?: StModalButton[];
    maxWidth?: number;
+   minWidth?: number;
    empty?: boolean;
 }
 

@@ -49,7 +49,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
    @Input() hasDependencies: boolean;
    @Input() forceValidations: boolean;
    @Input() showTooltip: boolean = true;
-
+   @Input() maxWidth: number;
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
    @ViewChild('templateModel') templateModel: NgModel;
@@ -88,8 +88,8 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit {
 
    ngOnInit(): void {
       setTimeout(() => {
-         if (this.schema.value.default !== undefined && (this.innerValue === undefined || this.innerValue === null)) {
-            this.innerValue = this.schema.value.default;
+         if (this.default !== undefined && (this.innerValue === undefined || this.innerValue === null)) {
+            this.innerValue = this.default;
             this.onChange(this.innerValue);
          }
          if (this.schema.value.readOnly) {

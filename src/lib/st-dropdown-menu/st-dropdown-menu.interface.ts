@@ -34,3 +34,7 @@ export class StDropDownMenuGroupSchema {
    title?: TranslateableElement;
    items: StDropDownMenuItemSchema[];
 }
+
+export enum StDropDownVisualMode {
+   OPTION_LIST, MENU_LIST
+}

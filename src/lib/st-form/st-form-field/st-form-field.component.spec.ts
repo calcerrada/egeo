@@ -29,6 +29,8 @@ import { StSwitchModule } from '../../st-switch/st-switch.module';
 import { StSelectComponent } from '../../st-select/st-select';
 import { StInputComponent } from '../../st-input/st-input.component';
 import { StDropdownMenuComponent } from '../../st-dropdown-menu/st-dropdown-menu.component';
+import { StTextareaModule } from '../../st-textarea/st-textarea.module';
+import { StTextareaComponent } from '../../st-textarea/st-textarea.component';
 
 let component: StFormFieldComponent;
 let fixture: ComponentFixture<StFormFieldComponent>;
@@ -39,7 +41,7 @@ describe('StFormFieldComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [FormsModule, ReactiveFormsModule, StInputModule, StCheckboxModule, StSelectModule, PipesModule,
-            StTooltipModule, StFormDirectiveModule, StDropdownMenuModule, StSwitchModule],
+            StTooltipModule, StFormDirectiveModule, StDropdownMenuModule, StSwitchModule, StTextareaModule],
          declarations: [StFormFieldComponent]
       })
          .overrideComponent(StSelectComponent, {
@@ -49,6 +51,9 @@ describe('StFormFieldComponent', () => {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
          .overrideComponent(StInputComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .overrideComponent(StTextareaComponent, {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
          .overrideComponent(StFormFieldComponent, {
@@ -66,7 +71,6 @@ describe('StFormFieldComponent', () => {
       beforeEach(() => {
          component.qaTag = 'genericIntegerInput';
       });
-
       describe('integer input', () => {
          let input: HTMLInputElement;
          let numberInputProperty: any;
@@ -534,11 +538,30 @@ describe('StFormFieldComponent', () => {
             textInputProperty = JSON_SCHEMA.properties.genericTextInput;
             minLength = textInputProperty.minLength;
             maxLength = textInputProperty.maxLength;
-            component.schema = { key: 'genericTextInput', value: textInputProperty };
+            component.schema = { key: 'genericTextInput', value: _cloneDeep(textInputProperty) };
             component.qaTag = 'genericTextInput';
+            component.maxWidth = undefined;
             formControl = new FormControl('');
             fixture.detectChanges();
             input = fixture.nativeElement.querySelector('#genericTextInput');
+         });
+
+         it('It should render an input if minLength and maxLength are not defined or both are minor than the maxLengthField input', () => {
+            component.maxWidth = 80;
+            component.schema.value.minLength = component.maxWidth - 2;
+            component.schema.value.maxLength = component.maxWidth - 1;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('input#genericTextInput')).not.toBeNull();
+         });
+
+         it('It should render an input if maxWidth input is not defined', () => {
+            component.maxWidth = undefined;
+            component.schema.value.minLength = 200;
+            component.schema.value.maxLength = 100;
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('input#genericTextInput')).not.toBeNull();
          });
 
          it('required validation', () => {
@@ -637,7 +660,7 @@ describe('StFormFieldComponent', () => {
          });
       });
 
-      it('if input has a default value and user interacts with input, he will be able to reset to the default value', () => {
+      it('if input has a default value and user interacts with input, he will be able to reset to the default value', (done) => {
          let fakeDefault: string = 'test default';
          component.schema = { key: 'genericTextInput', value: JSON_SCHEMA.properties.genericTextInput };
          component.qaTag = 'genericTextInput';
@@ -658,13 +681,196 @@ describe('StFormFieldComponent', () => {
             input.dispatchEvent(new Event('input'));
             fixture.detectChanges();
 
-            expect(fixture.nativeElement.querySelector('.st-input-reset-button')).not.toBeNull();
+            expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
 
-            fixture.nativeElement.querySelector('.st-input-reset-button').click();
+            fixture.nativeElement.querySelector('.st-form-control-reset-button').click();
             fixture.detectChanges();
 
-            expect(component.value).toEqual(fakeDefault);
+            expect(input.value).toEqual(fakeDefault);
+            done();
+         });
+      });
+   });
 
+   describe('should be able to render textareas with their validations', () => {
+      let textarea: HTMLInputElement;
+      let genericLongTextProperty: any;
+      let minLength: number;
+      let maxLength: number;
+
+      beforeEach(() => {
+         genericLongTextProperty = JSON_SCHEMA.properties.genericLongText;
+         minLength = genericLongTextProperty.minLength;
+         maxLength = genericLongTextProperty.maxLength;
+         component.schema = { key: 'genericLongText', value: _cloneDeep(genericLongTextProperty) };
+         component.qaTag = 'genericLongText';
+         component.maxWidth = 70;
+         formControl = new FormControl('');
+         fixture.detectChanges();
+         textarea = fixture.nativeElement.querySelector('#genericLongText');
+      });
+
+      it('a textarea is displayed when minLength or maxLength are defined and they are major or equal to maxWidth', () => {
+         expect(fixture.nativeElement.querySelector('.st-textarea')).not.toBeNull();
+
+         component.schema.value.minLength = 1;
+         component.schema.value.maxLength = 2;
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea')).toBeNull();
+
+         component.schema.value.maxLength = component.maxWidth;
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea')).not.toBeNull();
+
+         component.schema.value.maxLength = component.maxWidth - 1;
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea')).toBeNull();
+
+         component.schema.value.minLength = component.maxWidth;
+         component.schema.value.maxLength = undefined;
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea')).not.toBeNull();
+
+         component.schema.value.minLength = component.maxWidth - 1;
+         component.schema.value.maxLength = undefined;
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea')).toBeNull();
+      });
+
+      it('required validation', () => {
+         component.required = true;
+         fixture.detectChanges();
+
+         textarea.focus();
+         textarea.value = '';
+         textarea.dispatchEvent(new Event('input'));
+
+         textarea.blur();
+
+         fixture.detectChanges();
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span').innerHTML).toBe('This field is required');
+
+         textarea.value = 'aa';
+         textarea.dispatchEvent(new Event('input'));
+         textarea.blur();
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span')).toBeNull();
+      });
+
+      it('min length validation', () => {
+         textarea.focus();
+
+         textarea.value = 'a'.repeat(minLength - 1);
+         textarea.dispatchEvent(new Event('input'));
+
+         textarea.blur();
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span').innerHTML).toBe('The field min length is ' + minLength);
+
+         textarea.value = 'a'.repeat(minLength);
+         textarea.dispatchEvent(new Event('input'));
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span')).toBeNull();
+      });
+
+      it('max length validation', () => {
+         textarea.focus();
+
+         textarea.value = 'a'.repeat(maxLength + 1);
+         textarea.dispatchEvent(new Event('input'));
+
+         textarea.blur();
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span').innerHTML).toBe('The field max length is ' + maxLength);
+
+         textarea.focus();
+         textarea.value = 'a'.repeat(maxLength);
+         textarea.dispatchEvent(new Event('input'));
+
+         textarea.blur();
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span')).toBeNull();
+      });
+
+      it('pattern validation', () => {
+         component.schema.value.pattern = 'aa';
+         fixture.detectChanges();
+
+         textarea.focus();
+         textarea.value = 'bbb';
+         textarea.dispatchEvent(new Event('input'));
+         textarea.blur();
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span').innerHTML).toBe('Invalid value');
+
+         textarea.focus();
+         textarea.value = 'aa';
+         textarea.dispatchEvent(new Event('input'));
+         textarea.blur();
+
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-textarea-error-layout span')).toBeNull();
+      });
+
+      it('When user leaves it, it emits an event', () => {
+         spyOn(component.blur, 'emit');
+
+         textarea.dispatchEvent(new Event('focus'));
+         fixture.detectChanges();
+         textarea.dispatchEvent(new Event('blur'));
+         fixture.detectChanges();
+
+         expect(component.blur.emit).toHaveBeenCalledTimes(1);
+      });
+
+      it('if textarea has a default value and user interacts with textarea, he will be able to reset to the default value', (done) => {
+         let fakeDefault: string = 'test default';
+         component.schema.value.default = fakeDefault;
+
+         fixture.detectChanges();
+
+         textarea = fixture.nativeElement.querySelector('#genericLongText');
+
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            textarea.focus();
+            textarea.dispatchEvent(new Event('focus'));
+            fixture.detectChanges();
+
+            textarea.value = 'bbb';
+            textarea.dispatchEvent(new Event('input'));
+            fixture.detectChanges();
+
+            expect(fixture.nativeElement.querySelector('.st-form-control-reset-button')).not.toBeNull();
+
+            fixture.nativeElement.querySelector('.st-form-control-reset-button').click();
+            fixture.detectChanges();
+
+            expect(textarea.value).toEqual(fakeDefault);
+            done();
          });
       });
    });

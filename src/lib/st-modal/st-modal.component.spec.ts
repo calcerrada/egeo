@@ -115,7 +115,11 @@ describe('StModal', () => {
          expect(comp.message).toEqual(message);
          expect(comp.title).toEqual(defaultConfig.modalTitle);
          expect(comp.messageTitle).toEqual(defaultConfig.messageTitle);
-         expect(comp.modalStyles).toEqual({});
+         expect(comp.modalStyles).toEqual({
+            'max-width': '600px',
+            'min-width': '400px',
+            'width': '400px'
+         });
       });
 
       it('should get if it is fullscreen', () => {
@@ -128,19 +132,34 @@ describe('StModal', () => {
          expect(comp.isFullscreen).toBeFalsy();
       });
 
-      it('should get correct width value with space', inject([StWindowRefService], (windowRef: StWindowRefService) => {
+      it('should get correct width value with space (max width)', inject([StWindowRefService], (windowRef: StWindowRefService) => {
          windowMock.screen.width = 2000;
          comp.modalConfig = Object.assign({}, defaultConfig, { message, maxWidth: 800 });
          fixture.detectChanges();
 
-         expect(comp.modalStyles).toEqual({'max-width': '800px', 'width': '800px'});
+         expect(comp.modalStyles).toEqual({ 'max-width': '800px', 'min-width': '400px', 'width': '800px'});
       }));
 
-      it('should get correct width value whitout space', inject([StWindowRefService], (windowRef: StWindowRefService) => {
+      it('should get correct width value whitout space (max width)', inject([StWindowRefService], (windowRef: StWindowRefService) => {
          windowMock.screen.width = 500;
          comp.modalConfig = Object.assign({}, defaultConfig, { message, maxWidth: 800 });
          fixture.detectChanges();
-         expect(comp.modalStyles).toEqual({'max-width': '800px', 'width': '500px'});
+         expect(comp.modalStyles).toEqual({ 'max-width': '800px', 'min-width': '400px', 'width': '500px' });
+      }));
+
+      it('should get correct width value with space (min width)', inject([StWindowRefService], (windowRef: StWindowRefService) => {
+         windowMock.screen.width = 2000;
+         comp.modalConfig = Object.assign({}, defaultConfig, { message, minWidth: 400 });
+         fixture.detectChanges();
+
+         expect(comp.modalStyles).toEqual({ 'max-width': '600px', 'min-width': '400px', 'width': '600px' });
+      }));
+
+      it('should get correct width value whitout space (min width)', inject([StWindowRefService], (windowRef: StWindowRefService) => {
+         windowMock.screen.width = 300;
+         comp.modalConfig = Object.assign({}, defaultConfig, { message, minWidth: 400 });
+         fixture.detectChanges();
+         expect(comp.modalStyles).toEqual({ 'max-width': '600px', 'min-width': '400px', 'width': '400px'});
       }));
 
       it('should set class to body when modal show and remove on hide', () => {

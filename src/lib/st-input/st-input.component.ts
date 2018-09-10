@@ -160,7 +160,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
       return (this.qaTag || this.name) + '-label';
    }
 
-   createResetButton(): boolean {
+   displayResetButton(): boolean {
       return this.default !== undefined && this.internalControl.dirty && this.internalControl.value !== this.default;
    }
 

@@ -33,7 +33,7 @@ export {
 
 /**************************** PIPES ***************************************************/
 export { PipesModule } from './pipes/pipes.module';
-export { StFilterList } from './pipes/search-filter.pipe';
+export { StFilterList } from './pipes/search-filter/search-filter.pipe';
 
 /**************************** DIRECTIVES ***************************************************/
 export { StInputAdjustable } from './directives/st-input-adjustable/st-input-adjustable';
@@ -48,7 +48,13 @@ export { StAlertLink, STALERT_SEVERITY } from './st-alerts/st-alerts.model';
 export { StAlertsService } from './st-alerts/st-alerts.service';
 
 // Breadcrumb
+export {
+   StBreadCrumbItem
+} from './st-breadcrumbs/st-breadcrumbs.interface';
 export { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
+
+// Bubble
+export { StBubbleModule } from './st-bubble/st-bubble.module';
 
 // Checkbox
 export { StCheckboxModule } from './st-checkbox/st-checkbox.module';
@@ -63,6 +69,7 @@ export {
    StDropDownMenuGroup,
    StDropDownMenuGroupSchema,
    StDropDownMenuItem,
+   StDropDownVisualMode,
    StDropDownMenuItemSchema
 } from './st-dropdown-menu/st-dropdown-menu.interface';
 export { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';

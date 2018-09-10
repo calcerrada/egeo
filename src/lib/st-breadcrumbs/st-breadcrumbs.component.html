@@ -13,7 +13,14 @@
 <ul class="st-breadcrumbs" [attr.id]="qaTag">
    <ng-content select="st-breadcrumbs-item"></ng-content>
    <div *ngIf="options.length">
-      <st-breadcrumbs-item class ="sth-breadcrumbs__item-container" *ngFor="let idx of indexArray; let last=last" (click)="onSelect(idx)" [active]="last"
-         [qaTag]="qaTag + '-' + idx">{{getOption(idx)}}</st-breadcrumbs-item>
+      <st-breadcrumbs-item 
+         class="sth-breadcrumbs__item-container"
+         *ngFor="let idx of indexArray; let last=last"
+         (click)="onSelect(idx)"
+         [active]="last"
+         [qaTag]="qaTag + '-' + idx">
+            <i *ngIf="hasIcon" [ngClass]="getIcon(idx)"></i>
+            <span *ngIf="hasLabel">{{getLabel(idx)}}</span>
+        </st-breadcrumbs-item>
    </div>
 </ul>

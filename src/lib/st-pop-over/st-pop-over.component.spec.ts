@@ -8,22 +8,17 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { StPopModule } from '../st-pop/st-pop.module';
 import { StPopOverComponent } from './st-pop-over.component';
 
-let qaTag: string = 'pop-over-test';
 let title: string = 'Pop Over Title';
-let hidden: boolean = true;
 
 describe('StPopOverComponent', () => {
 
    let component: StPopOverComponent;
    let fixture: ComponentFixture<StPopOverComponent>;
-   let de: DebugElement;
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
@@ -54,41 +49,81 @@ describe('StPopOverComponent', () => {
       expect(itemElement).toBeNull();
    });
 
-   it('It has to hide when hidden input is true', () => {
+   it('It has to be hidden when hidden input is true', () => {
       component.title = title;
-      component.hidden = hidden;
+      component.hidden = true;
       fixture.detectChanges();
 
       let itemElement = fixture.nativeElement.querySelector('[hidden]');
       expect(itemElement).toBeDefined();
    });
 
-   it('It has to hide settings button when showSettingBtn input is false', () => {
+   it('header is only visible if it has to display the settings button or title is not empty', () => {
+      component.title = '';
+      component.showSettingBtn = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.st-pop-over__header')).not.toBeNull();
+
+      component.title = '';
       component.showSettingBtn = false;
       fixture.detectChanges();
 
-      let itemElement = fixture.nativeElement.querySelector('.st-pop-over__setting-action');
-      expect(itemElement).toBeNull();
+      expect(fixture.nativeElement.querySelector('.st-pop-over__header')).toBeNull();
+
+      component.title = 'fake title';
+      component.showSettingBtn = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.st-pop-over__header')).not.toBeNull();
    });
 
-   it('It has to display settings button when showSettingBtn input is true', () => {
-      component.showSettingBtn = true;
-      fixture.detectChanges();
+   describe('It has to be able to display or hide the settings button', () => {
 
-      let itemElement = fixture.nativeElement.querySelector('.st-pop-over__setting-action');
-      expect(itemElement).not.toBeNull();
+      it('It has to hide settings button when showSettingBtn input is false', () => {
+         component.showSettingBtn = false;
+         fixture.detectChanges();
+
+         let itemElement = fixture.nativeElement.querySelector('.st-pop-over__setting-action');
+         expect(itemElement).toBeNull();
+      });
+
+      it('It has to display settings button when showSettingBtn input is true', () => {
+         component.showSettingBtn = true;
+         fixture.detectChanges();
+
+         let itemElement = fixture.nativeElement.querySelector('.st-pop-over__setting-action');
+         expect(itemElement).not.toBeNull();
+      });
+
+      it('When settings button is clicked it has to emmit an event', () => {
+         component.showSettingBtn = true;
+         fixture.detectChanges();
+         spyOn(component.clickConfig, 'emit');
+
+         let itemElement: HTMLButtonElement = fixture.nativeElement.querySelector('.st-pop-over__setting-action');
+         itemElement.click();
+         fixture.detectChanges();
+
+         expect(component.clickConfig.emit).toHaveBeenCalled();
+      });
    });
 
-   it('It has to display settings button when showSettingBtn input is true', () => {
-      component.showSettingBtn = true;
-      fixture.detectChanges();
+   describe('It has to be able to display or hide the arrow icon', () => {
 
-      spyOn(component.clickConfig, 'emit');
+      it('It has to hide arrow when showArrow input is false', () => {
+         component.showArrow = false;
+         fixture.detectChanges();
 
-      let itemElement = fixture.nativeElement.querySelector('.st-pop-over__setting-action');
-      itemElement.click();
-      fixture.detectChanges();
+         expect(fixture.nativeElement.querySelector('.st-pop-over__content').classList).not.toContain('st-pop-over__content--with-arrow');
+      });
 
-      expect(component.clickConfig.emit).toHaveBeenCalled();
+      it('It has to display arrow icon when showArrow input is true', () => {
+         component.showArrow = true;
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.st-pop-over__content').classList).toContain('st-pop-over__content--with-arrow');
+      });
+
    });
 });

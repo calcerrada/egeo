@@ -54,7 +54,8 @@ export class StModalDemoComponent implements AfterViewInit {
          buttons: this.buttons,
          messageTitle: 'Copy',
          message: message,
-         maxWidth: 600
+         maxWidth: 600,
+         minWidth: 400
       }).subscribe((response) => this._logger.notifyAlert(StDemoLoggerSeverity.INFO, this.evaluateResponse(response)));
    }
 
@@ -78,7 +79,8 @@ export class StModalDemoComponent implements AfterViewInit {
          modalTitle: 'With HTML',
          buttons: this.buttons,
          html: html,
-         maxWidth: 600
+         maxWidth: 600,
+         minWidth: 400
       }).subscribe((response) => this._logger.notifyAlert(StDemoLoggerSeverity.INFO, this.evaluateResponse(response)));
    }
 
@@ -86,7 +88,8 @@ export class StModalDemoComponent implements AfterViewInit {
       this._modalService.show({
          modalTitle: 'With component',
          buttons: this.buttons,
-         maxWidth: 600
+         maxWidth: 600,
+         minWidth: 400
       }, StModalDemoTestComponent)
          .subscribe((response) => this._logger.notifyAlert(StDemoLoggerSeverity.INFO, this.evaluateResponse(response)));
    }
@@ -95,6 +98,7 @@ export class StModalDemoComponent implements AfterViewInit {
       this._modalService.show({
          modalTitle: 'With component',
          maxWidth: 600,
+         minWidth: 400,
          outputs: { close: this.onCloseModalWithoutButtons.bind(this) }
       }, StModalDemoTestButtonsComponent)
          .subscribe((response) => this._logger.notifyAlert(StDemoLoggerSeverity.INFO, this.evaluateResponse(response)));
@@ -116,6 +120,7 @@ export class StModalDemoComponent implements AfterViewInit {
       this._modalService.show({
          modalTitle: 'With component',
          maxWidth: 600,
+         minWidth: 400,
          fullscreen: true,
          empty: true,
          outputs: { close: this.onCloseModalWithoutButtons.bind(this) }

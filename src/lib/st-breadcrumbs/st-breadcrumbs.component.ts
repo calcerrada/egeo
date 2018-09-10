@@ -19,12 +19,17 @@ import {
    SimpleChanges
 } from '@angular/core';
 import { range as _range } from 'lodash';
+import { StBreadCrumbItem } from './st-breadcrumbs.interface';
 
 /**
  * @description {Component} [Breadcrumbs]
  *
  * The breadcrumb is s a type of secondary navigation
  * element that shows a trail for allowing users to keep track of their location.
+ *
+ * @model
+ *
+ *   [Id, optional label and icon of an option] {./st-breadcrumbs.interface.ts#StBreadCrumbItem}
  *
  * @example
  *
@@ -46,8 +51,8 @@ import { range as _range } from 'lodash';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StBreadCrumbsComponent implements OnInit, OnChanges {
-   /** @Input {string[]} [options=\[\]] List of navigation parts for show in breadcrumb */
-   @Input() options: string[] = [];
+   /** @Input {StBreadCrumbItem[]} [options=\[\]] List of navigation parts for show in breadcrumb */
+   @Input() options: StBreadCrumbItem[] = [];
    /** @Input {number} [elementsToShow=5] Max number of elements to show. */
    @Input() elementsToShow: number = 5;
    /** @Input {string} [qaTag=''] Id value for qa test */
@@ -66,7 +71,7 @@ export class StBreadCrumbsComponent implements OnInit, OnChanges {
    public ngOnChanges(changes: SimpleChanges): void {
       if (changes.options || changes.elementsToShow) {
          const currElsToShow: number = changes.elementsToShow ? changes.elementsToShow.currentValue : this.elementsToShow;
-         const currOptions: string[] = changes.options ? changes.options.currentValue : this.options;
+         const currOptions: StBreadCrumbItem[] = changes.options ? changes.options.currentValue : this.options;
          this.calculateStart(currOptions, currElsToShow);
       }
    }
@@ -78,11 +83,27 @@ export class StBreadCrumbsComponent implements OnInit, OnChanges {
       }
    }
 
-   public getOption(index: number): string {
-      return index > -1 ? this.options[index] : '...';
+   public getId(index: number): string {
+      return this.options[index].id;
    }
 
-   private calculateStart(options: string[], elementsToShow: number): void {
+   public getLabel(index: number): string {
+      return index > -1 ? this.options[index].label : '...';
+   }
+
+   public getIcon(index: number): string {
+      return index > -1 ? this.options[index].icon : '';
+   }
+
+   public hasLabel(index: number): boolean {
+      return index > -1 && Boolean(this.options[index].label);
+   }
+
+   public hasIcon(index: number): boolean {
+      return index > -1 && Boolean(this.options[index].icon);
+   }
+
+   private calculateStart(options: StBreadCrumbItem[], elementsToShow: number): void {
       if (options.length > elementsToShow) {
          this._initPos = options.length - elementsToShow + 1; // use +1 because first element is fixed
          this.indexArray = _range(this._initPos, this._initPos + elementsToShow - 1);

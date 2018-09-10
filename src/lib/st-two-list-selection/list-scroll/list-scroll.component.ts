@@ -24,6 +24,8 @@ export class ListScrollComponent {
 
    @Input() @StRequired() list: StTwoListSelectionElement[];
    @Input() editable: boolean = false;
+   @Input() hasAllList?: boolean = false;
+   @Input() itemAll?: StTwoListSelectionElement;
    @Input() @StRequired() qaTag: string;
    @Input() mode: 'compact' | 'normal' = 'normal';
 
@@ -31,10 +33,16 @@ export class ListScrollComponent {
    @Output() selectExtraLabel: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
+
    scrollItems: StTwoListSelectionElement[] = [];
    firstEl: number = 0;
 
    get listQaTag(): string {
       return this.qaTag + '-scroll-list';
    }
+
+   get listCheckAllQaTag(): string {
+      return this.qaTag + '-check-all-scroll-list';
+   }
+
 }

@@ -44,11 +44,13 @@ export class StInputDemoComponent {
          this.myForm.controls.disabledField.disable();
          this.myForm.controls.disabledFieldWithValue.disable();
          this.myForm.controls.requiredField.disable();
+         this.myForm.controls.numberField.disable();
       } else {
          this.myForm.controls.name.enable();
          this.myForm.controls.disabledField.enable();
          this.myForm.controls.disabledFieldWithValue.enable();
          this.myForm.controls.requiredField.enable();
+         this.myForm.controls.numberField.enable();
 
       }
    }

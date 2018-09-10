@@ -9,7 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { CommonModule } from '@angular/common';
-import { DebugElement } from '@angular/core';
+import { DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -17,7 +17,6 @@ import { StSpinnerComponent } from './st-spinner.component';
 
 let fixture: ComponentFixture<StSpinnerComponent>;
 let comp: StSpinnerComponent;
-let imageUrl: string = 'image.jpg';
 
 describe('StSpinnerComponent', () => {
 
@@ -26,20 +25,29 @@ describe('StSpinnerComponent', () => {
          imports: [CommonModule, RouterTestingModule],
          declarations: [StSpinnerComponent]
       })
+         .overrideComponent(StSpinnerComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .compileComponents();  // compile template and css
    }));
 
    beforeEach(() => {
       fixture = TestBed.createComponent(StSpinnerComponent);
       comp = fixture.componentInstance;
-      comp.imageUrl = imageUrl;
+      fixture.detectChanges();
    });
 
-   it('should have an image with src', () => {
-      fixture.detectChanges();
-      let image: DebugElement = fixture.debugElement.query(By.css('img'));
-      let src: string = image.nativeElement.getAttribute('src');
-      expect(src).toBeDefined();
-      expect(src).toEqual(imageUrl);
+   describe('Its theme can be configured', () => {
+      it('by default, theme is "primary"', () => {
+         expect(comp.theme).toEqual('primary');
+         expect(fixture.nativeElement.querySelector('.path.path--primary')).not.toBeNull();
+      });
+
+      it ('theme introduced as input is added to svg path', () => {
+         comp.theme = 'secondary';
+         fixture.detectChanges();
+
+         expect(fixture.nativeElement.querySelector('.path.path--secondary')).not.toBeNull();
+      });
    });
 });

@@ -9,9 +9,8 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { Component } from '@angular/core';
-import { StDropDownMenuItem, StDropDownMenuGroup } from '@stratio/egeo';
+import { StDropDownMenuItem, StDropDownMenuGroup, StDropDownVisualMode } from '@stratio/egeo';
 
-import { StDemoLoggerSeverity } from '../shared/st-demo-logger/st-demo-loger.model';
 import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.service';
 
 @Component({
@@ -24,6 +23,7 @@ export class StDropdownMenuDemoComponent {
    public menus: ((StDropDownMenuItem | StDropDownMenuGroup)[])[] = [];
    public active: boolean[] = [];
    public selectedValue: (StDropDownMenuItem | undefined)[] = [];
+   public visualMode: StDropDownVisualMode = StDropDownVisualMode.MENU_LIST;
 
    constructor(private _logger: StDemoLoggerService) {
       const menus: number = 5;
@@ -37,8 +37,6 @@ export class StDropdownMenuDemoComponent {
       this.menus.push(this.generateLargeText());
       this.menus.push(this.generateGroup());
       this.menus.push(this.generateGroupWithScroll());
-
-
    }
 
    changeActive(position: number): void {
@@ -50,6 +48,10 @@ export class StDropdownMenuDemoComponent {
       this.active[position] = false;
       this.selectedValue[position] = selected;
       this._logger.log('select value and hide menu', JSON.stringify(selected));
+   }
+
+   getVisualMode(menuId: number): StDropDownVisualMode {
+      return menuId % 2 ? StDropDownVisualMode.OPTION_LIST: StDropDownVisualMode.MENU_LIST;
    }
 
    private generateNormal(): StDropDownMenuItem[] {

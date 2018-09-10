@@ -12,6 +12,7 @@
 -->
 <li class="st-breadcrumbs__item sth-breadcrumbs__item" [ngClass]="{'last': active}" [attr.id]="qaTag">
     <span class="st-breadcrumbs__item--text sth-breadcrumbs__item--text">
-      <ng-content></ng-content>
+      <ng-content select="i"></ng-content>
+      <ng-content select="span"></ng-content>
    </span>
 </li>

@@ -29,6 +29,9 @@ describe('StInputComponent', () => {
          imports: [FormsModule, ReactiveFormsModule, StLabelModule],
          declarations: [StInputComponent]
       })
+         .overrideComponent(StInputComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
          .compileComponents();  // compile template and css
    }));
 
@@ -103,6 +106,18 @@ describe('StInputComponent', () => {
       fixture.detectChanges();
 
       expect(component.blur.emit).toHaveBeenCalledTimes(1);
+   });
+
+   it('label is only generated if label input is not empty', () => {
+      component.label = 'fake label';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('label.st-input__label')).not.toBeNull();
+
+      component.label = '';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('label.st-input__label')).toBeNull();
    });
 
    describe('When a default value is introduced, user will be able to reset the input', () => {
@@ -493,8 +508,7 @@ describe('StInputComponent in reactive form', () => {
       expect(errorMessage).toBeNull();
    });
 
-
-   it('should notify no notify error with focus', () => {
+   it('should only notify error with focus', () => {
       reactiveComp.forceValidations = false;
       reactiveComp.errors = { generic: 'error' };
       reactiveFixture.detectChanges();

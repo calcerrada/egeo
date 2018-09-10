@@ -68,11 +68,12 @@
    }
 
    &.disabled {
-      color: $neutral-08;
+      color: $neutral-06;
+      cursor: default;
 
       .custom-checkbox {
          border-color: $neutral-06;
-         background-color: $neutral-01;
+         background-color: $neutral-14;
          &.icon-check2 {
             background-color: $neutral-06;
             border-color: $neutral-06;

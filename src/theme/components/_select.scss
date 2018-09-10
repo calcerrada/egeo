@@ -25,7 +25,8 @@
 
    .arrow[disabled] {
       color: $neutral-07;
-      background-color: $neutral-01;
+      background-color: $neutral-14;
+      cursor: not-allowed;
    }
 
    .st-input:focus::placeholder {

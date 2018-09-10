@@ -11,12 +11,13 @@
 
 -->
 
-<label st-label class="st-input__label" [ngClass]="{error: showError(), active: focus, disabled: disabled}" name="name"
+<label *ngIf="label" st-label class="st-input__label" [ngClass]="{error: showError(), active: focus, disabled: disabled}" name="name"
        [attr.id]="labelQaTag" [attr.title]="contextualHelp">
    {{label}}
 </label>
 <div class="input-container">
-   <input #input class="st-input" (focus)="onFocus($event)" (focusout)="onFocusOut($event, false)"
+   <input #input class="st-input" (focus)="onFocus($event)"
+          (focusout)="onFocusOut($event, false)"
           (blur)="onFocusOut($event, true)"
           [formControl]="internalControl"
           [placeholder]="placeholder"
@@ -24,7 +25,7 @@
           [name]="name" [attr.type]="fieldType" [attr.id]="qaTag" [attr.maxlength]="maxLength" [attr.min]="min"
           [attr.max]="max"
           [value]="value || null" [readonly]="readonly" [ngClass]="{error: showError()}">
-   <span *ngIf="createResetButton()" class="st-form-control-reset-button" (click)="resetToDefault()"
+   <span *ngIf="displayResetButton()" class="st-form-control-reset-button" (click)="resetToDefault()"
          [style.opacity] = "focus ? 1 : 0">
       <i class="icon-reload2"></i>
    </span>

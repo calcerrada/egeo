@@ -8,6 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
+ @import '../../../theme/constants/index';
+
 .item {
    display: inline-block;
    min-width: 100%;
@@ -22,6 +24,9 @@
    overflow: hidden;
    text-overflow: ellipsis;
    flex-grow: 1;
+   color: $action-secondary-07;
+   font-size: $egeo-font-size-xsmall;
+   font-family: $egeo-nunito-sans;
 }
 
 :host {
@@ -30,7 +35,7 @@
 }
 
 .item-normal {
-   height: 35px;
+   height: 25px;
    line-height: 35px;
 }
 

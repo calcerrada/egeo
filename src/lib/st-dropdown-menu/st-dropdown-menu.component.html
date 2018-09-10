@@ -18,7 +18,8 @@
 
    <div pop-content [style.z-index]="9">
 
-      <div class="st-dropdown-menu" *ngIf="active" [ngClass]="{'active': active}" [style.minWidth]='widthMenu'>
+      <div *ngIf="active" [ngClass]="listClasses" [style.minWidth]='widthMenu'>
+         <ng-content select=[dropdown-header]></ng-content>
 
          <ul *ngIf="!isItemGroup" [attr.aria-hidden]="!active" aria-label="submenu" [style.maxHeight]="menuMaxHeight" [attr.id]="menuId" #itemList>
             <st-dropdown-menu-item
@@ -60,6 +61,8 @@
                </li>
             </ul>
          </div>
+
+         <ng-content select=[dropdown-footer]></ng-content>
       </div>
    </div>
 </st-pop>

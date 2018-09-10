@@ -14,12 +14,19 @@
        [ngClass]="{error: showError(), active: focus, disabled: isDisabled}" [attr.for]="name">
    {{label}}
 </label>
-<textarea class="st-textarea" #textarea (focus)="onFocus($event)" (focusout)="onFocusOut($event)"
-          (blur)="onFocusOut($event)" [formControl]="internalControl"
+<textarea class="st-textarea" #textarea
+          (focus)="onFocus($event)"
+          (focusout)="onFocusOut($event, false)"
+          (blur)="onFocusOut($event, true)"
+          [formControl]="internalControl"
           [ngClass]="{error: showError(), disabled: isDisabled}"
-          [placeholder]="placeholder" [name]="name" [cols]="cols" [rows]="rows" [wrap]="wrap"
+          [placeholder]="placeholder" [name]="name" [cols]="cols" [rows]="rows || null" [wrap]="wrap"
           [attr.maxlength]="maxLength" [attr.id]="qaTag">
 </textarea>
+<span *ngIf="displayResetButton()" class="st-form-control-reset-button" (click)="resetToDefault()"
+      [style.opacity]="focus ? 1 : 0">
+      <i class="icon-reload2"></i>
+</span>
 
 <div class="st-textarea-error-layout">
    <div *ngIf="showError()">

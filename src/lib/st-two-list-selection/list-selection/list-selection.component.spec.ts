@@ -62,6 +62,7 @@ describe('StTwoListSelectionComponent', () => {
    beforeEach(() => {
       fixture = TestBed.createComponent(ListSelectionComponent);
       comp = fixture.componentInstance;
+      comp.list = [];
       comp.qaTag = qaTag;
 
    });

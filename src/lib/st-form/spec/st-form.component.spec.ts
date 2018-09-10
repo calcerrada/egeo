@@ -675,15 +675,32 @@ describe('StFormComponent', () => {
       });
    });
 
-   it('form can be configured to be validated its fields without any user interaction', () => {
-      component.forceValidations = true;
-      fixture.detectChanges();
-      expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).toContain('This field is required');
+   describe('Form can be configured to be validated its fields without any user interaction', () => {
+      it('Errors of invalid fields are displayed if forceValidations input is true', () => {
+         component.forceValidations = true;
+         fixture.detectChanges();
+         expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).toContain('This field is required');
+      });
 
-      component.forceValidations = false;
-      fixture.detectChanges();
+      it('Errors of invalid fields are not displayed if forceValidations input is false', () => {
+         component.forceValidations = false;
+         fixture.detectChanges();
 
-      expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).not.toContain('This field is required');
+         expect(getParentElement(fixture.nativeElement.querySelector('#url'), 2).innerHTML).not.toContain('This field is required');
+      });
+
+      it('Form is marked as pristine only if forceValidations is false after view is initialized', () => {
+         spyOn(component.form.form, 'markAsPristine');
+         component.forceValidations = true;
+         component.ngAfterViewInit();
+
+         expect(component.form.form.markAsPristine).not.toHaveBeenCalled();
+
+         component.forceValidations = false;
+         component.ngAfterViewInit();
+
+         expect(component.form.form.markAsPristine).toHaveBeenCalled();
+      });
    });
 
    describe('Section descriptions can be displayed using the input "sectionDescriptionLevel"', () => {

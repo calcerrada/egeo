@@ -54,7 +54,7 @@ import { StLauncherGroup, StLauncherItem } from './st-launcher.model';
    styleUrls: ['./st-launcher.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StLauncherComponent implements OnInit {
+export class StLauncherComponent {
 
    /** @input {string} [qaTag=''] For set id for tests */
    @Input() qaTag: string;
@@ -83,9 +83,6 @@ export class StLauncherComponent implements OnInit {
    constructor(
       private _cd: ChangeDetectorRef
    ) { }
-
-   ngOnInit(): void {
-   }
 
    ngOnChanges(changes: SimpleChanges): void {
       if (changes && changes.items && !changes.items.firstChange) {

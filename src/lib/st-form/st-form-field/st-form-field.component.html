@@ -11,7 +11,7 @@
 
 -->
 
-<st-input *ngIf="hasType('input')"
+<st-input *ngIf="hasType('input') && (!maxWidth || (!maxLength || maxLength < maxWidth) && (!minLength || minLength < maxWidth))"
           #templateModel="ngModel"
           [forceValidations]="forceValidations"
           [fieldType]="type"
@@ -33,6 +33,24 @@
           [qaTag]="qaTag"
           (blur)="onBlur()">
 </st-input>
+
+<st-textarea *ngIf="hasType('input') && maxWidth && (maxLength >= maxWidth || minLength >= maxWidth)"
+          #templateModel="ngModel"
+          [label]="label"
+          [name]="schema.key"
+          [default]="default"
+          [placeholder]="placeholder"
+          [ngModel]="innerValue"
+          (ngModelChange)="setValue($event)"
+          [contextualHelp]="description"
+          [errors]="errors"
+          [minlength]="minLength"
+          [maxlength]="maxLength"
+          [required]="required"
+          [pattern]="pattern"
+          [qaTag]="qaTag"
+          (blur)="onBlur()">
+</st-textarea>
 
 <st-checkbox *ngIf="hasType('checkbox')"
              #templateModel="ngModel"

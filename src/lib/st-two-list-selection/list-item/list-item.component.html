@@ -10,9 +10,9 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div class="item sth-two-list__list-item" [ngClass]="itemMode" (click)="emitOnSelect($event)" [attr.id]="itemQaTag" [title]="itemName">
+<div class="item" [ngClass]="itemMode" [attr.id]="itemQaTag" [title]="itemName">
    <span *ngIf="!editable" class="label">{{itemName}}</span>
-   <st-checkbox *ngIf="editable" [qaTag]="checkQaTag" [checked]="selected">
+   <st-checkbox [disabled]="disabled" *ngIf="editable" [qaTag]="checkQaTag" [checked]="selected" (click)="emitOnSelect($event)" >
       <span class="label">{{itemName}}</span>
    </st-checkbox>
    <span class="extraLabel" *ngIf="item.extraLabel" [innerHTML]="item.extraLabel" (click)="selectExtraLabel.emit({element: item, event: $event})"></span>

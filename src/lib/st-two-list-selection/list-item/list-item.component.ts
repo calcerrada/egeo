@@ -26,6 +26,7 @@ export class ListItemComponent {
    @Input() @StRequired() qaTag: string;
    @Input() editable: boolean = false;
    @Input() mode: 'compact' | 'normal' = 'normal';
+   @Input() disabled: boolean = false;
 
    @Output() selectItem: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectExtraLabel: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();

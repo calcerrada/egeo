@@ -8,9 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { DebugElement } from '@angular/core';
+import { SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { StLauncherItemComponent } from './st-launcher-item/st-launcher-item.component';
 import { StLauncherComponent } from './st-launcher.component';
@@ -39,10 +38,10 @@ let items: StLauncherGroup[] = [
          label: 'example 5',
          url: 'www.example5.com'
       },
-      {
-         label: 'example 6',
-         url: 'www.example6.com'
-      }]
+         {
+            label: 'example 6',
+            url: 'www.example6.com'
+         }]
    }
 ];
 
@@ -57,27 +56,27 @@ let itemsCh: StLauncherGroup[] = [
 ];
 
 let limit: number = 2;
-let qaTag: string = 'launcher-test';
 
 describe('StLauncherComponent', () => {
 
    let component: StLauncherComponent;
    let fixture: ComponentFixture<StLauncherComponent>;
-   let de: DebugElement;
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [],
          declarations: [StLauncherComponent, StLauncherItemComponent]
       })
-      .compileComponents();  // compile template and css
+         .overrideComponent(StLauncherComponent, {
+            set: { changeDetection: ChangeDetectionStrategy.Default }
+         })
+         .compileComponents();  // compile template and css
    }));
 
    beforeEach(() => {
       fixture = TestBed.createComponent(StLauncherComponent);
       component = fixture.componentInstance;
    });
-
 
    it('should show two items in component', () => {
       component.items = items;
@@ -92,7 +91,6 @@ describe('StLauncherComponent', () => {
       fixture.detectChanges();
       expect(component.items.length).toBe(itemsCh.length);
    });
-
 
    it('should click item and dispatch event toggle with value of item', () => {
       spyOn(component.toggle, 'emit');
@@ -131,5 +129,21 @@ describe('StLauncherComponent', () => {
       fixture.detectChanges();
 
       expect(component.viewMore.emit).toHaveBeenCalledWith(items[0]);
+   });
+
+   it('It should be able to see changes in items when it is not the first change', () => {
+      component.items = items;
+
+      component.ngOnChanges({
+         items: new SimpleChange([items[0]], [], true)
+      });
+
+      expect(component.items).toEqual(items);
+
+      component.ngOnChanges({
+         items: new SimpleChange(items, [items[0]], false)
+      });
+
+      expect(component.items).toEqual([items[0]]);
    });
 });

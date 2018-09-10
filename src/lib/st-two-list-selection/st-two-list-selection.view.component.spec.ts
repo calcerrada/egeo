@@ -37,9 +37,12 @@ let de: DebugElement;
 
 let config: StTwoListSelectionConfig = {
    allElementsListTitle: 'All',
+   allElementsListSubtitle: 'All subtitle',
    allElementsSearchPlaceholder: 'Search all',
    selectedElementsListTitle: 'Selected',
-   selectedElementsSearchPlaceholder: 'Search selected'
+   selectedElementsListSubtitle: 'Selected subtitle',
+   selectedElementsSearchPlaceholder: 'Search selected',
+   orderPlaceholder: 'order by'
 };
 let qaTag: string = 'st-two-list-test';
 
@@ -76,9 +79,12 @@ describe('StTwoListSelectionComponent', () => {
          fixture.detectChanges();
 
          expect(comp.allTitle).toEqual(config.allElementsListTitle);
+         expect(comp.allSubtitle).toEqual(config.allElementsListSubtitle);
          expect(comp.allPlaceholder).toEqual(config.allElementsSearchPlaceholder);
          expect(comp.selectedTitle).toEqual(config.selectedElementsListTitle);
+         expect(comp.selectedSubtitle).toEqual(config.selectedElementsListSubtitle);
          expect(comp.selectedPlaceholder).toEqual(config.selectedElementsSearchPlaceholder);
+         expect(comp.orderPlaceholder).toEqual(config.orderPlaceholder);
          expect(comp.allQaTag).toContain(qaTag);
          expect(comp.selectedQaTag).toContain(qaTag);
       });
@@ -87,11 +93,14 @@ describe('StTwoListSelectionComponent', () => {
          fixture.detectChanges();
 
          expect(comp.allTitle).toEqual('');
+         expect(comp.allSubtitle).toEqual('');
          expect(comp.allPlaceholder).toEqual('');
          expect(comp.selectedTitle).toEqual('');
+         expect(comp.selectedSubtitle).toEqual('');
          expect(comp.selectedPlaceholder).toEqual('');
          expect(comp.allQaTag).toContain(qaTag);
          expect(comp.selectedQaTag).toContain(qaTag);
+         expect(comp.orderPlaceholder).toEqual('');
       });
    });
 });

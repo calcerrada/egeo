@@ -15,7 +15,7 @@ import { By } from '@angular/platform-browser';
 import { StDropdownMenuComponent } from './st-dropdown-menu.component';
 import { StPopPlacement } from '../st-pop/st-pop.model';
 import { StDropdownMenuModule } from './st-dropdown-menu.module';
-import { StDropDownMenuItem, StDropDownMenuGroup } from './st-dropdown-menu.interface';
+import { StDropDownMenuItem, StDropDownMenuGroup, StDropDownVisualMode } from './st-dropdown-menu.interface';
 
 const simpleItems: StDropDownMenuItem[] = [
    { label: 'example 1', value: 1 },
@@ -58,9 +58,12 @@ const defaultRowHeight: number = 42;
             [items]="items"
             [active]="active"
             [selectedItem]="selected"
+            [visualMode]="visualMode"
             id="test-id"
             (change)="onChange($event)">
-            <button class="button button-primary" [style.width]="dropdownWidth">Show</button>
+            <button class="button button-primary" [style.width]="dropdownWidth" (click)="onChangeMenuVisibility()">Show</button>
+            <span dropdown-header><span>TEST HEADER</span></span>
+            <span dropdown-footer>TEST FOOTER</span>
          </st-dropdown-menu>
       `
 })
@@ -70,7 +73,15 @@ class TestDropdownComponent {
    selected: StDropDownMenuItem;
    @ViewChild('dropdown') dropdownItem: StDropdownMenuComponent;
    dropdownWidth: string = '300px';
-   onChange(item: StDropDownMenuItem): void { this.selected = item; }
+   visualMode: StDropDownVisualMode = StDropDownVisualMode.OPTION_LIST;
+
+   onChange(item: StDropDownMenuItem): void {
+      this.selected = item;
+   }
+
+   onChangeMenuVisibility(): void {
+      this.active = !this.active;
+   }
 }
 
 describe('StDropdownMenu', () => {
@@ -278,7 +289,11 @@ describe('StDropdownMenu', () => {
          TestBed.configureTestingModule({
             imports: [StDropdownMenuModule],
             declarations: [TestDropdownComponent]
-         }).compileComponents();  // compile template and css
+         })
+            .overrideComponent(StDropdownMenuComponent, {
+               set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();  // compile template and css
       }));
 
       beforeEach(() => {
@@ -288,6 +303,31 @@ describe('StDropdownMenu', () => {
 
       afterEach(() => {
          instanceTestFixture.destroy();
+      });
+
+      it('It should be able to add some content before and after the menu', () => {
+         instanceTestComp.active = true;
+         instanceTestFixture.detectChanges();
+
+         expect(instanceTestFixture.nativeElement.querySelector('[dropdown-header]')).not.toBeNull();
+         expect(instanceTestFixture.nativeElement.querySelector('span[dropdown-header]').innerText).toContain('TEST HEADER');
+         expect(instanceTestFixture.nativeElement.querySelector('[dropdown-footer]')).not.toBeNull();
+         expect(instanceTestFixture.nativeElement.querySelector('span[dropdown-footer]').innerText).toContain('TEST FOOTER');
+      });
+
+      it('If visual mode is OPTION_LIST, class "menu-list" is not added to the list', () => {
+         instanceTestComp.active = true;
+         instanceTestFixture.detectChanges();
+
+         expect(instanceTestFixture.nativeElement.querySelector('.st-dropdown-menu').classList).not.toContain('menu-list');
+      });
+
+      it('If visual mode is MENU_LIST, class "menu-list" is added to the list', () => {
+         instanceTestComp.active = true;
+         instanceTestComp.visualMode = StDropDownVisualMode.MENU_LIST;
+         instanceTestFixture.detectChanges();
+
+         expect(instanceTestFixture.nativeElement.querySelector('.st-dropdown-menu').classList).toContain('menu-list');
       });
 
       it('Should adjust to button width when have button element', () => {
@@ -359,4 +399,3 @@ describe('StDropdownMenu', () => {
       });
    });
 });
-

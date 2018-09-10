@@ -8,12 +8,13 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
- 
+
 :host {
    display: block;
    width: 100%;
+   position: relative;
 }
- 
+
 .inner-input {
    border: 0;
    outline: 0;
